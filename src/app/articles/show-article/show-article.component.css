@@ -1,0 +1,155 @@
+.container{
+    width:95%;
+}
+
+.card.article{
+    margin-bottom: 50px;
+}
+
+.article h6{
+    text-align: center;
+    font-size: 1.25rem;
+    color: #222;
+}
+.article img{
+    text-align: center;
+    margin: 0 25%;
+    margin-bottom: 24px;
+    width:50%;
+    border-radius: 6px;
+}
+
+.article p.truncate{
+    font-size: 1rem;
+    color: #212121;
+    padding: 10px;
+}
+
+.article .card-footer{
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+    align-content:space-between;
+    align-items: center;
+}
+
+div.contenttags{
+    margin: 0;padding: 0;
+    width:70%;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    align-content:space-between;
+    align-items: center;
+}
+
+span.collection{
+    width:30%;
+    list-style-type: none;
+    background: transparent !important;
+    border: none !important;
+    margin: auto 4px;
+
+}
+
+span.collection li{
+    background: transparent !important;
+    font-size: .75rem !important;
+    color: #757575;
+    padding: 6px;
+}
+
+
+div.left-btn{
+    margin: 0;padding: 16px;
+    width:30%;
+    text-align: left;
+}
+
+button.btn, button.btn-small, div.btn {
+    background: red !important;
+}
+
+
+
+.material-icons{
+    vertical-align: middle !important;
+    margin-left:  6px;
+    font-size: 1.25rem;
+}
+
+ul.sub-article li{
+    display: inline !important;
+    font-size: .875rem !important;
+    color: #757575;
+    background: transparent !important;
+}
+
+.aside .card-header h6{
+    font-size: 1rem;
+    color: #212121;
+}
+
+
+div.input-field {
+    position: relative;
+    padding: 0 !important;
+}
+
+input#search{
+    background: #eee;
+    height: 40px;
+    border:1px solid #eee;
+}
+
+input:placeholder{
+    color: red !important
+}
+
+div.input-field button.btn-small{
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 40px;
+    line-height: 40px;
+}
+
+ul.cats{
+    border:none;
+    margin: 0;padding: 0;
+
+}
+
+
+ul.cats li ,a{
+    color: #757575 ;
+    border:none !important;
+    font-size: .875rem;
+    transition: .1s ease-in-out;
+
+}
+
+ul.cats li:hover{
+    color: teal;
+
+}
+ul.cats li:hover>a{
+    margin-right: 6px;
+}
+
+ul.children{
+    border:none;
+    padding: 10px;
+}
+
+ul.children>li a{
+    margin: 0;padding: 0;
+    font-size: 0.75rem;
+}
+
+ul.children li:hover>a{
+    margin-right: 0;
+}
+
+
+

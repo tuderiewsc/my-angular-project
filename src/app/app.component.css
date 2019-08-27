@@ -1,0 +1,76 @@
+mat-toolbar {
+  position: fixed;
+  top: 0;
+  z-index: 100;
+  margin-bottom: 50px;
+}
+
+ul.dropdown-content li {
+  text-align: right;
+}
+
+ul#dropdown1 {
+  width: auto !important;
+  top: 65px !important;
+  height: auto !important;
+  border-radius: 0 0 8px 8px;
+  transition: 0.5s ease-in-out;
+  -webkit-transition: 0.5s ease-in-out;
+  -moz-transition: 0.5s ease-in-out;
+  -o-transition: 0.5s ease-in-out;
+}
+
+ul#dropdown1 li:hover a {
+  color: purple !important;
+  background: transparent !important;
+}
+
+ul#dropdown1 li:hover {
+  background: transparent !important;
+}
+
+ul#dropdown1 li a {
+  color: #757575 !important;
+}
+
+
+
+
+mat-toolbar-row {
+  position: relative;
+}
+
+ul.toolbar-items {
+  font-family: 'Samim';
+  display: inline-flex;
+  align-items: center;
+}
+
+ul.toolbar-items a:hover {
+  background: mediumpurple;
+}
+
+ul.toolbar-items a {
+  color: #eeeeee;
+  padding: 16px;
+  cursor: pointer !important;
+  font-size: 1rem;
+
+}
+
+ul.toolbar-items a li {
+  padding: auto 16px;
+  margin: auto 10px;
+  font-size: .875rem;
+
+}
+
+.mat-menu-item {
+  font-family: 'Samim';
+  font-size: .75rem;
+  text-align: center;
+}
+
+div.switch {
+  margin-top: 80px;
+}

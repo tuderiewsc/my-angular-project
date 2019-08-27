@@ -1,0 +1,102 @@
+<!--<app-add-article (newArticle)="onNewArticle($event)"></app-add-article>-->
+
+<!-- content -->
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 col-sm-12 my-3">
+      <div *ngFor="let article of articles">
+        <div class="card article" *ngIf="article.submitted==true">
+          <div class="card-header grey lighten-2">
+            <h6>{{article.title}}</h6>
+          </div>
+          <div class="card-body">
+            <img src="{{article.image}}">
+            <p class="truncate">
+              {{article.desc}}
+            </p>
+          </div>
+          <div class="card-footer">
+            <div class="contenttags">
+              <span class="collection">
+                <li class="collection-item">
+                  <mat-icon aria-hidden="false">person</mat-icon>
+                  <span>Admin</span>
+                </li>
+              </span>
+              <span class="collection">
+                <li class="collection-item">
+                  <mat-icon aria-hidden="false">date_range</mat-icon>
+                  <span>{{article.createdat | date}}</span>
+                </li>
+              </span>
+              <span class="collection">
+                <li class="collection-item">
+                  <mat-icon aria-hidden="false">visibility</mat-icon>
+                  <span>332</span>
+                </li>
+              </span>
+            </div>
+            <div class="left-btn">
+              <button mat-flat-button color="accent" (click)="setSelected(article)"
+                routerLink="/article/{{article.id}}">ادامه مطلب</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <aside class="col-md-4 col-sm-12 my-3 aside">
+      <div class="card">
+        <div class="card-header">
+          <h6>
+            <mat-icon aria-hidden="false" aria-label="">check</mat-icon>
+            جستجو
+          </h6>
+        </div>
+        <div class="card-body">
+          <form class="side-search form-group" method="get" role="search">
+            <div class="contain">
+              <input class="form-control" placeholder="جستجو..." id="search" type="search" name="s" autocomplete="on">
+              <a>
+                <mat-icon aria-hidden="false" aria-label="">search</mat-icon>
+              </a>
+            </div>
+
+          </form>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <h6>
+            <mat-icon aria-hidden="false" aria-label="">check</mat-icon>دسته بندی مطالب
+          </h6>
+        </div>
+        <div class="card-body">
+          <ul class="collection cats">
+            <li class="collection-item">
+              <i class="material-icons">chevron_left</i><a href="#">اخبار</a>
+            </li>
+            <li class="collection-item">
+              <i class="material-icons">chevron_left</i><a href="#">مقالات</a>
+              <ul class="collection children">
+                <li class="collection-item"><a href="#">مقالات1</a></li>
+                <li class="collection-item"><a href="#">مقالات2</a></li>
+                <li class="collection-item"><a href="#">مقالات3</a></li>
+              </ul>
+            </li>
+            <li class="collection-item">
+              <i class="material-icons">chevron_left</i><a href="#">رویدادها</a>
+            </li>
+          </ul>
+
+        </div>
+      </div>
+    </aside>
+
+  </div>
+
+</div>
+<!-- content -->
+
+<!--<app-show-article [passedArticle]="selectedArticle" *ngIf="selectedArticle!=null"></app-show-article>-->

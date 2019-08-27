@@ -1,0 +1,63 @@
+<form ngForm class="col-md-12 my-5" dir="rtl" id="add-article" #addArticle [formGroup]="addArticleForm" novalidate>
+  <mat-form-field>
+    <input type="text" matInput name="title" [(ngModel)]="title" placeholder="عنوان" formControlName="title">
+  </mat-form-field>
+
+  <mat-form-field>
+    <textarea matInput formControlName="desc" [(ngModel)]="desc" name="desc" placeholder="توضيحات" maxlength="100"
+      #tarea></textarea>
+    <mat-hint>{{tarea.value?.length || 0}}/20</mat-hint>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>وضعيت انتشار</mat-label>
+    <mat-select name="submitted" formControlName="submitted" [(ngModel)]="submitted">
+      <mat-option *ngFor="let stat of stats" [value]="stat.value">
+        {{stat.viewValue}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <div class="form-group">
+    <label for="image">تصوير</label>
+    <input class="form-control" type="file" id="image" [(ngModel)]="image" name="image" formControlName="image">
+  </div>
+
+  <div class="form-group">
+    <button class="form-control" mat-flat-button color="accent" name="arc_submit"
+      (click)="onsubmit(); addArticle.reset()" [disabled]="addArticleForm.pristine || addArticleForm.invalid">
+      ثبت <mat-icon class="mx-2">save</mat-icon>
+    </button>
+  </div>
+</form>
+
+
+<!-- Errors -->
+<section class="errors">
+  <div *ngIf="addArticleForm.controls['title'].invalid &&
+   (addArticleForm.controls['title'].dirty || addArticleForm.controls['title'].touched)">
+    <span *ngIf="addArticleForm.controls['title'].errors.required">
+      فیلد نام را تکمیل کنید.
+    </span>
+  </div>
+  <div *ngIf="addArticleForm.controls['desc'].invalid &&
+   (addArticleForm.controls['desc'].dirty || addArticleForm.controls['desc'].touched)">
+    <span *ngIf="addArticleForm.controls['desc'].errors.maxlength">
+      طول مجاز رعایت نشده است.
+    </span>
+    <span *ngIf="addArticleForm.controls['desc'].errors.required">
+      فیلد توضيحات را تکمیل کنید.
+    </span>
+  </div>
+  <div *ngIf="addArticleForm.controls['submitted'].invalid &&
+   (addArticleForm.controls['submitted'].dirty || addArticleForm.controls['submitted'].touched)">
+    <span *ngIf="addArticleForm.controls['submitted'].errors.required">
+      وضعیت را تکمیل کنید.
+    </span>
+  </div>
+</section>
+<!-- Errors -->
+
+
+
+<!-- <p>{{title}}</p> -->

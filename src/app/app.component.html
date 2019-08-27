@@ -1,20 +1,59 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/cli">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+<!-- navbar -->
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <span style="flex: 1 1 auto;">
+      <ul class="toolbar-items">
+        <a routerLink="/home" class="toolbar-item">
+          <li>خانه</li>
+        </a>
 
+        <a [matMenuTriggerFor]="menu1" class="toolbar-item" *ngIf="isAdmin()">
+          <li>مقالات</li>
+        </a>
+        <mat-menu #menu1="matMenu" xPosition="after">
+          <a mat-menu-item [routerLink]="[ 'article/add' ]">افزودن</a>
+          <a mat-menu-item [routerLink]="[ 'article/list' ]">لیست مقالات</a>
+        </mat-menu>
+        <a [matMenuTriggerFor]="menu2" class="toolbar-item" *ngIf="isAdmin()">
+          <li>دسته بندي</li>
+        </a>
+        <mat-menu #menu2="matMenu" xPosition="after">
+          <a mat-menu-item [routerLink]="[ 'article/add' ]">افزودن</a>
+          <a mat-menu-item [routerLink]="[ 'article/list' ]">لیست دسته بندي ها</a>
+        </mat-menu>
+      </ul>
+    </span>
+    <span class="mx-2" *ngIf="isAdmin()">خوش آمدید ادمین</span>
+    <mat-icon aria-hidden="false" aria-label="">account_circle</mat-icon>
+    <!--    <mat-icon class="mat-icon-rtl-mirror" aria-hidden="false" aria-label="">account_circle</mat-icon>-->
+  </mat-toolbar-row>
+</mat-toolbar>
+<!-- navbar -->
+
+
+<div class="switch p-4 text-center">
+  <mat-slide-toggle color="primary" (click)="login()"><span class="mx-2">ورود</span></mat-slide-toggle>
+</div>
+
+
+<router-outlet></router-outlet>
+<!--<app-articles></app-articles>-->
+
+
+<!-- Footer -->
+<footer id="myFooter" class=" text-white pt-4">
+  <div class="container text-center text-md-left">
+    <div class="row">
+      <div class="text-center mr-auto ml-auto">
+        <h5 class="font-weight-bold text-uppercase mb-4">درباره سايت</h5>
+        <p>آموزش برنامه نويسي و نرم افزار</p>
+      </div>
+    </div>
+  </div>
+  <div class="footer-copyright text-center py-3">
+    <span>© 2018 Copyright</span>
+  </div>
+
+
+</footer>
+<!-- Footer -->
