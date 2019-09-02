@@ -17,6 +17,7 @@ export class ArticlesService {
 
     url = 'http://localhost:8020/api/articles';
     urlOne = 'http://localhost:8020/api/article';
+    httpClient: any;
 
 
     constructor(private http: HttpClient) { }
@@ -60,6 +61,9 @@ export class ArticlesService {
         const newUrl = this.urlOne + '/' + deletedArticle._id;
         return this.http.delete(newUrl);
     }
+
+
+
 
 
 }

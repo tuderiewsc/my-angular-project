@@ -11,13 +11,14 @@ import { map, catchError } from 'rxjs/operators';
 export class ArticleResolverService implements Resolve<ArticleResolved> {
 
   constructor(private articleService: ArticlesService) { }
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<ArticleResolved> {
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot):
+    Observable<ArticleResolved> {
     const id = +route.paramMap.get('id');
     // return this.articleService.getArticle(id);
     if (isNaN(+id)) {
       const message = `id is not a number ${id}`;
       console.error(message);
-      return of({ resolvedarticle: null , error: message});
+      return of({ resolvedarticle: null, error: message });
     }
 
     return this.articleService.getArticle(+id).pipe(

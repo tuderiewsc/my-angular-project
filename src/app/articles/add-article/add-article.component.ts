@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, FormControl, Validators, MaxLengthValidator } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
 import { SnackbarComponent } from 'src/app/shared/snackbar/snackbar.component';
+import { HttpClient, HttpEventType } from '@angular/common/http';
+import { FileUploader } from 'ng2-file-upload';
 
 
 export interface Stats {
@@ -29,15 +31,18 @@ export class AddArticleComponent implements OnInit {
 
   title: string;
   desc: string;
+  image: string;
   submitted: boolean;
+  fileToUpload: File = null;
+
 
 
   // @Output() newArticle = new EventEmitter<ArticleModel>();
 
 
-  constructor(private articleservice: ArticlesService,
-    private router: Router, private formbuilder: FormBuilder,
-    private snackbar: MatSnackBar) {
+  constructor(private articleservice: ArticlesService, private router: Router,
+    private formbuilder: FormBuilder, private snackbar: MatSnackBar,
+    private http: HttpClient) {
     this.buildForm();
   }
 
@@ -57,11 +62,21 @@ export class AddArticleComponent implements OnInit {
   }
 
 
+
+
+
+
+
   onsubmit() {
+
+
+
+
     const Article = new ArticleModel();
 
     Article.id = Math.floor(Math.random() * 100);
     Article.title = this.title;
+    // Article.image = this.image;
     Article.image = '/assets/images/slide1.jpg';
     Article.desc = this.desc;
     Article.createdat = Date.now();
@@ -71,26 +86,12 @@ export class AddArticleComponent implements OnInit {
       Article.submitted = false;
     }
 
-    // const uploadData = new FormData();
-    // uploadData.append('myFile', this.selectedFile, this.selectedFile.name);
-    // this.http.post('src/uploads/', uploadData, {
-    //   reportProgress: true,
-    //   observe: 'events'
-    // })
-    //     .subscribe(event => {
-    //       // console.log(event);
-    //     });
 
-    // if (event.target.files && event.target.files[0]) {
-    //     var reader = new FileReader();
-    //     reader.readAsDataURL(event.target.files[0]);
-    //     reader.onload = (event) => {
-    //         //this.image = event.target.result;
-    //     }
-    //
-    // }
 
-    // this.articleservice.addArticles(Article);
+
+
+
+
     this.articleservice.addArticles(Article).
       subscribe(() => this.router.navigate(['/home']));
 
@@ -102,8 +103,8 @@ export class AddArticleComponent implements OnInit {
       duration: 4000,
       verticalPosition: 'bottom',
       horizontalPosition: 'left',
-      politeness: 'assertive',
-      announcementMessage: 'test msg'
+      politeness: 'assertive'
+      // announcementMessage: 'test msg'
     });
     throw new Error('Method not implemented.');
   }

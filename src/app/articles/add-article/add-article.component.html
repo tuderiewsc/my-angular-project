@@ -20,7 +20,8 @@
 
   <div class="form-group">
     <label for="image">تصوير</label>
-    <input class="form-control" type="file" id="image" [(ngModel)]="image" name="image" formControlName="image">
+    <input class="form-control" accept=".png , .jpg" type="file" id="image" [(ngModel)]="image" name="image"
+      formControlName="image">
   </div>
 
   <div class="form-group">
