@@ -9,8 +9,8 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let article of articles">
-          <td scope="row">1</td>
+        <tr *ngFor="let article of articles ;let index = index">
+          <td scope="row">{{index+1}}</td>
           <td>{{ article.title }}</td>
           <td>
             <a href="" class="btn btn-info mx-1">جزئیات</a> |

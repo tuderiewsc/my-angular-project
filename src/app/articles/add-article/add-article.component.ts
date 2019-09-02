@@ -43,6 +43,7 @@ export class AddArticleComponent implements OnInit {
   constructor(private articleservice: ArticlesService, private router: Router,
     private formbuilder: FormBuilder, private snackbar: MatSnackBar,
     private http: HttpClient) {
+
     this.buildForm();
   }
 
@@ -62,16 +63,7 @@ export class AddArticleComponent implements OnInit {
   }
 
 
-
-
-
-
-
   onsubmit() {
-
-
-
-
     const Article = new ArticleModel();
 
     Article.id = Math.floor(Math.random() * 100);
@@ -85,11 +77,6 @@ export class AddArticleComponent implements OnInit {
     } else {
       Article.submitted = false;
     }
-
-
-
-
-
 
 
     this.articleservice.addArticles(Article).

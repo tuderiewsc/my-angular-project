@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {ArticleModel} from '../models/article.model';
-import {HttpClient} from '@angular/common/http';
-import {DatePipe} from '@angular/common';
-import {ArticlesService} from '../services/articles.service';
-import {AuthService} from '../shared/auth.service';
-import {Router} from '@angular/router';
+import { ArticleModel } from '../models/article.model';
+import { HttpClient } from '@angular/common/http';
+import { DatePipe } from '@angular/common';
+import { ArticlesService } from '../services/articles.service';
+import { AuthService } from '../shared/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-articles',
@@ -24,12 +24,11 @@ export class ArticlesComponent implements OnInit {
     selectedArticle: ArticleModel;
     articles: ArticleModel[];
 
-    selectedFile: File;
 
 
 
-    constructor(private http: HttpClient , private articlesService: ArticlesService,
-                private authservice: AuthService, private router: Router) { }
+    constructor(private http: HttpClient, private articlesService: ArticlesService,
+        private authservice: AuthService, private router: Router) { }
 
     ngOnInit() {
         this.getArticles();
@@ -39,14 +38,9 @@ export class ArticlesComponent implements OnInit {
 
     getArticles() {
         this.articlesService.getArticles().
-        subscribe(articles => this.articles = articles);
+            subscribe(articles => this.articles = articles);
     }
 
-    onfilechange(event) {
-        // const file = event.target.files[0];
-        this.selectedFile = event.target.files[0];
-        console.log(this.selectedFile);
-    }
 
     // onNewArticle(event:ArticleModel){
     //     this.articlesService.addArticles(event).

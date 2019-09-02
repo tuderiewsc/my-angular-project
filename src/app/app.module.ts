@@ -16,7 +16,7 @@ import { ArticlesComponent } from './articles/articles.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AddArticleComponent } from './articles/add-article/add-article.component';
-import { ShowArticleComponent } from './articles/show-article/ShowArticleComponent';
+import { ShowArticleComponent } from './articles/show-article/show-article.component';
 import { Routes, Route, RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthGuard } from './shared/auth.guard';

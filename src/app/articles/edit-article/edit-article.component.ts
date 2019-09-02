@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {ArticleModel} from '../../models/article.model';
-import {ActivatedRoute, Router} from '@angular/router';
-import {ArticlesService} from '../../services/articles.service';
-import {Stats} from '../add-article/add-article.component';
+import { ArticleModel } from '../../models/article.model';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ArticlesService } from '../../services/articles.service';
+import { Stats } from '../add-article/add-article.component';
 
 export interface Stats {
   value: boolean;
@@ -17,9 +17,9 @@ export interface Stats {
 export class EditArticleComponent implements OnInit {
 
   stats: Stats[] = [
-    {value: false , viewValue: '---'},
-    {value: true , viewValue: 'منتشر شده'},
-    {value: false , viewValue: 'منتشر نشده'}
+    { value: false, viewValue: '---' },
+    { value: true, viewValue: 'منتشر شده' },
+    { value: false, viewValue: 'منتشر نشده' }
   ];
 
 
@@ -30,8 +30,8 @@ export class EditArticleComponent implements OnInit {
   article: ArticleModel;
 
 
-  constructor(private route: ActivatedRoute , private router: Router,
-              private articleservice: ArticlesService) { }
+  constructor(private route: ActivatedRoute, private router: Router,
+    private articleservice: ArticlesService) { }
 
   ngOnInit() {
     const id = +this.route.snapshot.params.id;
@@ -40,17 +40,17 @@ export class EditArticleComponent implements OnInit {
 
   getArticle(id) {
     this.articleservice.getArticle(id).
-    subscribe(article => this.article = article);
+      subscribe(article => this.article = article);
   }
 
   onSaveArticle() {
-    if (this.articletitle) {this.article.title = this.articletitle; }
-    if (this.articledesc) {this.article.desc = this.articledesc; }
-    if (this.articleimage) {this.article.image = '/assets/images/slide1.jpg'; }
-    if (this.articlesubmitted) {this.article.submitted = this.articlesubmitted; }
+    if (this.articletitle) { this.article.title = this.articletitle; }
+    if (this.articledesc) { this.article.desc = this.articledesc; }
+    if (this.articleimage) { this.article.image = '/assets/images/slide1.jpg'; }
+    if (this.articlesubmitted) { this.article.submitted = this.articlesubmitted; }
 
     this.articleservice.updatearticles(this.article).
-        subscribe(article => this.router.navigate(['/article/' + this.article.id]));
+      subscribe(() => this.router.navigate(['/article/' + this.article.id]));
   }
 
 
