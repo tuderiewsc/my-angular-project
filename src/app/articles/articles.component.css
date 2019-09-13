@@ -138,3 +138,7 @@ ul.children>li a {
 ul.children li:hover>a {
   margin-right: 0;
 }
+
+mat-icon.is-favorite {
+  color: teal;
+}

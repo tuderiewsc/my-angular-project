@@ -17,32 +17,18 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AddArticleComponent } from './articles/add-article/add-article.component';
 import { ShowArticleComponent } from './articles/show-article/show-article.component';
-import { Routes, Route, RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthGuard } from './shared/auth.guard';
 import { ArticlesService } from './services/articles.service';
 import { EditArticleComponent } from './articles/edit-article/edit-article.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
-import { ArticleResolverService } from './services/article-resolver.service';
 import { ListArticleComponent } from './articles/list-article/list-article.component';
 import { SnackbarComponent } from './shared/snackbar/snackbar.component';
-
-const routes: Routes = [
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
-  { path: 'home', component: ArticlesComponent },
-  { path: 'article/add', component: AddArticleComponent, canActivate: [AuthGuard] },
-  { path: 'article/list', component: ListArticleComponent, canActivate: [AuthGuard] },
-  {
-    path: 'article/:id', component: ShowArticleComponent,
-    resolve: { resolveData: ArticleResolverService }
-  },
-  {
-    path: 'article/:id/edit', component: EditArticleComponent,
-    canActivate: [AuthGuard]
-  },
-
-  { path: '**', component: PageNotFoundComponent }
-];
+import { SearchPipe } from './pipes/search.pipe';
+import { CompletePipe } from './pipes/complete.pipe';
+import { routing } from './routes';
+import { FavoriteDirective } from './Directives/favorite.directive';
+import { ApiService } from './services/api.service';
 
 
 @NgModule({
@@ -54,19 +40,22 @@ const routes: Routes = [
     EditArticleComponent,
     PageNotFoundComponent,
     ListArticleComponent,
-    SnackbarComponent
+    SnackbarComponent,
+    SearchPipe,
+    CompletePipe,
+    FavoriteDirective
   ],
   imports: [
     BrowserModule, BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
-    RouterModule.forRoot(routes),
+    routing,
     MatButtonModule, MatToolbarModule, MatMenuModule, MatIconModule,
     MatSlideToggleModule, MatInputModule, MatFormFieldModule, MatSelectModule,
     MatTableModule, MatSnackBarModule,
     ReactiveFormsModule.withConfig({ warnOnNgModelWithFormControl: 'never' }),
   ],
-  providers: [AuthGuard, ArticlesService],
+  providers: [AuthGuard, ArticlesService, ApiService],
   bootstrap: [AppComponent],
   entryComponents: [SnackbarComponent]
 })

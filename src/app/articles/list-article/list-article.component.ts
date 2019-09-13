@@ -12,15 +12,20 @@ export class ListArticleComponent implements OnInit {
 
   articles: ArticleModel[];
   passedArticle: ArticleModel;
+  complete: boolean;
+  keyword: string;
 
   constructor(private articlesService: ArticlesService, private route: ActivatedRoute,
     private router: Router) { }
 
   ngOnInit() {
     this.getArticles();
+    this.complete = true;
+    this.keyword = '';
+
+
     // this.passedArticle = this.route.snapshot.data.resolveData.resolvedarticle;
     // if (this.passedArticle != null) { this.onDelete(); }
-
   }
 
   getArticles() {

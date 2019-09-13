@@ -1,20 +1,34 @@
 <div class="container">
+  <form ngForm class="my-4" id="list-frm">
+    <mat-form-field>
+      <mat-label>وضعيت انتشار</mat-label>
+      <mat-select name="complete" [(ngModel)]="complete">
+        <mat-option [value]="0">وضعيت انتشار ---</mat-option>
+        <mat-option [value]="true">منتشر شده</mat-option>
+        <mat-option [value]="false">منتشر نشده</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="text" name="search" id="search" [(ngModel)]="keyword" placeholder="جستجو ...">
+    </mat-form-field>
+  </form>
   <div class="text-center">
     <table class="table table-hover">
       <thead class="thead-inverse">
         <tr>
           <th>ردیف</th>
           <th>عنوان</th>
+          <th>توضیحات</th>
           <th>عملیات</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let article of articles ;let index = index">
+        <tr *ngFor="let article of articles | complete:complete | search:keyword ;let index = index">
           <td scope="row">{{index+1}}</td>
           <td>{{ article.title }}</td>
+          <td>{{ article.desc }}</td>
           <td>
-            <a href="" class="btn btn-info mx-1">جزئیات</a> |
-            <a href="" class="btn btn-secondary mx-1">ویرایش</a>
+            <a href="" class="btn btn-info mx-1">ویرایش</a> |
             <button type="button" class="btn btn-danger mx-1" (click)="del(article.id)">حذف</button>
           </td>
         </tr>

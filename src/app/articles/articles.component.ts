@@ -5,6 +5,9 @@ import { DatePipe } from '@angular/common';
 import { ArticlesService } from '../services/articles.service';
 import { AuthService } from '../shared/auth.service';
 import { Router } from '@angular/router';
+import { ApiService } from '../services/api.service';
+import { Observable } from 'rxjs';
+import { log } from 'util';
 
 @Component({
     selector: 'app-articles',
@@ -28,7 +31,8 @@ export class ArticlesComponent implements OnInit {
 
 
     constructor(private http: HttpClient, private articlesService: ArticlesService,
-        private authservice: AuthService, private router: Router) { }
+        private authservice: AuthService, private router: Router,
+        private api: ApiService) { }
 
     ngOnInit() {
         this.getArticles();
@@ -37,9 +41,12 @@ export class ArticlesComponent implements OnInit {
     }
 
     getArticles() {
-        this.articlesService.getArticles().
-            subscribe(articles => this.articles = articles);
+        // this.articlesService.getArticles().
+        //     subscribe(articles => this.articles = articles);
+
+        this.api.getArticles().subscribe(articles => this.articles = articles);
     }
+
 
 
     // onNewArticle(event:ArticleModel){

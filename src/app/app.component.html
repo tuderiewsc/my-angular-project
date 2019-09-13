@@ -3,10 +3,10 @@
   <mat-toolbar-row>
     <span style="flex: 1 1 auto;">
       <ul class="toolbar-items">
-        <a routerLink="/home" class="toolbar-item">
+        <a routerLink="/home" class="toolbar-item" routerLinkActive="active"
+          [routerLinkActiveOptions]="{exatct : true}">
           <li>خانه</li>
         </a>
-
         <a [matMenuTriggerFor]="menu1" class="toolbar-item" *ngIf="isAdmin()">
           <li>مقالات</li>
         </a>

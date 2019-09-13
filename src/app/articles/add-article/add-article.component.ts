@@ -31,9 +31,13 @@ export class AddArticleComponent implements OnInit {
 
   title: string;
   desc: string;
+  slug: string;
   image: string;
   submitted: boolean;
+  isfavorite: boolean;
   fileToUpload: File = null;
+
+  lastArticleId: number;
 
 
 
@@ -43,22 +47,41 @@ export class AddArticleComponent implements OnInit {
   constructor(private articleservice: ArticlesService, private router: Router,
     private formbuilder: FormBuilder, private snackbar: MatSnackBar,
     private http: HttpClient) {
-
-    this.buildForm();
   }
 
   ngOnInit() {
+    this.getArticles();
+    this.buildForm();
   }
+
+
+  getArticles() {
+    this.articleservice.getArticles().
+      subscribe(articles => this.lastArticleId = (articles.length) + 1);
+  }
+
 
   buildForm() {
     this.addArticleForm = this.formbuilder.group({
-      title: ['', Validators.required],
-      desc: ['', [
+      title: this.formbuilder.control('', Validators.required),
+      desc: this.formbuilder.control('', Validators.compose([
         Validators.maxLength(20),
         Validators.required
-      ]],
-      submitted: ['', Validators.required],
-      image: ['', Validators.required]
+      ])),
+      submitted: this.formbuilder.control('', Validators.required),
+      isfavorite: this.formbuilder.control('', Validators.required),
+      image: this.formbuilder.control('', Validators.required)
+
+
+
+      // title: ['', Validators.required],
+      // desc: ['', [
+      //   Validators.maxLength(20),
+      //   Validators.required
+      // ]],
+      // submitted: ['', Validators.required],
+      // isfavorite: ['', Validators.required],
+      // image: ['', Validators.required]
     });
   }
 
@@ -66,12 +89,15 @@ export class AddArticleComponent implements OnInit {
   onsubmit() {
     const Article = new ArticleModel();
 
-    Article.id = Math.floor(Math.random() * 100);
+    Article.id = this.lastArticleId;
+    // Article.id = Math.floor(Math.random() * 100);
     Article.title = this.title;
     // Article.image = this.image;
     Article.image = '/assets/images/slide1.jpg';
     Article.desc = this.desc;
+    Article.slug = this.slug;
     Article.createdat = Date.now();
+    Article.isfavorite = this.isfavorite;
     if (this.submitted === true) {
       Article.submitted = true;
     } else {

@@ -1,0 +1,11 @@
+form#list-frm {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-content: space-around;
+  align-items: center;
+}
+
+form#list-frm mat-form-field {
+  margin: auto 16px;
+}

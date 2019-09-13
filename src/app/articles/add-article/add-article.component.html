@@ -1,4 +1,5 @@
-<form ngForm class="col-md-12 my-5" dir="rtl" id="add-article" #addArticle [formGroup]="addArticleForm" novalidate>
+<form #addArticle="ngForm" (ngSubmit)="onsubmit()" class="col-md-12 my-5" dir="rtl" id="add-article"
+  [formGroup]="addArticleForm" novalidate>
   <mat-form-field>
     <input type="text" matInput name="title" [(ngModel)]="title" placeholder="عنوان" formControlName="title">
   </mat-form-field>
@@ -18,6 +19,14 @@
     </mat-select>
   </mat-form-field>
 
+  <mat-form-field>
+    <mat-label>علاقه مندی</mat-label>
+    <mat-select name="isfavorite" formControlName="isfavorite" [(ngModel)]="isfavorite">
+      <mat-option value="true">هست</mat-option>
+      <mat-option value="false">نیست</mat-option>
+    </mat-select>
+  </mat-form-field>
+
   <div class="form-group">
     <label for="image">تصوير</label>
     <input class="form-control" accept=".png , .jpg" type="file" id="image" [(ngModel)]="image" name="image"
@@ -25,8 +34,9 @@
   </div>
 
   <div class="form-group">
+    <!-- <button type="submit" (click)=" addArticle.reset()">Submit</button> -->
     <button type="submit" class="form-control" mat-flat-button color="accent" name="arc_submit"
-      (click)="onsubmit() ; addArticle.reset()" [disabled]="addArticleForm.pristine || addArticleForm.invalid">
+      [disabled]="addArticleForm.pristine || addArticleForm.invalid">
       ثبت <mat-icon class="mx-2">save</mat-icon>
     </button>
   </div>

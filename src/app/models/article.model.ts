@@ -5,8 +5,10 @@ export class ArticleModel {
     title: string;
     image: string;
     desc: string;
+    slug: string;
     createdat?: number;
     submitted: boolean;
+    isfavorite: boolean;
 }
 
 export class ArticleResolved {

@@ -55,7 +55,10 @@ ul.toolbar-items a {
   padding: 16px;
   cursor: pointer !important;
   font-size: 1rem;
+}
 
+ul.toolbar-items a.active {
+  background: blueviolet;
 }
 
 ul.toolbar-items a li {

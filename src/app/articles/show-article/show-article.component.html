@@ -1,7 +1,6 @@
-
 <!-- content -->
-  <div class="container">
-    <div class="row">
+<div class="container">
+  <div class="row">
     <div class="col-12 my-3">
       <div class="card article">
         <div class="card-header grey lighten-2">
@@ -9,29 +8,41 @@
         </div>
         <div class="card-body">
           <img src="{{passedArticle.image}}">
-          <p >{{passedArticle.desc}}</p>
+          <p>{{passedArticle.desc}}</p>
         </div>
 
         <div class="card-footer p-0">
           <div class="contenttags">
-							<span class="collection">
-								<li class="collection-item"><mat-icon aria-hidden="false">person</mat-icon>
-                  <span>Admin</span></li>
-							</span>
             <span class="collection">
-								<li class="collection-item"><mat-icon aria-hidden="false">date_range</mat-icon>
-                  <span>{{passedArticle.createdat | date}}</span></li>
-							</span>
+              <li class="collection-item">
+                <mat-icon aria-hidden="false">person</mat-icon>
+                <span>Admin</span>
+              </li>
+            </span>
             <span class="collection">
-								<li class="collection-item"><mat-icon aria-hidden="false">visibility</mat-icon>
-                  <span>332</span></li>
-							</span>
+              <li class="collection-item">
+                <mat-icon aria-hidden="false">date_range</mat-icon>
+                <span>{{passedArticle.createdat | date}}</span>
+              </li>
+            </span>
+            <span class="collection">
+              <li class="collection-item">
+                <mat-icon aria-hidden="false">visibility</mat-icon>
+                <span>332</span>
+              </li>
+            </span>
+            <span class="collection">
+              <li class="collection-item">
+                <mat-icon [articlefav]="passedArticle.isfavorite" aria-hidden="false">favorite_border</mat-icon>
+              </li>
+            </span>
+
           </div>
           <div class="left-btn">
             <button mat-flat-button color="primary" (click)="onEdit()" class="mx-2"
-                    [disabled]="!isAdmin()">ویرایش</button>
-            <button mat-flat-button color="warn" name="delete" class="mx-2"
-                    (click)="onDelete()" [disabled]="!isAdmin()">حذف
+              [disabled]="!isAdmin()">ویرایش</button>
+            <button mat-flat-button color="warn" name="delete" class="mx-2" (click)="onDelete()"
+              [disabled]="!isAdmin()">حذف
             </button>
           </div>
         </div>
@@ -41,4 +52,3 @@
   </div>
 </div>
 <!-- content -->
-
