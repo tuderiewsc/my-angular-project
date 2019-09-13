@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, Inject } from '@angular/core';
 import { ArticleModel } from '../../models/article.model';
 import { ArticlesService } from '../../services/articles.service';
 import { Router } from '@angular/router';
@@ -7,12 +7,8 @@ import { MatSnackBar } from '@angular/material';
 import { SnackbarComponent } from 'src/app/shared/snackbar/snackbar.component';
 import { HttpClient, HttpEventType } from '@angular/common/http';
 import { FileUploader } from 'ng2-file-upload';
+import { articleStatsToken } from 'src/app/providers/article.provider';
 
-
-export interface Stats {
-  value: boolean;
-  viewValue: string;
-}
 
 @Component({
   selector: 'app-add-article',
@@ -23,11 +19,6 @@ export class AddArticleComponent implements OnInit {
 
   addArticleForm: FormGroup;
 
-  stats: Stats[] = [
-    { value: false, viewValue: '---' },
-    { value: true, viewValue: 'منتشر شده' },
-    { value: false, viewValue: 'منتشر نشده' }
-  ];
 
   title: string;
   desc: string;
@@ -46,7 +37,7 @@ export class AddArticleComponent implements OnInit {
 
   constructor(private articleservice: ArticlesService, private router: Router,
     private formbuilder: FormBuilder, private snackbar: MatSnackBar,
-    private http: HttpClient) {
+    private http: HttpClient, @Inject(articleStatsToken) public stats) {
   }
 
   ngOnInit() {

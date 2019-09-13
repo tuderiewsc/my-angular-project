@@ -29,6 +29,7 @@ import { CompletePipe } from './pipes/complete.pipe';
 import { routing } from './routes';
 import { FavoriteDirective } from './Directives/favorite.directive';
 import { ApiService } from './services/api.service';
+import { articleStatsToken, stats } from './providers/article.provider';
 
 
 @NgModule({
@@ -55,7 +56,9 @@ import { ApiService } from './services/api.service';
     MatTableModule, MatSnackBarModule,
     ReactiveFormsModule.withConfig({ warnOnNgModelWithFormControl: 'never' }),
   ],
-  providers: [AuthGuard, ArticlesService, ApiService],
+  providers: [AuthGuard, ArticlesService, ApiService,
+    { provide: articleStatsToken, useValue: stats }
+  ],
   bootstrap: [AppComponent],
   entryComponents: [SnackbarComponent]
 })

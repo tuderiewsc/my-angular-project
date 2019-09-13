@@ -1,13 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { ArticleModel } from '../../models/article.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ArticlesService } from '../../services/articles.service';
-import { Stats } from '../add-article/add-article.component';
+import { articleStatsToken } from 'src/app/providers/article.provider';
 
-export interface Stats {
-  value: boolean;
-  viewValue: string;
-}
+
 
 @Component({
   selector: 'app-edit-article',
@@ -16,11 +13,6 @@ export interface Stats {
 })
 export class EditArticleComponent implements OnInit {
 
-  stats: Stats[] = [
-    { value: false, viewValue: '---' },
-    { value: true, viewValue: 'منتشر شده' },
-    { value: false, viewValue: 'منتشر نشده' }
-  ];
 
 
   articletitle: string;
@@ -31,7 +23,7 @@ export class EditArticleComponent implements OnInit {
 
 
   constructor(private route: ActivatedRoute, private router: Router,
-    private articleservice: ArticlesService) { }
+    private articleservice: ArticlesService, @Inject(articleStatsToken) public stats) { }
 
   ngOnInit() {
     const id = +this.route.snapshot.params.id;
