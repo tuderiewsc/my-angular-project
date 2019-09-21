@@ -8,6 +8,7 @@ import { SnackbarComponent } from 'src/app/shared/snackbar/snackbar.component';
 import { HttpClient, HttpEventType } from '@angular/common/http';
 import { FileUploader } from 'ng2-file-upload';
 import { articleStatsToken } from 'src/app/providers/article.provider';
+import { ApiService } from 'src/app/services/api.service';
 
 
 @Component({
@@ -17,9 +18,8 @@ import { articleStatsToken } from 'src/app/providers/article.provider';
 })
 export class AddArticleComponent implements OnInit {
 
+  // declarations
   addArticleForm: FormGroup;
-
-
   title: string;
   desc: string;
   slug: string;
@@ -27,9 +27,7 @@ export class AddArticleComponent implements OnInit {
   submitted: boolean;
   isfavorite: boolean;
   fileToUpload: File = null;
-
   lastArticleId: number;
-
 
 
   // @Output() newArticle = new EventEmitter<ArticleModel>();
@@ -37,19 +35,20 @@ export class AddArticleComponent implements OnInit {
 
   constructor(private articleservice: ArticlesService, private router: Router,
     private formbuilder: FormBuilder, private snackbar: MatSnackBar,
-    private http: HttpClient, @Inject(articleStatsToken) public stats) {
+    private http: HttpClient, @Inject(articleStatsToken) public stats,
+    private api: ApiService) {
   }
 
   ngOnInit() {
-    this.getArticles();
+    // this.getArticles();
     this.buildForm();
   }
 
 
-  getArticles() {
-    this.articleservice.getArticles().
-      subscribe(articles => this.lastArticleId = (articles.length) + 1);
-  }
+  // getArticles() {
+  //   this.articleservice.getArticles().
+  //     subscribe(articles => this.lastArticleId = (articles.length) + 1);
+  // }
 
 
   buildForm() {
@@ -62,17 +61,6 @@ export class AddArticleComponent implements OnInit {
       submitted: this.formbuilder.control('', Validators.required),
       isfavorite: this.formbuilder.control('', Validators.required),
       image: this.formbuilder.control('', Validators.required)
-
-
-
-      // title: ['', Validators.required],
-      // desc: ['', [
-      //   Validators.maxLength(20),
-      //   Validators.required
-      // ]],
-      // submitted: ['', Validators.required],
-      // isfavorite: ['', Validators.required],
-      // image: ['', Validators.required]
     });
   }
 
@@ -80,11 +68,8 @@ export class AddArticleComponent implements OnInit {
   onsubmit() {
     const Article = new ArticleModel();
 
-    Article.id = this.lastArticleId;
-    // Article.id = Math.floor(Math.random() * 100);
     Article.title = this.title;
-    // Article.image = this.image;
-    Article.image = '/assets/images/slide1.jpg';
+    Article.image = this.image;
     Article.desc = this.desc;
     Article.slug = this.slug;
     Article.createdat = Date.now();
@@ -96,8 +81,11 @@ export class AddArticleComponent implements OnInit {
     }
 
 
-    this.articleservice.addArticles(Article).
-      subscribe(() => this.router.navigate(['/home']));
+    // this.articleservice.addArticles(Article).
+    //   subscribe(() => this.router.navigate(['/home']));
+
+    this.api.addArticle(Article)
+      .subscribe(() => this.router.navigate(['/home']));
 
     this.openSnackbar();
   }

@@ -3,30 +3,37 @@ import { ArticleModel } from '../../models/article.model';
 import { ArticlesService } from '../../services/articles.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/shared/auth.service';
+import { ApiService } from 'src/app/services/api.service';
 @Component({
   selector: 'app-show-article',
   templateUrl: './show-article.component.html',
   styleUrls: ['./show-article.component.css']
 })
 export class ShowArticleComponent implements OnInit {
+
+
   // @Input() passedArticle: ArticleModel;
   passedArticle: ArticleModel;
-  constructor(private articlesService: ArticlesService, private route: ActivatedRoute,
-    private router: Router, private authservice: AuthService) { }
-
   errorMessage: string;
+
+
+  constructor(private articlesService: ArticlesService, private route: ActivatedRoute,
+    private router: Router, private authservice: AuthService,
+    private api: ApiService) { }
+
 
   ngOnInit() {
     this.getArticle();
   }
-  getArticle() {
-    // const id = +this.route.snapshot.params.id;
-    // this.articlesService.getArticle(id).
-    //   subscribe(article => this.passedArticle = article);
 
-    this.passedArticle = this.route.snapshot.data.resolveData.resolvedarticle;
-    this.errorMessage = this.route.snapshot.data.resolveData.error;
-    console.log(this.errorMessage);
+  getArticle() {
+    const id = +this.route.snapshot.params.id;
+    this.api.getArticle(id).
+      subscribe(article => this.passedArticle = article);
+
+    // this.passedArticle = this.route.snapshot.data.resolveData.resolvedarticle;
+    // this.errorMessage = this.route.snapshot.data.resolveData.error;
+    // console.log(this.errorMessage);
   }
   onDelete() {
     this.articlesService.deleteArticle(this.passedArticle).

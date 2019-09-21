@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import {promise} from 'selenium-webdriver';
-import {resolve} from 'url';
-import {reject} from 'q';
+import { promise } from 'selenium-webdriver';
+import { resolve } from 'url';
+import { reject } from 'q';
 
 
 @Injectable({
@@ -23,9 +23,9 @@ export class AuthService {
 
   isAdmin() {
     const isUserAdmin = new Promise(
-        (resolve) => {
-          resolve(this.loggedIn);
-        }
+      (resolve) => {
+        resolve(this.loggedIn);
+      }
     );
     return isUserAdmin;
   }

@@ -7,24 +7,26 @@
           [routerLinkActiveOptions]="{exatct : true}">
           <li>خانه</li>
         </a>
-        <a [matMenuTriggerFor]="menu1" class="toolbar-item" *ngIf="isAdmin()">
+        <a routerLink="/articles/page/1" class="toolbar-item" routerLinkActive="active">
           <li>مقالات</li>
         </a>
-        <mat-menu #menu1="matMenu" xPosition="after">
-          <a mat-menu-item [routerLink]="[ 'article/add' ]">افزودن</a>
-          <a mat-menu-item [routerLink]="[ 'article/list' ]">لیست مقالات</a>
-        </mat-menu>
-        <a [matMenuTriggerFor]="menu2" class="toolbar-item" *ngIf="isAdmin()">
-          <li>دسته بندي</li>
-        </a>
-        <mat-menu #menu2="matMenu" xPosition="after">
-          <a mat-menu-item [routerLink]="[ 'article/add' ]">افزودن</a>
-          <a mat-menu-item [routerLink]="[ 'article/list' ]">لیست دسته بندي ها</a>
-        </mat-menu>
       </ul>
     </span>
     <span class="mx-2" *ngIf="isAdmin()">خوش آمدید ادمین</span>
-    <mat-icon aria-hidden="false" aria-label="">account_circle</mat-icon>
+    <ul class="toolbar-item">
+      <a [matMenuTriggerFor]="menu1" class="toolbar-item" *ngIf="isAdmin()">
+        <li>
+          <mat-icon aria-hidden="false" aria-label="">account_circle</mat-icon>
+        </li>
+      </a>
+      <mat-menu #menu1="matMenu" xPosition="after">
+        <a mat-menu-item [routerLink]="[ 'article/add' ]">افزودن مقاله</a>
+        <a mat-menu-item [routerLink]="[ 'article/list' ]">لیست مقالات</a>
+        <a mat-menu-item [routerLink]="[ 'article/add' ]">افزودن دسته بندي</a>
+        <a mat-menu-item [routerLink]="[ 'article/list' ]">لیست دسته بندي ها</a>
+      </mat-menu>
+    </ul>
+
     <!--    <mat-icon class="mat-icon-rtl-mirror" aria-hidden="false" aria-label="">account_circle</mat-icon>-->
   </mat-toolbar-row>
 </mat-toolbar>

@@ -5,21 +5,19 @@ import { AddArticleComponent } from './articles/add-article/add-article.componen
 import { ListArticleComponent } from './articles/list-article/list-article.component';
 import { AuthGuard } from './shared/auth.guard';
 import { ShowArticleComponent } from './articles/show-article/show-article.component';
-import { ArticleResolverService } from './services/article-resolver.service';
 import { EditArticleComponent } from './articles/edit-article/edit-article.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
+import { IndexpageComponent } from './articles/indexpage/indexpage.component';
 
 
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
-  { path: 'home', component: ArticlesComponent },
+  { path: 'home', component: IndexpageComponent },
   { path: 'article/add', component: AddArticleComponent, canActivate: [AuthGuard] },
   { path: 'article/list', component: ListArticleComponent, canActivate: [AuthGuard] },
-  {
-    path: 'article/:id', component: ShowArticleComponent,
-    resolve: { resolveData: ArticleResolverService }
-  },
+  { path: 'articles/page/:id', component: ArticlesComponent },
+  { path: 'article/:id', component: ShowArticleComponent },
   {
     path: 'article/:id/edit', component: EditArticleComponent,
     canActivate: [AuthGuard]

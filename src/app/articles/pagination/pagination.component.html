@@ -1,0 +1,17 @@
+<ul class="pagination paginatin-sm my-4" *ngIf="pager != undefined && pager.pages && pager.pages.length">
+  <li class="page-item" [ngClass]="{'disabled': pager.currentPage == 1}">
+    <a class="page-link" [routerLink]="['/articles/page/' , 1]">First</a>
+  </li>
+  <li class="page-item" [ngClass]="{'disabled': pager.currentPage == 1}">
+    <a class="page-link" [routerLink]="['/articles/page/' , pager.currentPage-1]">Previous</a>
+  </li>
+
+  <li class="page-item" *ngFor="let page of pager.pages" [ngClass]="{'active': pager.currentPage == page}">
+    <a class="page-link" [routerLink]="['/articles/page/' , page]">{{ page }}</a>
+  </li>
+
+  <li class="page-item" [ngClass]="{'disabled': pager.currentPage == pager.totalPages}"><a class="page-link"
+      [routerLink]="['/articles/page/'  , pager.currentPage+1]">Next</a></li>
+  <li class="page-item" [ngClass]="{'disabled': pager.currentPage == pager.totalPages}">
+    <a class="page-link" [routerLink]="['/articles/page/'  , pager.totalPages]">Last</a></li>
+</ul>

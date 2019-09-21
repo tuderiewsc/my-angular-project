@@ -30,6 +30,9 @@ import { routing } from './routes';
 import { FavoriteDirective } from './Directives/favorite.directive';
 import { ApiService } from './services/api.service';
 import { articleStatsToken, stats } from './providers/article.provider';
+import { PagerService } from './services/pager.services';
+import { PaginationComponent } from './articles/pagination/pagination.component';
+import { IndexpageComponent } from './articles/indexpage/indexpage.component';
 
 
 @NgModule({
@@ -44,7 +47,9 @@ import { articleStatsToken, stats } from './providers/article.provider';
     SnackbarComponent,
     SearchPipe,
     CompletePipe,
-    FavoriteDirective
+    FavoriteDirective,
+    PaginationComponent,
+    IndexpageComponent
   ],
   imports: [
     BrowserModule, BrowserAnimationsModule,
@@ -56,7 +61,7 @@ import { articleStatsToken, stats } from './providers/article.provider';
     MatTableModule, MatSnackBarModule,
     ReactiveFormsModule.withConfig({ warnOnNgModelWithFormControl: 'never' }),
   ],
-  providers: [AuthGuard, ArticlesService, ApiService,
+  providers: [AuthGuard, ArticlesService, ApiService, PagerService,
     { provide: articleStatsToken, useValue: stats }
   ],
   bootstrap: [AppComponent],

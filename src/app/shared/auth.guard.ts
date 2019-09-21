@@ -11,28 +11,28 @@ import {
   Router
 } from '@angular/router';
 import { Observable } from 'rxjs';
-import {AuthService} from './auth.service';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
 
-  constructor(private authservice: AuthService , private router: Router) {}
+  constructor(private authservice: AuthService, private router: Router) { }
 
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
     return this.authservice.isAdmin().then(
-        (authenticate: boolean) => {
-          if (authenticate) {
-            return true;
-          } else {
-            this.router.navigate(['/home']);
-            return false;
-          }
+      (authenticate: boolean) => {
+        if (authenticate) {
+          return true;
+        } else {
+          this.router.navigate(['/home']);
+          return false;
         }
+      }
     );
   }
   canActivateChild(
@@ -43,6 +43,17 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
   canLoad(
     route: Route,
     segments: UrlSegment[]): Observable<boolean> | Promise<boolean> | boolean {
-    return true;
+    return this.checkLogin();
   }
+
+  private checkLogin() {
+    if (this.authservice.loggedIn) {
+      return true;
+    } else {
+      this.router.navigate(['home']);
+      return false;
+    }
+  }
+
+
 }

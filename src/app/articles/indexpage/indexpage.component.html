@@ -1,0 +1,66 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 col-sm-12 my-3">
+      <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+          <h2 class="display-3">Angular Articles</h2>
+          <hr class="my-2">
+          <p>More info</p>
+          <p class="lead">
+            <a class="btn btn-primary btn-lg" routerLink="/articles/page/1" role="button">
+              رفتن به مقالات</a>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <aside class="col-md-4 col-sm-12 my-3 aside">
+      <div class="card">
+        <div class="card-header">
+          <h6>
+            <mat-icon aria-hidden="false" aria-label="">check</mat-icon>
+            جستجو
+          </h6>
+        </div>
+        <div class="card-body">
+          <form class="side-search form-group" method="get" role="search">
+            <div class="contain">
+              <input class="form-control" placeholder="جستجو..." id="search" type="search" name="s" autocomplete="on">
+              <a>
+                <mat-icon aria-hidden="false" aria-label="">search</mat-icon>
+              </a>
+            </div>
+
+          </form>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <h6>
+            <mat-icon aria-hidden="false" aria-label="">check</mat-icon>دسته بندی مطالب
+          </h6>
+        </div>
+        <div class="card-body">
+          <ul class="collection cats">
+            <li class="collection-item">
+              <i class="material-icons">chevron_left</i><a href="#">اخبار</a>
+            </li>
+            <li class="collection-item">
+              <i class="material-icons">chevron_left</i><a href="#">مقالات</a>
+              <ul class="collection children">
+                <li class="collection-item"><a href="#">مقالات1</a></li>
+                <li class="collection-item"><a href="#">مقالات2</a></li>
+                <li class="collection-item"><a href="#">مقالات3</a></li>
+              </ul>
+            </li>
+            <li class="collection-item">
+              <i class="material-icons">chevron_left</i><a href="#">رویدادها</a>
+            </li>
+          </ul>
+
+        </div>
+      </div>
+    </aside>
+  </div>
+</div>

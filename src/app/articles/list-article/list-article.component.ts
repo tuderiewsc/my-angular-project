@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ArticlesService } from 'src/app/services/articles.service';
 import { ArticleModel } from 'src/app/models/article.model';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ApiService } from 'src/app/services/api.service';
 
 @Component({
   selector: 'app-list-article',
@@ -16,7 +17,7 @@ export class ListArticleComponent implements OnInit {
   keyword: string;
 
   constructor(private articlesService: ArticlesService, private route: ActivatedRoute,
-    private router: Router) { }
+    private router: Router, private api: ApiService) { }
 
   ngOnInit() {
     this.getArticles();
@@ -29,13 +30,18 @@ export class ListArticleComponent implements OnInit {
   }
 
   getArticles() {
-    this.articlesService.getArticles().
-      subscribe(articles => this.articles = articles);
+    const id = +this.route.snapshot.params.id;
+    this.api.getArticles(id).subscribe(articles => this.articles = articles.data);
   }
 
 
   del(id: number) {
-    this.articlesService.getArticle(id).
+    // this.articlesService.getArticle(id).
+    //   subscribe(article => this.articlesService.deleteArticle(article).
+    //     subscribe(() => this.router.navigate(['/home'])));
+
+
+    this.api.getArticle(id).
       subscribe(article => this.articlesService.deleteArticle(article).
         subscribe(() => this.router.navigate(['/home'])));
   }
