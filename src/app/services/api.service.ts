@@ -3,6 +3,7 @@ import { Observable, of, throwError } from 'rxjs';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { ArticleModel } from '../models/article.model';
 import { map, catchError, tap, delay } from 'rxjs/operators';
+import { CategoryModel } from '../models/category.model';
 
 
 @Injectable({
@@ -12,6 +13,8 @@ export class ApiService {
 
   url = 'http://localhost:8000/api/articles?page=';
   urlOne = 'http://localhost:8000/api/articles';
+  urlCats = 'http://localhost:8000/api/categories';
+  urlOneCat = 'http://localhost:8000/api/articles/categories';
 
 
   private httpOptions = {
@@ -26,7 +29,6 @@ export class ApiService {
   getArticles(pagenumber: number): Observable<any> {
     return this.http.get(this.url + pagenumber);
   }
-
   getArticle(id: number): Observable<ArticleModel> {
     return this.http.get<ArticleModel>(this.urlOne + '/' + id)
       .pipe(
@@ -34,6 +36,19 @@ export class ApiService {
         catchError(this.handleError),
         // catchError(this.handleError<ArticleModel>(`Article_id=${id}`)),
         delay(1000)
+      );
+  }
+
+
+  getCategories(): Observable<any> {
+    return this.http.get(this.urlCats);
+  }
+  getCategory(id: number): Observable<CategoryModel> {
+    return this.http.get<CategoryModel>(this.urlOneCat + '/' + id)
+      .pipe(
+        tap(_ => console.log(`Category_id=${id}`)),
+        catchError(this.handleError),
+        delay(2000)
       );
   }
 

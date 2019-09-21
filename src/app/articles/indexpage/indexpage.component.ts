@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { CategoryModel } from 'src/app/models/category.model';
+import { ApiService } from 'src/app/services/api.service';
 
 @Component({
   selector: 'app-indexpage',
@@ -7,9 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class IndexpageComponent implements OnInit {
 
-  constructor() { }
+  categories: CategoryModel[];
+
+  constructor(private api: ApiService) { }
 
   ngOnInit() {
+    this.api.getCategories()
+      .subscribe(res => this.categories = res);
   }
 
 }

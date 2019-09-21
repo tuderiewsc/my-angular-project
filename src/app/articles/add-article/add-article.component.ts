@@ -17,7 +17,14 @@ import { fadeAnimation } from '../animations/animations';
   templateUrl: './add-article.component.html',
   styleUrls: ['./add-article.component.css'],
   animations: [trigger('changeState', [
-    transition('void => *', [useAnimation(fadeAnimation)])
+    transition('void => *', [useAnimation(fadeAnimation, {
+      params: {
+        delay: '300ms',
+        from: 0,
+        to: 1,
+        time: '2s'
+      }
+    })])
   ])]
 })
 export class AddArticleComponent implements OnInit {

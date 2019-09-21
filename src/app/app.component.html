@@ -17,6 +17,7 @@
       <a [matMenuTriggerFor]="menu1" class="toolbar-item" *ngIf="isAdmin()">
         <li>
           <mat-icon aria-hidden="false" aria-label="">account_circle</mat-icon>
+          <!--    <mat-icon class="mat-icon-rtl-mirror" aria-hidden="false" aria-label="">account_circle</mat-icon>-->
         </li>
       </a>
       <mat-menu #menu1="matMenu" xPosition="after">
@@ -26,8 +27,6 @@
         <a mat-menu-item [routerLink]="[ 'article/list' ]">لیست دسته بندي ها</a>
       </mat-menu>
     </ul>
-
-    <!--    <mat-icon class="mat-icon-rtl-mirror" aria-hidden="false" aria-label="">account_circle</mat-icon>-->
   </mat-toolbar-row>
 </mat-toolbar>
 <!-- navbar -->
@@ -37,8 +36,9 @@
   <mat-slide-toggle color="primary" (click)="login()"><span class="mx-2">ورود</span></mat-slide-toggle>
 </div>
 
-
-<router-outlet></router-outlet>
+<div class="page" [@routerAnimation]="prepareRouteTransition(outlet)">
+  <router-outlet #outlet="outlet"></router-outlet>
+</div>
 <!--<app-articles></app-articles>-->
 
 

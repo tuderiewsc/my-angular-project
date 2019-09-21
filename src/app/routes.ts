@@ -13,14 +13,25 @@ import { IndexpageComponent } from './articles/indexpage/indexpage.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
-  { path: 'home', component: IndexpageComponent },
-  { path: 'article/add', component: AddArticleComponent, canActivate: [AuthGuard] },
-  { path: 'article/list', component: ListArticleComponent, canActivate: [AuthGuard] },
-  { path: 'articles/page/:id', component: ArticlesComponent },
-  { path: 'article/:id', component: ShowArticleComponent },
+  { path: 'home', component: IndexpageComponent, data: { animation: { value: 'home' } } },
+  {
+    path: 'article/add', component: AddArticleComponent, canActivate: [AuthGuard]
+  },
+  {
+    path: 'article/list', component: ListArticleComponent, canActivate: [AuthGuard],
+    data: { animation: { value: 'list' } }
+  },
+  {
+    path: 'articles/page/:id', component: ArticlesComponent,
+    data: { animation: { value: 'page' } }
+  },
+  {
+    path: 'article/:id', component: ShowArticleComponent,
+    data: { animation: { value: 'article' } }
+  },
   {
     path: 'article/:id/edit', component: EditArticleComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard], data: { animation: { value: 'edit' } }
   },
 
   { path: '**', component: PageNotFoundComponent }
