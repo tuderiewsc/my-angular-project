@@ -1,5 +1,5 @@
 <form #addArticle="ngForm" (ngSubmit)="onsubmit()" class="col-md-12 my-5" dir="rtl" id="add-article"
-  [formGroup]="addArticleForm" novalidate>
+  [formGroup]="addArticleForm" novalidate [@changeState]="currentState">
   <mat-form-field>
     <input type="text" matInput name="title" [(ngModel)]="title" placeholder="عنوان" formControlName="title">
   </mat-form-field>
@@ -72,5 +72,3 @@
 
 
 <!-- <p>{{title}}</p> -->
-
-

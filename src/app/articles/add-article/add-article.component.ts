@@ -6,15 +6,19 @@ import { FormGroup, FormBuilder, FormControl, Validators, MaxLengthValidator } f
 import { MatSnackBar } from '@angular/material';
 import { SnackbarComponent } from 'src/app/shared/snackbar/snackbar.component';
 import { HttpClient, HttpEventType } from '@angular/common/http';
-import { FileUploader } from 'ng2-file-upload';
 import { articleStatsToken } from 'src/app/providers/article.provider';
 import { ApiService } from 'src/app/services/api.service';
+import { transition, useAnimation, trigger } from '@angular/animations';
+import { fadeAnimation } from '../animations/animations';
 
 
 @Component({
   selector: 'app-add-article',
   templateUrl: './add-article.component.html',
-  styleUrls: ['./add-article.component.css']
+  styleUrls: ['./add-article.component.css'],
+  animations: [trigger('changeState', [
+    transition('void => *', [useAnimation(fadeAnimation)])
+  ])]
 })
 export class AddArticleComponent implements OnInit {
 
