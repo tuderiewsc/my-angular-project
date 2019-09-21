@@ -33,6 +33,7 @@ import { articleStatsToken, stats } from './providers/article.provider';
 import { PagerService } from './services/pager.services';
 import { PaginationComponent } from './articles/pagination/pagination.component';
 import { IndexpageComponent } from './articles/indexpage/indexpage.component';
+import { CategoryComponent } from './articles/category/category.component';
 
 
 @NgModule({
@@ -49,7 +50,8 @@ import { IndexpageComponent } from './articles/indexpage/indexpage.component';
     CompletePipe,
     FavoriteDirective,
     PaginationComponent,
-    IndexpageComponent
+    IndexpageComponent,
+    CategoryComponent
   ],
   imports: [
     BrowserModule, BrowserAnimationsModule,

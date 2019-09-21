@@ -8,6 +8,7 @@ export class ArticleModel {
     createdat?: number;
     submitted: boolean;
     isfavorite: boolean;
+    data: ArticleModel[];
 }
 
 export class ArticleResolved {

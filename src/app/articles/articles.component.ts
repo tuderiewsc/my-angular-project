@@ -10,6 +10,7 @@ import { PagerService } from '../services/pager.services';
 import { map } from 'rxjs/operators';
 import { log } from 'util';
 import { Logs } from 'selenium-webdriver';
+import { CategoryModel } from '../models/category.model';
 
 
 
@@ -28,6 +29,7 @@ export class ArticlesComponent implements OnInit {
     submitted: boolean;
     selectedArticle: ArticleModel;
     articles: ArticleModel[];
+    categories: CategoryModel[];
     pager: Paginate;
 
 
@@ -38,6 +40,7 @@ export class ArticlesComponent implements OnInit {
 
     ngOnInit() {
         this.getArticles();
+        this.getCategories();
 
 
 
@@ -57,8 +60,6 @@ export class ArticlesComponent implements OnInit {
         //     console.log(res);
         // });
 
-
-
         /////////// reuse route ///////////
         this.activateroute.params.pipe
             (map((params: Params) => params.id))
@@ -67,7 +68,11 @@ export class ArticlesComponent implements OnInit {
                     this.articles = res.data;
                     this.pager = this.pagerservice.getPager(res.total, res.current_page, res.per_page);
                 }));
+    }
 
+    getCategories() {
+        this.api.getCategories()
+            .subscribe(res => this.categories = res);
 
     }
 

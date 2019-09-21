@@ -1,6 +1,3 @@
-<!--<app-add-article (newArticle)="onNewArticle($event)"></app-add-article>-->
-
-<!-- content -->
 <div class="container">
   <div class="row">
     <div class="col-md-8 col-sm-12 my-3">
@@ -54,53 +51,5 @@
       </div>
     </div>
 
-    <aside class="col-md-4 col-sm-12 my-3 aside">
-      <div class="card">
-        <div class="card-header">
-          <h6>
-            <mat-icon aria-hidden="false" aria-label="">check</mat-icon>
-            جستجو
-          </h6>
-        </div>
-        <div class="card-body">
-          <form class="side-search form-group" method="get" role="search">
-            <div class="contain">
-              <input class="form-control" placeholder="جستجو..." id="search" type="search" name="s" autocomplete="on">
-              <a>
-                <mat-icon aria-hidden="false" aria-label="">search</mat-icon>
-              </a>
-            </div>
-
-          </form>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <h6>
-            <mat-icon aria-hidden="false" aria-label="">check</mat-icon>دسته بندی مطالب
-          </h6>
-        </div>
-        <div class="card-body">
-          <ul class="collection cats">
-            <li class="collection-item" *ngFor="let category of categories">
-              <span *ngIf="category.parent_id == 0"><i class="material-icons">chevron_left</i>
-                <a routerLink="/category/{{ category.id }}">{{ category.name }}</a>
-                <ul class="collection children">
-                  <li class="collection-item" *ngFor="let subcat of categories">
-                    <a routerLink="/category/{{ subcat.id }}"
-                      *ngIf="subcat.parent_id==category.id">{{ subcat.name }}</a>
-                  </li>
-                </ul>
-              </span>
-            </li>
-          </ul>
-
-        </div>
-      </div>
-    </aside>
   </div>
 </div>
-<!-- content -->
-
-<!--<app-show-article [passedArticle]="selectedArticle" *ngIf="selectedArticle!=null"></app-show-article>-->

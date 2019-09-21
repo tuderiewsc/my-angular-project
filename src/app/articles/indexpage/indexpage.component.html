@@ -44,18 +44,14 @@
         <div class="card-body">
           <ul class="collection cats">
             <li class="collection-item" *ngFor="let category of categories">
-              <span *ngIf="category.parent_id == 0">
-                <i class="material-icons">chevron_left</i>
-                <a href="#">{{ category.name }}</a>
+              <span *ngIf="category.parent_id == 0"><i class="material-icons">chevron_left</i>
+                <a routerLink="/category/{{ category.id }}">{{ category.name }}</a>
                 <ul class="collection children">
-                  <li class="collection-item"><a href="#">مقالات1</a></li>
-                  <li class="collection-item"><a href="#">مقالات2</a></li>
-                  <li class="collection-item"><a href="#">مقالات3</a></li>
+                  <li class="collection-item" *ngFor="let subcat of categories">
+                    <a routerLink="/category/{{ subcat.id }}"
+                      *ngIf="subcat.parent_id==category.id">{{ subcat.name }}</a>
+                  </li>
                 </ul>
-              </span>
-              <span *ngIf="category.parent_id != 0">
-                <i class="material-icons">chevron_left</i>
-                <a [routerLink]="[ '/path', routeParam ]">{{ category.name }}</a>
               </span>
             </li>
           </ul>

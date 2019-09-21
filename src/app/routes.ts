@@ -8,6 +8,7 @@ import { ShowArticleComponent } from './articles/show-article/show-article.compo
 import { EditArticleComponent } from './articles/edit-article/edit-article.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { IndexpageComponent } from './articles/indexpage/indexpage.component';
+import { CategoryComponent } from './articles/category/category.component';
 
 
 
@@ -32,6 +33,9 @@ const routes: Routes = [
   {
     path: 'article/:id/edit', component: EditArticleComponent,
     canActivate: [AuthGuard], data: { animation: { value: 'edit' } }
+  },
+  {
+    path: 'category/:id', component: CategoryComponent, data: { animation: { value: 'edit' } }
   },
 
   { path: '**', component: PageNotFoundComponent }

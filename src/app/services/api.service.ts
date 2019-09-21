@@ -43,12 +43,12 @@ export class ApiService {
   getCategories(): Observable<any> {
     return this.http.get(this.urlCats);
   }
-  getCategory(id: number): Observable<CategoryModel> {
-    return this.http.get<CategoryModel>(this.urlOneCat + '/' + id)
+  getCategory(id: number): Observable<ArticleModel> {
+    return this.http.get<ArticleModel>(this.urlOneCat + '/' + id)
       .pipe(
         tap(_ => console.log(`Category_id=${id}`)),
         catchError(this.handleError),
-        delay(2000)
+        delay(200)
       );
   }
 
