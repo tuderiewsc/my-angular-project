@@ -36,9 +36,8 @@
   <mat-slide-toggle color="primary" (click)="login()"><span class="mx-2">ورود</span></mat-slide-toggle>
 </div>
 
-<div class="page" [@routerAnimation]="prepareRouteTransition(outlet)">
-  <router-outlet #outlet="outlet"></router-outlet>
-</div>
+<router-outlet #outlet="outlet"></router-outlet>
+
 <!--<app-articles></app-articles>-->
 
 

@@ -14,28 +14,25 @@ import { CategoryComponent } from './articles/category/category.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
-  { path: 'home', component: IndexpageComponent, data: { animation: { value: 'home' } } },
+  { path: 'home', component: IndexpageComponent },
   {
     path: 'article/add', component: AddArticleComponent, canActivate: [AuthGuard]
   },
   {
     path: 'article/list', component: ListArticleComponent, canActivate: [AuthGuard],
-    data: { animation: { value: 'list' } }
   },
   {
-    path: 'articles/page/:id', component: ArticlesComponent,
-    data: { animation: { value: 'page' } }
+    path: 'articles/page/:id', component: ArticlesComponent
   },
   {
-    path: 'article/:id', component: ShowArticleComponent,
-    data: { animation: { value: 'article' } }
+    path: 'article/:id', component: ShowArticleComponent
   },
   {
     path: 'article/:id/edit', component: EditArticleComponent,
-    canActivate: [AuthGuard], data: { animation: { value: 'edit' } }
+    canActivate: [AuthGuard]
   },
   {
-    path: 'category/:id', component: CategoryComponent, data: { animation: { value: 'edit' } }
+    path: 'category/:id', component: CategoryComponent
   },
 
   { path: '**', component: PageNotFoundComponent }

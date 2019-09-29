@@ -17,12 +17,12 @@ import { trigger, transition, query, style, animate, stagger } from '@angular/an
         trigger('articleAnimation', [
             transition('* => *', [
                 query(':enter', style({ opacity: 0 }), { optional: true }),
-                query(':enter', stagger('2s', [
+                query(':enter', stagger('200ms', [
                     animate('1.5s', style({ opacity: 1 }))
                 ]), { optional: true })
             ])
         ])
-    ],
+    ]
 })
 export class ArticlesComponent implements OnInit {
 
