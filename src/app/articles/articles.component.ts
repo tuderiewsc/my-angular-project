@@ -1,23 +1,28 @@
 import { Component, OnInit } from '@angular/core';
 import { ArticleModel } from '../models/article.model';
-import { HttpClient } from '@angular/common/http';
-import { ArticlesService } from '../services/articles.service';
-import { AuthService } from '../shared/auth.service';
-import { Router, ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 import { ApiService } from '../services/api.service';
 import { Paginate } from '../models/paginate';
 import { PagerService } from '../services/pager.services';
 import { map } from 'rxjs/operators';
-import { log } from 'util';
-import { Logs } from 'selenium-webdriver';
 import { CategoryModel } from '../models/category.model';
-
+import { trigger, transition, query, style, animate, stagger } from '@angular/animations';
 
 
 @Component({
     selector: 'app-articles',
     templateUrl: './articles.component.html',
     styleUrls: ['./articles.component.css'],
+    animations: [
+        trigger('articleAnimation', [
+            transition('* => *', [
+                query(':enter', style({ opacity: 0 }), { optional: true }),
+                query(':enter', stagger('2s', [
+                    animate('1.5s', style({ opacity: 1 }))
+                ]), { optional: true })
+            ])
+        ])
+    ],
 })
 export class ArticlesComponent implements OnInit {
 
@@ -41,16 +46,12 @@ export class ArticlesComponent implements OnInit {
     ngOnInit() {
         this.getArticles();
         this.getCategories();
-
-
-
         // this.selectedArticle = null;
         // var Now = this.datePipe.transform(new Date(),"dd-MM-yyyy");
     }
 
 
     getArticles() {
-
         /////////// single route ///////////
         // let id: number;
         // id = +this.route.snapshot.paramMap.get('id');
@@ -68,12 +69,12 @@ export class ArticlesComponent implements OnInit {
                     this.articles = res.data;
                     this.pager = this.pagerservice.getPager(res.total, res.current_page, res.per_page);
                 }));
+
     }
 
     getCategories() {
         this.api.getCategories()
             .subscribe(res => this.categories = res);
-
     }
 
 }

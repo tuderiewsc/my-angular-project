@@ -4,7 +4,7 @@
 <div class="container">
   <div class="row">
     <div class="col-md-8 col-sm-12 my-3">
-      <div *ngFor="let article of articles">
+      <div *ngFor="let article of articles" [@articleAnimation]="articles.length">
         <div class="card article" *ngIf="article.submitted==true">
           <div class="card-header grey lighten-2">
             <h6>{{article.title | uppercase}}</h6>
