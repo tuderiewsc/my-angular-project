@@ -34,6 +34,7 @@ import { PagerService } from './services/pager.services';
 import { PaginationComponent } from './articles/pagination/pagination.component';
 import { IndexpageComponent } from './articles/indexpage/indexpage.component';
 import { CategoryComponent } from './articles/category/category.component';
+import { RegisterComponent } from './Auth/register/register.component';
 
 
 @NgModule({
@@ -51,7 +52,8 @@ import { CategoryComponent } from './articles/category/category.component';
     FavoriteDirective,
     PaginationComponent,
     IndexpageComponent,
-    CategoryComponent
+    CategoryComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule, BrowserAnimationsModule,

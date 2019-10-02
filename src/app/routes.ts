@@ -9,6 +9,7 @@ import { EditArticleComponent } from './articles/edit-article/edit-article.compo
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { IndexpageComponent } from './articles/indexpage/indexpage.component';
 import { CategoryComponent } from './articles/category/category.component';
+import { RegisterComponent } from './Auth/register/register.component';
 
 
 
@@ -34,8 +35,12 @@ const routes: Routes = [
   {
     path: 'category/:id', component: CategoryComponent
   },
+  {
+    path: 'register', component: RegisterComponent
+  },
 
-  { path: '**', component: PageNotFoundComponent }
+  // Last Path
+  { path: '**', component: PageNotFoundComponent },
 ];
 
 export const routing: ModuleWithProviders = RouterModule.forRoot(routes);

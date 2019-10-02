@@ -1,0 +1,64 @@
+<form #regForm="ngForm" class="col-md-12 my-5" dir="rtl" id="regForm" novalidate [formGroup]="registerForm"
+  (ngSubmit)="register(registerForm.value)">
+
+  <div class="alert alert-danger" *ngIf="errorMessage != undefined">
+    {{ errorMessage }}
+  </div>
+  <br>
+
+  <mat-form-field>
+    <input type="text" matInput placeholder="نام" formControlName="name">
+  </mat-form-field>
+  <div class="errors" *ngIf="registerForm.controls['name'].invalid &&
+(registerForm.controls['name'].dirty || registerForm.controls['name'].touched)">
+    <span *ngIf="registerForm.controls['name'].errors.required">
+      فیلد نام را تکمیل کنید.
+    </span>
+  </div>
+
+  <mat-form-field>
+    <input type="email" matInput placeholder="ايميل" formControlName="email">
+  </mat-form-field>
+  <div class="errors" *ngIf="registerForm.controls['email'].invalid &&
+(registerForm.controls['email'].dirty || registerForm.controls['email'].touched)">
+    <span *ngIf="registerForm.controls['email'].errors.required">
+      فیلد ایمیل را تکمیل کنید.
+    </span><br>
+    <span *ngIf="registerForm.controls['email'].errors.email">
+      ایمیل معتبر نیست.
+    </span>
+  </div>
+
+  <mat-form-field>
+    <input type="password" matInput placeholder="رمز عبور" formControlName="password">
+  </mat-form-field>
+  <div class="errors" *ngIf="registerForm.controls['password'].invalid &&
+(registerForm.controls['password'].dirty || registerForm.controls['password'].touched)">
+    <span *ngIf="registerForm.controls['password'].errors.minlength">
+      طول مجاز پسورد رعایت نشده است.
+    </span>
+    <span *ngIf="registerForm.controls['password'].errors.required">
+      پسورد را وارد کنید.
+    </span>
+  </div>
+
+  <mat-form-field>
+    <input type="password" matInput placeholder="تاييد رمز عبور" formControlName="password_confirmation">
+  </mat-form-field>
+  <div class="errors" *ngIf="registerForm.controls['password_confirmation'].invalid &&
+(registerForm.controls['password_confirmation'].dirty || registerForm.controls['password_confirmation'].touched)">
+    <span *ngIf="registerForm.controls['password_confirmation'].errors.required">
+      پسورد را مجددا وارد کنید.
+    </span>
+
+  </div>
+  <span class="text-danger" [hidden]="!registerForm.hasError('mismatchpassword')">
+    پسوردها مطابقت ندارند!
+  </span>
+  <div class="form-group">
+    <button type="submit" class="form-control" mat-flat-button color="primary"
+      [disabled]="registerForm.pristine || registerForm.invalid">
+      ثبت <mat-icon class="mx-2">save</mat-icon>
+    </button>
+  </div>
+</form>

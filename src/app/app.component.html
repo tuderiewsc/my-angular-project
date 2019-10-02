@@ -12,6 +12,12 @@
         </a>
       </ul>
     </span>
+    <span class="mx-2">
+      <div class="btn-group" role="group">
+        <a routerLink="/register" type="button" class="btn btn-success">ثبت نام</a>
+        <a type="button" class="btn btn-info">login</a>
+      </div>
+    </span>
     <span class="mx-2" *ngIf="isAdmin()">خوش آمدید ادمین</span>
     <ul class="toolbar-item">
       <a [matMenuTriggerFor]="menu1" class="toolbar-item" *ngIf="isAdmin()">
@@ -36,7 +42,7 @@
   <mat-slide-toggle color="primary" (click)="login()"><span class="mx-2">ورود</span></mat-slide-toggle>
 </div>
 
-<router-outlet #outlet="outlet"></router-outlet>
+<router-outlet></router-outlet>
 
 <!--<app-articles></app-articles>-->
 
