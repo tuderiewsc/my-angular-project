@@ -10,6 +10,9 @@ import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.com
 import { IndexpageComponent } from './articles/indexpage/indexpage.component';
 import { CategoryComponent } from './articles/category/category.component';
 import { RegisterComponent } from './Auth/register/register.component';
+import { LoginComponent } from './Auth/login/login.component';
+import { PanelComponent } from './userpanel/panel/panel.component';
+import { GuestGuard } from './shared/guest.guard';
 
 
 
@@ -36,7 +39,13 @@ const routes: Routes = [
     path: 'category/:id', component: CategoryComponent
   },
   {
-    path: 'register', component: RegisterComponent
+    path: 'register', component: RegisterComponent, canActivate: [GuestGuard]
+  },
+  {
+    path: 'login', component: LoginComponent, canActivate: [GuestGuard]
+  },
+  {
+    path: 'user-panel', component: PanelComponent, canActivate: [AuthGuard]
   },
 
   // Last Path

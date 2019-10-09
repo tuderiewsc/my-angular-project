@@ -12,36 +12,42 @@
         </a>
       </ul>
     </span>
-    <span class="mx-2">
+
+    <span class="mx-2" *ngIf="!checkLogin(); else user_template">
       <div class="btn-group" role="group">
         <a routerLink="/register" type="button" class="btn btn-success">ثبت نام</a>
-        <a type="button" class="btn btn-info">login</a>
+        <a routerLink="/login" type="button" class="btn btn-info">ورود</a>
       </div>
     </span>
-    <span class="mx-2" *ngIf="isAdmin()">خوش آمدید ادمین</span>
-    <ul class="toolbar-item">
-      <a [matMenuTriggerFor]="menu1" class="toolbar-item" *ngIf="isAdmin()">
-        <li>
-          <mat-icon aria-hidden="false" aria-label="">account_circle</mat-icon>
-          <!--    <mat-icon class="mat-icon-rtl-mirror" aria-hidden="false" aria-label="">account_circle</mat-icon>-->
-        </li>
-      </a>
-      <mat-menu #menu1="matMenu" xPosition="after">
-        <a mat-menu-item [routerLink]="[ 'article/add' ]">افزودن مقاله</a>
-        <a mat-menu-item [routerLink]="[ 'article/list' ]">لیست مقالات</a>
-        <a mat-menu-item [routerLink]="[ 'article/add' ]">افزودن دسته بندي</a>
-        <a mat-menu-item [routerLink]="[ 'article/list' ]">لیست دسته بندي ها</a>
-      </mat-menu>
-    </ul>
+    <ng-template #user_template>
+      <span class="mx-2">خوش آمدید ادمین</span>
+      <ul class="toolbar-item">
+        <a [matMenuTriggerFor]="menu1" class="toolbar-item">
+          <li>
+            <mat-icon aria-hidden="false" aria-label="">account_circle</mat-icon>
+            <!--    <mat-icon class="mat-icon-rtl-mirror" aria-hidden="false" aria-label="">account_circle</mat-icon>-->
+          </li>
+        </a>
+        <mat-menu #menu1="matMenu" xPosition="after">
+          <a mat-menu-item [routerLink]="[ 'user-panel' ]">پنل کاربری</a>
+          <a mat-menu-item [routerLink]="[ 'article/add' ]">افزودن مقاله</a>
+          <a mat-menu-item [routerLink]="[ 'article/list' ]">لیست مقالات</a>
+          <a mat-menu-item [routerLink]="[ 'article/add' ]">افزودن دسته بندي</a>
+          <a mat-menu-item [routerLink]="[ 'article/list' ]">لیست دسته بندي ها</a>
+          <a mat-menu-item (click)="logout()">خروج</a>
+        </mat-menu>
+      </ul>
+    </ng-template>
   </mat-toolbar-row>
 </mat-toolbar>
 <!-- navbar -->
 
 
-<div class="switch p-4 text-center">
-  <mat-slide-toggle color="primary" (click)="login()"><span class="mx-2">ورود</span></mat-slide-toggle>
-</div>
-
+<br>
+<br>
+<br>
+<br>
+<br>
 <router-outlet></router-outlet>
 
 <!--<app-articles></app-articles>-->

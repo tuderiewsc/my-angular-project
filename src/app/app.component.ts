@@ -1,31 +1,39 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from './shared/auth.service';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
 
 
   title = 'articles_project';
+  loggedIn = false;
 
 
-  constructor(private authservice: AuthService, private router: Router) { }
+  constructor(private router: Router, private auth: AuthService) {
+  }
 
-  login() {
-    if (this.authservice.loggedIn === false) {
-      this.authservice.logIn();
+
+
+  checkLogin(): boolean {
+    if (this.auth.getUser()) {
+      return true;
     } else {
-      this.authservice.logOut();
-      this.router.navigate(['/home']);
+      return false;
     }
   }
 
-  isAdmin(): boolean {
-    return this.authservice.loggedIn;
+  ngOnInit(): void {
+  }
+
+  logout() {
+    this.auth.logOut();
+    this.router.navigateByUrl('/');
+    return false;
   }
 
 

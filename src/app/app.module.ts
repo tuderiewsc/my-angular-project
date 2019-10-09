@@ -35,6 +35,9 @@ import { PaginationComponent } from './articles/pagination/pagination.component'
 import { IndexpageComponent } from './articles/indexpage/indexpage.component';
 import { CategoryComponent } from './articles/category/category.component';
 import { RegisterComponent } from './Auth/register/register.component';
+import { LoginComponent } from './Auth/login/login.component';
+import { PanelComponent } from './userpanel/panel/panel.component';
+import { GuestGuard } from './shared/guest.guard';
 
 
 @NgModule({
@@ -53,7 +56,9 @@ import { RegisterComponent } from './Auth/register/register.component';
     PaginationComponent,
     IndexpageComponent,
     CategoryComponent,
-    RegisterComponent
+    RegisterComponent,
+    LoginComponent,
+    PanelComponent
   ],
   imports: [
     BrowserModule, BrowserAnimationsModule,
@@ -65,7 +70,7 @@ import { RegisterComponent } from './Auth/register/register.component';
     MatTableModule, MatSnackBarModule,
     ReactiveFormsModule.withConfig({ warnOnNgModelWithFormControl: 'never' }),
   ],
-  providers: [AuthGuard, ArticlesService, ApiService, PagerService,
+  providers: [AuthGuard, ArticlesService, ApiService, PagerService, GuestGuard,
     { provide: articleStatsToken, useValue: stats }
   ],
   bootstrap: [AppComponent],

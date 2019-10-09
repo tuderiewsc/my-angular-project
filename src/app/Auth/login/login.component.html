@@ -1,0 +1,41 @@
+<form #regForm="ngForm" class="col-md-12 my-5" dir="rtl" id="loginForm" novalidate [formGroup]="loginForm"
+  (ngSubmit)="login(loginForm.value)">
+
+  <div class="alert alert-danger" *ngIf="errorMessage != undefined">
+    {{ errorMessage }}
+  </div>
+  <br>
+
+  <mat-form-field>
+    <input type="email" matInput placeholder="ايميل" formControlName="email">
+  </mat-form-field>
+  <div class="errors" *ngIf="loginForm.controls['email'].invalid &&
+(loginForm.controls['email'].dirty || loginForm.controls['email'].touched)">
+    <span *ngIf="loginForm.controls['email'].errors.required">
+      فیلد ایمیل را تکمیل کنید.
+    </span><br>
+    <span *ngIf="loginForm.controls['email'].errors.email">
+      ایمیل معتبر نیست.
+    </span>
+  </div>
+
+  <mat-form-field>
+    <input type="password" matInput placeholder="رمز عبور" formControlName="password">
+  </mat-form-field>
+  <div class="errors" *ngIf="loginForm.controls['password'].invalid &&
+(loginForm.controls['password'].dirty || loginForm.controls['password'].touched)">
+    <span *ngIf="loginForm.controls['password'].errors.minlength">
+      طول مجاز پسورد رعایت نشده است.
+    </span>
+    <span *ngIf="loginForm.controls['password'].errors.required">
+      پسورد را وارد کنید.
+    </span>
+  </div>
+
+  <div class="form-group">
+    <button type="submit" class="form-control" mat-flat-button color="primary"
+      [disabled]="loginForm.pristine || loginForm.invalid">
+      ورود <mat-icon class="mx-2">login</mat-icon>
+    </button>
+  </div>
+</form>

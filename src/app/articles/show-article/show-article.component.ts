@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ArticleModel } from '../../models/article.model';
 import { ArticlesService } from '../../services/articles.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthService } from 'src/app/shared/auth.service';
 import { ApiService } from 'src/app/services/api.service';
 @Component({
   selector: 'app-show-article',
@@ -18,8 +17,7 @@ export class ShowArticleComponent implements OnInit {
 
 
   constructor(private articlesService: ArticlesService, private route: ActivatedRoute,
-    private router: Router, private authservice: AuthService,
-    private api: ApiService) { }
+    private router: Router, private api: ApiService) { }
 
 
   ngOnInit() {
@@ -46,6 +44,7 @@ export class ShowArticleComponent implements OnInit {
       { queryParams: { title: this.passedArticle.title }, fragment: 'editing' });
   }
   isAdmin(): boolean {
-    return this.authservice.loggedIn;
+    // return this.authservice.loggedIn;
+    return true;
   }
 }
