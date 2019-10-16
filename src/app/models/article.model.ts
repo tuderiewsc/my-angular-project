@@ -1,10 +1,10 @@
 export class ArticleModel {
-    _id?: string;
     id: number;
     title: string;
     image: string;
     desc: string;
-    slug: string;
+    //slug: string;
+    category_id: number;
     createdat?: number;
     submitted: boolean;
     isfavorite: boolean;

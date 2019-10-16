@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { ArticleModel, ArticleResolved } from '../models/article.model';
 import { Observable, of } from 'rxjs';
-import { ArticlesService } from './articles.service';
 import { map, catchError } from 'rxjs/operators';
 
 @Injectable({
@@ -10,7 +9,7 @@ import { map, catchError } from 'rxjs/operators';
 })
 export class ArticleResolverService implements Resolve<ArticleResolved> {
 
-  constructor(private articleService: ArticlesService) { }
+  constructor() { }
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot):
     Observable<ArticleResolved> {
     const id = +route.paramMap.get('id');
@@ -21,14 +20,14 @@ export class ArticleResolverService implements Resolve<ArticleResolved> {
       return of({ resolvedarticle: null, error: message });
     }
 
-    return this.articleService.getArticle(+id).pipe(
-      map(article => ({ resolvedarticle: article })),
-      catchError(err => {
-        const message = `unable to load`;
-        console.error(message);
-        return of({ resolvedarticle: null, error: message });
-      })
-    );
+    // return this.articleService.getArticle(+id).pipe(
+    //   map(article => ({ resolvedarticle: article })),
+    //   catchError(err => {
+    //     const message = `unable to load`;
+    //     console.error(message);
+    //     return of({ resolvedarticle: null, error: message });
+    //   })
+    // );
 
 
 

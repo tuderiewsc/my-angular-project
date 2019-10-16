@@ -1,6 +1,5 @@
-import { Component, EventEmitter, OnInit, Output, Inject } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, Inject, OnDestroy } from '@angular/core';
 import { ArticleModel } from '../../models/article.model';
-import { ArticlesService } from '../../services/articles.service';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, FormControl, Validators, MaxLengthValidator } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
@@ -10,6 +9,7 @@ import { articleStatsToken } from 'src/app/providers/article.provider';
 import { ApiService } from 'src/app/services/api.service';
 import { transition, useAnimation, trigger } from '@angular/animations';
 import { fadeAnimation } from '../animations/animations';
+import { CategoryModel } from 'src/app/models/category.model';
 
 
 @Component({
@@ -27,7 +27,7 @@ import { fadeAnimation } from '../animations/animations';
     })])
   ])]
 })
-export class AddArticleComponent implements OnInit {
+export class AddArticleComponent implements OnInit, OnDestroy {
 
   // declarations
   addArticleForm: FormGroup;
@@ -35,16 +35,19 @@ export class AddArticleComponent implements OnInit {
   desc: string;
   slug: string;
   image: string;
+  category_id: number;
   submitted: boolean;
   isfavorite: boolean;
   fileToUpload: File = null;
   lastArticleId: number;
+  categories: CategoryModel[];
+
 
 
   // @Output() newArticle = new EventEmitter<ArticleModel>();
 
 
-  constructor(private articleservice: ArticlesService, private router: Router,
+  constructor(private router: Router,
     private formbuilder: FormBuilder, private snackbar: MatSnackBar,
     private http: HttpClient, @Inject(articleStatsToken) public stats,
     private api: ApiService) {
@@ -52,7 +55,16 @@ export class AddArticleComponent implements OnInit {
 
   ngOnInit() {
     // this.getArticles();
+    this.api.getCategories()
+      .subscribe(res => this.categories = res);
+
     this.buildForm();
+
+  }
+
+  ngOnDestroy(): void {
+    // Called once, before the instance is destroyed.
+    // Add 'implements OnDestroy' to the class.
   }
 
 
@@ -71,7 +83,8 @@ export class AddArticleComponent implements OnInit {
       ])),
       submitted: this.formbuilder.control('', Validators.required),
       isfavorite: this.formbuilder.control('', Validators.required),
-      image: this.formbuilder.control('', Validators.required)
+      image: this.formbuilder.control('', Validators.required),
+      category_id: this.formbuilder.control('', Validators.required)
     });
   }
 
@@ -82,18 +95,10 @@ export class AddArticleComponent implements OnInit {
     Article.title = this.title;
     Article.image = this.image;
     Article.desc = this.desc;
-    Article.slug = this.slug;
-    Article.createdat = Date.now();
-    Article.isfavorite = this.isfavorite;
-    if (this.submitted === true) {
-      Article.submitted = true;
-    } else {
-      Article.submitted = false;
-    }
-
-
-    // this.articleservice.addArticles(Article).
-    //   subscribe(() => this.router.navigate(['/home']));
+    // Article.createdat = Date.now();
+    Article.category_id = this.category_id;
+    if (this.submitted === true) { Article.submitted = true; } else { Article.submitted = false; }
+    if (this.isfavorite === true) { Article.isfavorite = true; } else { Article.isfavorite = false; }
 
     this.api.addArticle(Article)
       .subscribe(() => this.router.navigate(['/home']));
@@ -109,7 +114,7 @@ export class AddArticleComponent implements OnInit {
       politeness: 'assertive'
       // announcementMessage: 'test msg'
     });
-    throw new Error('Method not implemented.');
+    // throw new Error('Method not implemented.');
   }
 
 }

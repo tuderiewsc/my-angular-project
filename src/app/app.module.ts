@@ -19,7 +19,6 @@ import { AddArticleComponent } from './articles/add-article/add-article.componen
 import { ShowArticleComponent } from './articles/show-article/show-article.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthGuard } from './shared/auth.guard';
-import { ArticlesService } from './services/articles.service';
 import { EditArticleComponent } from './articles/edit-article/edit-article.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { ListArticleComponent } from './articles/list-article/list-article.component';
@@ -70,7 +69,7 @@ import { GuestGuard } from './shared/guest.guard';
     MatTableModule, MatSnackBarModule,
     ReactiveFormsModule.withConfig({ warnOnNgModelWithFormControl: 'never' }),
   ],
-  providers: [AuthGuard, ArticlesService, ApiService, PagerService, GuestGuard,
+  providers: [AuthGuard, ApiService, PagerService, GuestGuard,
     { provide: articleStatsToken, useValue: stats }
   ],
   bootstrap: [AppComponent],

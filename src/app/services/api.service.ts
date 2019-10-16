@@ -43,8 +43,8 @@ export class ApiService {
   getCategories(): Observable<any> {
     return this.http.get(this.urlCats);
   }
-  getCategory(id: number): Observable<ArticleModel> {
-    return this.http.get<ArticleModel>(this.urlOneCat + '/' + id)
+  getCategory(id: number, pagenumber: number): Observable<any> {
+    return this.http.get(this.urlOneCat + '/' + id + '?page=' + pagenumber)
       .pipe(
         tap(_ => console.log(`Category_id=${id}`)),
         catchError(this.handleError),

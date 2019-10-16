@@ -45,10 +45,10 @@
           <ul class="collection cats">
             <li class="collection-item" *ngFor="let category of categories">
               <span *ngIf="category.parent_id == 0"><i class="material-icons">chevron_left</i>
-                <a routerLink="/category/{{ category.id }}">{{ category.name }}</a>
+                <a routerLink="/category/{{ category.id }}/page/1">{{ category.name }}</a>
                 <ul class="collection children">
                   <li class="collection-item" *ngFor="let subcat of categories">
-                    <a routerLink="/category/{{ subcat.id }}"
+                    <a routerLink="/category/{{ subcat.id }}/page/1"
                       *ngIf="subcat.parent_id==category.id">{{ subcat.name }}</a>
                   </li>
                 </ul>

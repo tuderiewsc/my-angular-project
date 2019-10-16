@@ -36,7 +36,7 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'category/:id', component: CategoryComponent
+    path: 'category/:id/page/:pagenum', component: CategoryComponent
   },
   {
     path: 'register', component: RegisterComponent, canActivate: [GuestGuard]

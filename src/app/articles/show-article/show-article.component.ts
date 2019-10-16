@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ArticleModel } from '../../models/article.model';
-import { ArticlesService } from '../../services/articles.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from 'src/app/services/api.service';
 @Component({
@@ -16,7 +15,7 @@ export class ShowArticleComponent implements OnInit {
   errorMessage: string;
 
 
-  constructor(private articlesService: ArticlesService, private route: ActivatedRoute,
+  constructor(private route: ActivatedRoute,
     private router: Router, private api: ApiService) { }
 
 
@@ -34,8 +33,8 @@ export class ShowArticleComponent implements OnInit {
     // console.log(this.errorMessage);
   }
   onDelete() {
-    this.articlesService.deleteArticle(this.passedArticle).
-      subscribe(res => console.log(res));
+    // this.articlesService.deleteArticle(this.passedArticle).
+    //   subscribe(res => console.log(res));
     // this.passedArticle= null;
     this.router.navigate(['/home']);
   }

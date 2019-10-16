@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ArticlesService } from 'src/app/services/articles.service';
 import { ArticleModel } from 'src/app/models/article.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from 'src/app/services/api.service';
@@ -16,7 +15,7 @@ export class ListArticleComponent implements OnInit {
   complete: boolean;
   keyword: string;
 
-  constructor(private articlesService: ArticlesService, private route: ActivatedRoute,
+  constructor(private route: ActivatedRoute,
     private router: Router, private api: ApiService) { }
 
   ngOnInit() {
@@ -41,9 +40,9 @@ export class ListArticleComponent implements OnInit {
     //     subscribe(() => this.router.navigate(['/home'])));
 
 
-    this.api.getArticle(id).
-      subscribe(article => this.articlesService.deleteArticle(article).
-        subscribe(() => this.router.navigate(['/home'])));
+    // this.api.getArticle(id).
+    // subscribe(article => this.articlesService.deleteArticle(article).
+    //   subscribe(() => this.router.navigate(['/home'])));
   }
 
 

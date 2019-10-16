@@ -1,5 +1,5 @@
 <form #addArticle="ngForm" (ngSubmit)="onsubmit()" class="col-md-12 my-5" dir="rtl" id="add-article"
-  [formGroup]="addArticleForm" novalidate [@changeState]="currentState">
+  [formGroup]="addArticleForm" novalidate [@changeState]="currentState" enctype="multipart/form-data">
   <mat-form-field>
     <input type="text" matInput name="title" [(ngModel)]="title" placeholder="عنوان" formControlName="title">
   </mat-form-field>
@@ -27,11 +27,22 @@
     </mat-select>
   </mat-form-field>
 
-  <div class="form-group">
-    <label for="image">تصوير</label>
-    <input class="form-control" accept=".png , .jpg" type="file" id="image" [(ngModel)]="image" name="image"
+  <mat-form-field>
+    <mat-label>دسته بندی</mat-label>
+    <mat-select name="category_id" formControlName="category_id" [(ngModel)]="category_id">
+      <mat-option *ngFor="let cat of categories" value="{{ cat.id }}">{{ cat.name }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input type="text" matInput placeholder="لینک تصویر" [(ngModel)]="image" name="image" formControlName="image">
+  </mat-form-field>
+
+  <!-- <div class="form-group">
+    <label for="image">لینک تصویر</label>
+    <input type="file" class="form-control" accept=".png , .jpg" id="image" [(ngModel)]="image" name="image"
       formControlName="image">
-  </div>
+  </div> -->
 
   <div class="form-group">
     <!-- <button type="submit" (click)=" addArticle.reset()">Submit</button> -->
