@@ -15,6 +15,7 @@ export class ApiService {
   urlOne = 'http://localhost:8000/api/articles';
   urlCats = 'http://localhost:8000/api/categories';
   urlOneCat = 'http://localhost:8000/api/articles/categories';
+  urlArticlesList = 'http://localhost:8000/api/articlesList';
 
 
   private httpOptions = {
@@ -28,6 +29,9 @@ export class ApiService {
 
   getArticles(pagenumber: number): Observable<any> {
     return this.http.get(this.url + pagenumber);
+  }
+  getArticlesList(): Observable<any> {
+    return this.http.get(this.urlArticlesList);
   }
   getArticle(id: number): Observable<ArticleModel> {
     return this.http.get<ArticleModel>(this.urlOne + '/' + id)

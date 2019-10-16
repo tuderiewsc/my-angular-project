@@ -23,7 +23,7 @@ const routes: Routes = [
     path: 'article/add', component: AddArticleComponent, canActivate: [AuthGuard]
   },
   {
-    path: 'article/list', component: ListArticleComponent, canActivate: [AuthGuard],
+    path: 'articlelist', component: ListArticleComponent, canActivate: [AuthGuard],
   },
   {
     path: 'articles/page/:id', component: ArticlesComponent

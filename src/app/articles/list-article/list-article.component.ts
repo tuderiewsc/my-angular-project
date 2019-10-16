@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ArticleModel } from 'src/app/models/article.model';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, Params } from '@angular/router';
 import { ApiService } from 'src/app/services/api.service';
+import { PagerService } from 'src/app/services/pager.services';
 
 @Component({
   selector: 'app-list-article',
@@ -12,33 +13,26 @@ export class ListArticleComponent implements OnInit {
 
   articles: ArticleModel[];
   passedArticle: ArticleModel;
-  complete: boolean;
+  complete: number;
   keyword: string;
 
-  constructor(private route: ActivatedRoute,
-    private router: Router, private api: ApiService) { }
+  constructor(private activateroute: ActivatedRoute,
+    private router: Router, private api: ApiService,
+    private pagerservice: PagerService) { }
 
   ngOnInit() {
     this.getArticles();
-    this.complete = true;
+    this.complete = 1;
     this.keyword = '';
-
-
-    // this.passedArticle = this.route.snapshot.data.resolveData.resolvedarticle;
-    // if (this.passedArticle != null) { this.onDelete(); }
   }
 
   getArticles() {
-    const id = +this.route.snapshot.params.id;
-    this.api.getArticles(id).subscribe(articles => this.articles = articles.data);
+    //const id = +this.route.snapshot.params.id;
+    this.api.getArticlesList().subscribe(articles => this.articles = articles);
   }
 
 
   del(id: number) {
-    // this.articlesService.getArticle(id).
-    //   subscribe(article => this.articlesService.deleteArticle(article).
-    //     subscribe(() => this.router.navigate(['/home'])));
-
 
     // this.api.getArticle(id).
     // subscribe(article => this.articlesService.deleteArticle(article).

@@ -4,7 +4,7 @@ import { ArticleModel } from '../models/article.model';
 
 @Pipe({
   name: 'complete',
-  pure: false
+  pure: true
 })
 export class CompletePipe implements PipeTransform {
 
@@ -15,7 +15,11 @@ export class CompletePipe implements PipeTransform {
 
     const complete = args[0];
     return articles.filter((article: ArticleModel) => {
-      return article.submitted === complete;
+      if (article.submitted === complete) {
+        return 1;
+      } else {
+        return 0;
+      }
     });
 
 

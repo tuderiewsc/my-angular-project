@@ -3,9 +3,9 @@
     <mat-form-field>
       <mat-label>وضعيت انتشار</mat-label>
       <mat-select name="complete" [(ngModel)]="complete">
-        <mat-option [value]="0">وضعيت انتشار ---</mat-option>
-        <mat-option [value]="true">منتشر شده</mat-option>
-        <mat-option [value]="false">منتشر نشده</mat-option>
+        <mat-option [value]="0" disabled>وضعيت انتشار ---</mat-option>
+        <mat-option [value]="1">منتشر شده</mat-option>
+        <mat-option [value]="0">منتشر نشده</mat-option>
       </mat-select>
     </mat-form-field>
     <mat-form-field>
@@ -23,8 +23,9 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let article of articles | complete:complete | search:keyword ;let index = index">
-          <td scope="row">{{index+1}}</td>
+        <tr *ngFor="let article of articles | search:keyword | complete:complete ;let index = index">
+          <!-- <tr *ngFor="let article of articles ;let index = index"> -->
+          <td scope="row">{{ index+1 }}</td>
           <td>{{ article.title }}</td>
           <td>{{ article.desc }}</td>
           <td>
@@ -34,5 +35,7 @@
         </tr>
       </tbody>
     </table>
+
+
   </div>
 </div>

@@ -25,11 +25,9 @@
      <a class="page-link" [routerLink]="['/category/'+ id +'/page/' , catPager.currentPage-1]">
        Previous</a>
    </li>
-
    <li class="page-item" *ngFor="let page of catPager.pages" [ngClass]="{'active': catPager.currentPage == page}">
      <a class="page-link" [routerLink]="['/category/'+ id +'/page/' , page]">{{ page }}</a>
    </li>
-
    <li class="page-item" [ngClass]="{'disabled': catPager.currentPage == catPager.totalPages}"><a class="page-link"
        [routerLink]="['/category/'+ id +'/page/' , catPager.currentPage+1]">Next</a></li>
    <li class="page-item" [ngClass]="{'disabled': catPager.currentPage == catPager.totalPages}">
