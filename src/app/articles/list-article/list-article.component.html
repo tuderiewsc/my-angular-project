@@ -29,7 +29,7 @@
           <td>{{ article.title }}</td>
           <td>{{ article.desc }}</td>
           <td>
-            <a href="" class="btn btn-info mx-1">ویرایش</a> |
+            <a routerLink="/article/{{ article.id }}/edit" class="btn btn-info mx-1">ویرایش</a> |
             <button type="button" class="btn btn-danger mx-1" (click)="del(article.id)">حذف</button>
           </td>
         </tr>

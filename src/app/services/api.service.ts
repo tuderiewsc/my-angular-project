@@ -16,6 +16,7 @@ export class ApiService {
   urlCats = 'http://localhost:8000/api/categories';
   urlOneCat = 'http://localhost:8000/api/articles/categories';
   urlArticlesList = 'http://localhost:8000/api/articlesList';
+  urlArticlesUpdate = 'http://localhost:8000/api/articles/';
 
 
   private httpOptions = {
@@ -72,6 +73,14 @@ export class ApiService {
 
   addArticle(article: ArticleModel): Observable<any> {
     return this.http.post<ArticleModel>(this.urlOne, article, this.httpOptions);
+  }
+
+  updateArticle(article: ArticleModel, id: number): Observable<any> {
+    return this.http.put<any>(this.urlArticlesUpdate + id, article, this.httpOptions);
+  }
+
+  deleteArticle(id: number): Observable<ArticleModel> {
+    return this.http.delete<ArticleModel>(this.urlOne + '/' + id);
   }
 
 }

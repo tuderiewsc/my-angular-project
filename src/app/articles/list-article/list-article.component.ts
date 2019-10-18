@@ -3,6 +3,9 @@ import { ArticleModel } from 'src/app/models/article.model';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { ApiService } from 'src/app/services/api.service';
 import { PagerService } from 'src/app/services/pager.services';
+import { SnackbarComponent } from 'src/app/shared/snackbar/snackbar.component';
+import { MatSnackBar } from '@angular/material';
+
 
 @Component({
   selector: 'app-list-article',
@@ -18,7 +21,7 @@ export class ListArticleComponent implements OnInit {
 
   constructor(private activateroute: ActivatedRoute,
     private router: Router, private api: ApiService,
-    private pagerservice: PagerService) { }
+    private pagerservice: PagerService, private snackbar: MatSnackBar) { }
 
   ngOnInit() {
     this.getArticles();
@@ -27,16 +30,25 @@ export class ListArticleComponent implements OnInit {
   }
 
   getArticles() {
-    //const id = +this.route.snapshot.params.id;
+    // const id = +this.route.snapshot.params.id;
     this.api.getArticlesList().subscribe(articles => this.articles = articles);
   }
 
 
   del(id: number) {
+    this.api.deleteArticle(id)
+      .subscribe(() => location.reload());
 
-    // this.api.getArticle(id).
-    // subscribe(article => this.articlesService.deleteArticle(article).
-    //   subscribe(() => this.router.navigate(['/home'])));
+    this.openSnackbar();
+  }
+
+  openSnackbar() {
+    this.snackbar.openFromComponent(SnackbarComponent, {
+      duration: 4000,
+      verticalPosition: 'bottom',
+      horizontalPosition: 'left',
+      politeness: 'assertive'
+    });
   }
 
 

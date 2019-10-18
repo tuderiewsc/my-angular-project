@@ -68,11 +68,6 @@ export class AddArticleComponent implements OnInit, OnDestroy {
   }
 
 
-  // getArticles() {
-  //   this.articleservice.getArticles().
-  //     subscribe(articles => this.lastArticleId = (articles.length) + 1);
-  // }
-
 
   buildForm() {
     this.addArticleForm = this.formbuilder.group({

@@ -1,35 +1,45 @@
-<form ngForm class="col-md-12 my-5" dir="rtl" #editArticle id="edit-article">
+<form #editArticle="ngForm" [formGroup]="editArticleForm" class="col-md-12 my-5" dir="rtl" id="edit-article" novalidate
+  (ngSubmit)="onEditArticle(article.id)" enctype="multipart/form-data">
   <mat-form-field>
-    <input matInput [(ngModel)]="articletitle" name="article-title"
-           value="{{article.title}}">
+    <input type="text" matInput formControlName="title" [(ngModel)]="title" value="{{article.title}}">
   </mat-form-field>
-  <mat-form-field >
-    <textarea matInput [(ngModel)]="articledesc" name="article-desc"
-              maxlength="100" #tarea [value]="article.desc"></textarea>
-    <mat-hint>{{tarea.value?.length || 0}}/40</mat-hint>
+  <mat-form-field>
+    <textarea matInput formControlName="desc" [(ngModel)]="desc" maxlength="100" #tarea
+      [value]="article.desc"></textarea>
+    <mat-hint>{{tarea.value?.length || 0}}/20</mat-hint>
   </mat-form-field>
 
   <mat-form-field>
     <mat-label>وضعيت انتشار</mat-label>
-    <mat-select name="article-submitted" [(ngModel)]="articlesubmitted">
-      <mat-option value="false">---</mat-option>
-      <mat-option value="true" >منتشر شده</mat-option>
-      <mat-option value="false" >منتشر نشده</mat-option>
+    <mat-select formControlName="submitted" [(ngModel)]="submitted">
+      <mat-option value="false" disabled>---</mat-option>
+      <mat-option value="1">منتشر شده</mat-option>
+      <mat-option value="0">منتشر نشده</mat-option>
     </mat-select>
   </mat-form-field>
 
-  <div class="form-group">
-    <label for="image">تصویر</label>
-    <input class="form-control" type="file" id="image" name="article-image"
-           [(ngModel)]="articleimage" value="{{article.image}}">
-  </div>
+  <mat-form-field>
+    <mat-label>علاقه مندی</mat-label>
+    <mat-select [(ngModel)]="isfavorite" formControlName="isfavorite">
+      <mat-option value="false" disabled>---</mat-option>
+      <mat-option value="1">هست</mat-option>
+      <mat-option value="0">نیست</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>دسته بندی</mat-label>
+    <mat-select [(ngModel)]="category_id" formControlName="category_id">
+      <mat-option *ngFor="let cat of categories" value="{{ cat.id }}">{{ cat.name }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input type="text" matInput placeholder="لینک تصویر" [(ngModel)]="image" formControlName="image">
+  </mat-form-field>
 
   <div class="form-group">
-    <button class="form-control" mat-flat-button color="accent" name="arc_submit"
-            (click)="onSaveArticle(); editArticle.reset()">
-      ویرایش <mat-icon class="mx-2">edit</mat-icon>
+    <button type="submit" class="form-control" mat-flat-button color="accent" name="arc_submit">ویرایش
     </button>
-
   </div>
-
 </form>
