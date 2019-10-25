@@ -106,10 +106,9 @@ export class AddArticleComponent implements OnInit, OnDestroy {
       duration: 4000,
       verticalPosition: 'bottom',
       horizontalPosition: 'left',
-      politeness: 'assertive'
+      politeness: 'assertive',
       // announcementMessage: 'test msg'
     });
-    // throw new Error('Method not implemented.');
   }
 
 }

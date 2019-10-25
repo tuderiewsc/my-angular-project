@@ -23,12 +23,20 @@ export class ListArticleComponent implements OnInit {
 
   constructor(private activateroute: ActivatedRoute,
     private router: Router, private api: ApiService, private authservice: AuthService,
-    private pagerservice: PagerService, private snackbar: MatSnackBar) { }
+    private pagerservice: PagerService, private snackbar: MatSnackBar) {
+
+  }
 
   ngOnInit() {
     this.getArticles();
     this.complete = 1;
     this.keyword = '';
+
+    if (this.articles) {
+      console.log('ok');
+    } else {
+      console.log('Notok');
+    }
   }
 
   getArticles() {
@@ -37,7 +45,6 @@ export class ListArticleComponent implements OnInit {
     const userId = this.user.id;
     this.api.getArticlesList(userId).subscribe(articles => this.articles = articles);
 
-    console.log('Articles: ' + this.articles);
   }
 
 
@@ -49,11 +56,11 @@ export class ListArticleComponent implements OnInit {
   }
 
   openSnackbar() {
-    this.snackbar.openFromComponent(SnackbarComponent, {
+    this.snackbar.open('حذف موفقیت آمیز', '', {
       duration: 4000,
       verticalPosition: 'bottom',
       horizontalPosition: 'left',
-      politeness: 'assertive'
+      politeness: 'assertive',
     });
   }
 

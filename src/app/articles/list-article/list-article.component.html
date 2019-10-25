@@ -1,12 +1,6 @@
 <div class="container">
 
-  <div class="alert alert-warning" role="alert" >
-    <strong>موردی برای نمایش وجود ندارد!</strong><br>
-    <a [routerLink]="[ '' ]" class="alert-link">بازگشت به صفحه اصلی</a>
-  </div>
-
-
-  <div >
+  <div *ngIf="articles != '' ">
     <form ngForm class="my-4" id="list-frm">
       <mat-form-field>
         <mat-label>وضعيت انتشار</mat-label>
@@ -32,7 +26,6 @@
         </thead>
         <tbody>
           <tr *ngFor="let article of articles | search:keyword | complete:complete ;let index = index">
-            <!-- <tr *ngFor="let article of articles ;let index = index"> -->
             <td scope="row">{{ index+1 }}</td>
             <td>{{ article.title }}</td>
             <td>{{ article.desc }}</td>
@@ -48,4 +41,8 @@
     </div>
   </div>
 
+  <div class="alert alert-warning text-center" role="alert" *ngIf="articles == ''">
+    <strong>موردی برای نمایش وجود ندارد!</strong><br><br>
+    <a [routerLink]="[ '' ]" class="alert-link">بازگشت به صفحه اصلی</a>
+  </div>
 </div>
