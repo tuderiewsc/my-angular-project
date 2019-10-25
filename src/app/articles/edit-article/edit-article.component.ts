@@ -5,6 +5,7 @@ import { articleStatsToken } from 'src/app/providers/article.provider';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ApiService } from 'src/app/services/api.service';
 import { CategoryModel } from 'src/app/models/category.model';
+import { Observable } from 'rxjs';
 
 
 
@@ -24,7 +25,6 @@ export class EditArticleComponent implements OnInit {
   category_id: number;
   submitted: string;
   isfavorite: string;
-
   article: ArticleModel;
   categories: CategoryModel;
 
@@ -40,7 +40,10 @@ export class EditArticleComponent implements OnInit {
       .subscribe(res => this.categories = res);
 
     this.buildForm();
+  }
 
+  canDeactivate(): Observable<boolean> | boolean {
+    return window.confirm('are u sure?');
   }
 
   buildForm() {
@@ -65,7 +68,6 @@ export class EditArticleComponent implements OnInit {
   onEditArticle(id: number) {
     const Article = new ArticleModel();
 
-
     Article.title = this.title;
     Article.image = this.image;
     Article.desc = this.desc;
@@ -80,8 +82,6 @@ export class EditArticleComponent implements OnInit {
     } else {
       Article.isfavorite = false;
     }
-
-
 
     this.api.updateArticle(Article, id)
       .subscribe(() => this.router.navigateByUrl('articlelist'));

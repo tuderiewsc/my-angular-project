@@ -3,7 +3,6 @@ import { AuthService } from 'src/app/services/auth.service';
 import { FormControl, Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { ValidateService } from 'src/app/services/validate.service';
 import { Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-login',

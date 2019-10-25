@@ -5,6 +5,7 @@ import { ApiService } from 'src/app/services/api.service';
 import { PagerService } from 'src/app/services/pager.services';
 import { SnackbarComponent } from 'src/app/shared/snackbar/snackbar.component';
 import { MatSnackBar } from '@angular/material';
+import { AuthService } from 'src/app/services/auth.service';
 
 
 @Component({
@@ -18,9 +19,10 @@ export class ListArticleComponent implements OnInit {
   passedArticle: ArticleModel;
   complete: number;
   keyword: string;
+  user: any;
 
   constructor(private activateroute: ActivatedRoute,
-    private router: Router, private api: ApiService,
+    private router: Router, private api: ApiService, private authservice: AuthService,
     private pagerservice: PagerService, private snackbar: MatSnackBar) { }
 
   ngOnInit() {
@@ -31,7 +33,11 @@ export class ListArticleComponent implements OnInit {
 
   getArticles() {
     // const id = +this.route.snapshot.params.id;
-    this.api.getArticlesList().subscribe(articles => this.articles = articles);
+    this.user = this.authservice.getUser();
+    const userId = this.user.id;
+    this.api.getArticlesList(userId).subscribe(articles => this.articles = articles);
+
+    console.log('Articles: ' + this.articles);
   }
 
 

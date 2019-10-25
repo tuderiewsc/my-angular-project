@@ -4,19 +4,13 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import { ArticleModel } from '../models/article.model';
 import { map, catchError, tap, delay } from 'rxjs/operators';
 import { CategoryModel } from '../models/category.model';
+import { Constants } from '../Constants';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
-
-  url = 'http://localhost:8000/api/articles?page=';
-  urlOne = 'http://localhost:8000/api/articles';
-  urlCats = 'http://localhost:8000/api/categories';
-  urlOneCat = 'http://localhost:8000/api/articles/categories';
-  urlArticlesList = 'http://localhost:8000/api/articlesList';
-  urlArticlesUpdate = 'http://localhost:8000/api/articles/';
 
 
   private httpOptions = {
@@ -29,13 +23,15 @@ export class ApiService {
 
 
   getArticles(pagenumber: number): Observable<any> {
-    return this.http.get(this.url + pagenumber);
+    return this.http.get(Constants.urlArticles + pagenumber);
   }
-  getArticlesList(): Observable<any> {
-    return this.http.get(this.urlArticlesList);
+
+  getArticlesList(userId: number): Observable<any> {
+    return this.http.get(Constants.urlArticlesList + '/' + userId);
   }
+
   getArticle(id: number): Observable<ArticleModel> {
-    return this.http.get<ArticleModel>(this.urlOne + '/' + id)
+    return this.http.get<ArticleModel>(Constants.urlOne + '/' + id)
       .pipe(
         tap(_ => console.log(`Article_id=${id}`)),
         catchError(this.handleError),
@@ -44,12 +40,12 @@ export class ApiService {
       );
   }
 
-
   getCategories(): Observable<any> {
-    return this.http.get(this.urlCats);
+    return this.http.get(Constants.urlCats);
   }
+
   getCategory(id: number, pagenumber: number): Observable<any> {
-    return this.http.get(this.urlOneCat + '/' + id + '?page=' + pagenumber)
+    return this.http.get(Constants.urlOneCat + '/' + id + '?page=' + pagenumber)
       .pipe(
         tap(_ => console.log(`Category_id=${id}`)),
         catchError(this.handleError),
@@ -72,15 +68,15 @@ export class ApiService {
   // }
 
   addArticle(article: ArticleModel): Observable<any> {
-    return this.http.post<ArticleModel>(this.urlOne, article, this.httpOptions);
+    return this.http.post<ArticleModel>(Constants.urlOne, article, this.httpOptions);
   }
 
   updateArticle(article: ArticleModel, id: number): Observable<any> {
-    return this.http.put<any>(this.urlArticlesUpdate + id, article, this.httpOptions);
+    return this.http.put<any>(Constants.urlArticlesUpdate + id, article, this.httpOptions);
   }
 
   deleteArticle(id: number): Observable<ArticleModel> {
-    return this.http.delete<ArticleModel>(this.urlOne + '/' + id);
+    return this.http.delete<ArticleModel>(Constants.urlOne + '/' + id);
   }
 
 }

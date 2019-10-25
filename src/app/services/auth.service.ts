@@ -2,14 +2,13 @@ import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { tap, map } from 'rxjs/operators';
+import { Constants } from '../Constants';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  regUrl = 'http://localhost:8000/api/register';
-  loginUrl = 'http://localhost:8000/api/login';
   currentUser = new BehaviorSubject(false);
   loggedIn = false;
 
@@ -25,11 +24,11 @@ export class AuthService {
   }
 
   register(values: any): Observable<boolean> {
-    return this.http.post<boolean>(this.regUrl, values, this.httpOptions);
+    return this.http.post<boolean>(Constants.regUrl, values, this.httpOptions);
   }
 
   login(values: any): Observable<boolean> {
-    return this.http.post<boolean>(this.loginUrl, values, this.httpOptions);
+    return this.http.post<boolean>(Constants.loginUrl, values, this.httpOptions);
   }
 
   localStoragegetItem(value: string) {
@@ -37,10 +36,11 @@ export class AuthService {
   }
 
   getUser() {
-    //const user = localStorage.getItem('user');
+    // const user = localStorage.getItem('user');
     return this.localStoragegetItem('user')
       ? JSON.parse(this.localStoragegetItem('user')) : false;
   }
+
 
   isLoggedIn() {
     //  const user = localStorage.getItem('user');

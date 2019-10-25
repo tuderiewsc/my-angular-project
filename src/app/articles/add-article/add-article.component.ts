@@ -10,6 +10,7 @@ import { ApiService } from 'src/app/services/api.service';
 import { transition, useAnimation, trigger } from '@angular/animations';
 import { fadeAnimation } from '../animations/animations';
 import { CategoryModel } from 'src/app/models/category.model';
+import { AuthService } from 'src/app/services/auth.service';
 
 
 @Component({
@@ -36,28 +37,27 @@ export class AddArticleComponent implements OnInit, OnDestroy {
   slug: string;
   image: string;
   category_id: number;
+  user_id: number;
   submitted: boolean;
   isfavorite: boolean;
   fileToUpload: File = null;
   lastArticleId: number;
   categories: CategoryModel[];
-
-
-
+  user: any;
   // @Output() newArticle = new EventEmitter<ArticleModel>();
 
 
   constructor(private router: Router,
     private formbuilder: FormBuilder, private snackbar: MatSnackBar,
     private http: HttpClient, @Inject(articleStatsToken) public stats,
-    private api: ApiService) {
+    private api: ApiService, private authservice: AuthService) {
   }
 
   ngOnInit() {
-    // this.getArticles();
     this.api.getCategories()
       .subscribe(res => this.categories = res);
 
+    this.user = this.authservice.getUser();
     this.buildForm();
 
   }
@@ -79,7 +79,7 @@ export class AddArticleComponent implements OnInit, OnDestroy {
       submitted: this.formbuilder.control('', Validators.required),
       isfavorite: this.formbuilder.control('', Validators.required),
       image: this.formbuilder.control('', Validators.required),
-      category_id: this.formbuilder.control('', Validators.required)
+      category_id: this.formbuilder.control('', Validators.required),
     });
   }
 
@@ -90,8 +90,8 @@ export class AddArticleComponent implements OnInit, OnDestroy {
     Article.title = this.title;
     Article.image = this.image;
     Article.desc = this.desc;
-    // Article.createdat = Date.now();
     Article.category_id = this.category_id;
+    Article.user_id = this.user.id;
     if (this.submitted === true) { Article.submitted = true; } else { Article.submitted = false; }
     if (this.isfavorite === true) { Article.isfavorite = true; } else { Article.isfavorite = false; }
 

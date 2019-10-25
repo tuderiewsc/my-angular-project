@@ -3,8 +3,6 @@ import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms'
 import { ValidateService } from 'src/app/services/validate.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
-import { error } from '@angular/compiler/src/util';
-import { throwError } from 'rxjs';
 
 @Component({
   selector: 'app-register',
