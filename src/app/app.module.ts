@@ -37,6 +37,7 @@ import { RegisterComponent } from './Auth/register/register.component';
 import { LoginComponent } from './Auth/login/login.component';
 import { PanelComponent } from './userpanel/panel/panel.component';
 import { GuestGuard } from './shared/guest.guard';
+import { SearchPageComponent } from './pages/search-page/search-page.component';
 
 
 @NgModule({
@@ -57,7 +58,8 @@ import { GuestGuard } from './shared/guest.guard';
     CategoryComponent,
     RegisterComponent,
     LoginComponent,
-    PanelComponent
+    PanelComponent,
+    SearchPageComponent
   ],
   imports: [
     BrowserModule, BrowserAnimationsModule,

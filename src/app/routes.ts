@@ -13,6 +13,7 @@ import { RegisterComponent } from './Auth/register/register.component';
 import { LoginComponent } from './Auth/login/login.component';
 import { PanelComponent } from './userpanel/panel/panel.component';
 import { GuestGuard } from './shared/guest.guard';
+import { SearchPageComponent } from './pages/search-page/search-page.component';
 
 
 
@@ -37,6 +38,9 @@ const routes: Routes = [
   },
   {
     path: 'category/:id/page/:pagenum', component: CategoryComponent
+  },
+  {
+    path: 'search/:query', component: SearchPageComponent
   },
   {
     path: 'register', component: RegisterComponent, canActivate: [GuestGuard]

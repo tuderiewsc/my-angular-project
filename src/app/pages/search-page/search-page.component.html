@@ -1,0 +1,58 @@
+<!-- content -->
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 col-sm-12 my-3">
+      <div class="text-center bg-secondary text-white mb-4">
+        <h5>عبارت جستجو شده: {{ query }}</h5>
+      </div>
+
+      <div *ngFor="let article of Articles">
+        <div class="card article" *ngIf="article.submitted==true">
+          <div class="card-header grey lighten-2">
+            <h6>{{article.title | uppercase}}</h6>
+          </div>
+          <div class="card-body">
+            <img src="{{article.image}}">
+            <p class="truncate">
+              {{article.desc | slice:0:30}} ---
+            </p>
+          </div>
+          <div class="card-footer">
+            <div class="contenttags">
+              <span class="collection">
+                <li class="collection-item">
+                  <mat-icon aria-hidden="false">person</mat-icon>
+                  <span>Admin</span>
+                </li>
+              </span>
+              <span class="collection">
+                <li class="collection-item">
+                  <mat-icon aria-hidden="false">date_range</mat-icon>
+                  <span>{{article.createdat | date:'shortDate'}}</span>
+                </li>
+              </span>
+              <span class="collection">
+                <li class="collection-item">
+                  <mat-icon aria-hidden="false">visibility</mat-icon>
+                  <span>332</span>
+                </li>
+              </span>
+              <span class="collection">
+                <li class="collection-item">
+                  <mat-icon [articlefav]="article.isfavorite" aria-hidden="false">favorite_border</mat-icon>
+                </li>
+              </span>
+            </div>
+            <div class="left-btn">
+              <button mat-flat-button color="accent" (click)="setSelected(article)"
+                routerLink="/article/{{article.id}}">ادامه مطلب</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+<!-- content -->

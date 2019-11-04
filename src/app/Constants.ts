@@ -8,6 +8,7 @@ export class Constants {
   public static urlArticlesUpdate = 'http://localhost:8000/api/articles/';
   public static regUrl = 'http://localhost:8000/api/register';
   public static loginUrl = 'http://localhost:8000/api/login';
+  public static searchArticleUrl = 'http://localhost:8000/api/searchArticle';
 
 }
 

@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Observable, of, throwError } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { ArticleModel } from '../models/article.model';
-import { map, catchError, tap, delay } from 'rxjs/operators';
-import { CategoryModel } from '../models/category.model';
+import { catchError, tap, delay } from 'rxjs/operators';
 import { Constants } from '../Constants';
 
 
@@ -38,6 +37,10 @@ export class ApiService {
         // catchError(this.handleError<ArticleModel>(`Article_id=${id}`)),
         delay(1000)
       );
+  }
+
+  getsearchArticle(phrase: string): Observable<any> {
+    return this.http.get<any>(Constants.searchArticleUrl + '/' + phrase);
   }
 
   getCategories(): Observable<any> {
