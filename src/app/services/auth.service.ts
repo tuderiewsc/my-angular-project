@@ -36,14 +36,12 @@ export class AuthService {
   }
 
   getUser() {
-    // const user = localStorage.getItem('user');
     return this.localStoragegetItem('user')
       ? JSON.parse(this.localStoragegetItem('user')) : false;
   }
 
 
   isLoggedIn() {
-    //  const user = localStorage.getItem('user');
     if (this.localStoragegetItem('user')) {
       this.loggedIn = true;
     } else {
