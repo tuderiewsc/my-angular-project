@@ -39,11 +39,6 @@
     <input type="text" matInput placeholder="لینک تصویر" [(ngModel)]="image" name="image" formControlName="image">
   </mat-form-field>
 
-  <!-- <div class="form-group">
-    <label for="image">لینک تصویر</label>
-    <input type="file" class="form-control" accept=".png , .jpg" id="image" [(ngModel)]="image" name="image"
-      formControlName="image">
-  </div> -->
 
   <div class="form-group">
     <!-- <button type="submit" (click)=" addArticle.reset()">Submit</button> -->
@@ -75,6 +70,24 @@
   <div *ngIf="addArticleForm.controls['submitted'].invalid &&
    (addArticleForm.controls['submitted'].dirty || addArticleForm.controls['submitted'].touched)">
     <span *ngIf="addArticleForm.controls['submitted'].errors.required">
+      وضعیت را تکمیل کنید.
+    </span>
+  </div>
+  <div *ngIf="addArticleForm.controls['isfavorite'].invalid &&
+   (addArticleForm.controls['isfavorite'].dirty || addArticleForm.controls['isfavorite'].touched)">
+    <span *ngIf="addArticleForm.controls['isfavorite'].errors.required">
+      وضعیت را تکمیل کنید.
+    </span>
+  </div>
+  <div *ngIf="addArticleForm.controls['category_id'].invalid &&
+   (addArticleForm.controls['category_id'].dirty || addArticleForm.controls['category_id'].touched)">
+    <span *ngIf="addArticleForm.controls['category_id'].errors.required">
+      وضعیت را تکمیل کنید.
+    </span>
+  </div>
+  <div *ngIf="addArticleForm.controls['image'].invalid &&
+   (addArticleForm.controls['image'].dirty || addArticleForm.controls['image'].touched)">
+    <span *ngIf="addArticleForm.controls['image'].errors.required">
       وضعیت را تکمیل کنید.
     </span>
   </div>

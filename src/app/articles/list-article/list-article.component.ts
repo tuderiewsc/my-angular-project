@@ -3,9 +3,9 @@ import { ArticleModel } from 'src/app/models/article.model';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { ApiService } from 'src/app/services/api.service';
 import { PagerService } from 'src/app/services/pager.services';
-import { SnackbarComponent } from 'src/app/shared/snackbar/snackbar.component';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar, MatDialog } from '@angular/material';
 import { AuthService } from 'src/app/services/auth.service';
+import { DeleteDialogComponent } from 'src/app/shared/dialog/delete-dialog/delete-dialog.component';
 
 
 @Component({
@@ -21,9 +21,8 @@ export class ListArticleComponent implements OnInit {
   keyword: string;
   user: any;
 
-  constructor(private activateroute: ActivatedRoute,
-    private router: Router, private api: ApiService, private authservice: AuthService,
-    private pagerservice: PagerService, private snackbar: MatSnackBar) {
+  constructor(private api: ApiService, private authservice: AuthService,
+    private snackbar: MatSnackBar, public dialog: MatDialog) {
 
   }
 
@@ -31,29 +30,29 @@ export class ListArticleComponent implements OnInit {
     this.getArticles();
     this.complete = 1;
     this.keyword = '';
-
-    if (this.articles) {
-      console.log('ok');
-    } else {
-      console.log('Notok');
-    }
   }
 
   getArticles() {
-    // const id = +this.route.snapshot.params.id;
     this.user = this.authservice.getUser();
     const userId = this.user.id;
     this.api.getArticlesList(userId).subscribe(articles => this.articles = articles);
-
   }
 
 
-  del(id: number) {
-    this.api.deleteArticle(id)
-      .subscribe(() => location.reload());
-
-    this.openSnackbar();
+  del(id: number, title: string) {
+    const dialog = this.dialog.open(DeleteDialogComponent, {
+      width: '348px',
+      data: { entityName: 'پاک کردن', message: `پاک شود؟ ${title} مفاله` }
+    });
+    dialog.afterClosed().subscribe(res => {
+      if (res !== undefined) {
+        this.api.deleteArticle(id)
+          .subscribe(() => location.reload());
+        this.openSnackbar();
+      }
+    });
   }
+
 
   openSnackbar() {
     this.snackbar.open('حذف موفقیت آمیز', '', {

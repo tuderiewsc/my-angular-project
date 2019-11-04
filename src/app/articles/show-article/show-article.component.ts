@@ -27,23 +27,7 @@ export class ShowArticleComponent implements OnInit {
     const id = +this.route.snapshot.params.id;
     this.api.getArticle(id).
       subscribe(article => this.passedArticle = article);
+  }
 
-    // this.passedArticle = this.route.snapshot.data.resolveData.resolvedarticle;
-    // this.errorMessage = this.route.snapshot.data.resolveData.error;
-    // console.log(this.errorMessage);
-  }
-  onDelete() {
-    // this.articlesService.deleteArticle(this.passedArticle).
-    //   subscribe(res => console.log(res));
-    // this.passedArticle= null;
-    this.router.navigate(['/home']);
-  }
-  onEdit() {
-    this.router.navigate(['/article', this.passedArticle.id, 'edit'],
-      { queryParams: { title: this.passedArticle.title }, fragment: 'editing' });
-  }
-  isAdmin(): boolean {
-    // return this.authservice.loggedIn;
-    return true;
-  }
+
 }
