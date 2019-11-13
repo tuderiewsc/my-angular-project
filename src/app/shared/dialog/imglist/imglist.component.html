@@ -1,0 +1,15 @@
+<h1 mat-dialog-title class="title">تصاویر موجود</h1>
+
+<div class="container">
+  <div class="row">
+    <ul class="imgs">
+      <li class="imgLink" *ngFor="let image of images" id="{{ image.id }}" onclick="getsrc(id)">
+        <img src="http://localhost:8000/upload/image/{{ image.image }}" alt="" width="80">
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div mat-dialog-actions>
+  <button mat-button cdkFocusInitial [mat-dialog-close] id="closedialog">بستن</button>
+</div>

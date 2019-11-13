@@ -3,7 +3,6 @@ export class ArticleModel {
     title: string;
     image: string;
     desc: string;
-    //slug: string;
     category_id: number;
     user_id: number;
     createdat?: number;

@@ -56,6 +56,10 @@ export class ApiService {
       );
   }
 
+  getImgList(): Observable<any> {
+    return this.http.get(Constants.uploadImageList);
+  }
+
   private handleError(error: HttpErrorResponse) {
     return throwError(error.message);
   }

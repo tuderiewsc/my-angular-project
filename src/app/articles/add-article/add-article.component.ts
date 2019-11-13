@@ -2,7 +2,7 @@ import { Component, EventEmitter, OnInit, Output, Inject, OnDestroy } from '@ang
 import { ArticleModel } from '../../models/article.model';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, FormControl, Validators, MaxLengthValidator } from '@angular/forms';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar, MatDialog } from '@angular/material';
 import { SnackbarComponent } from 'src/app/shared/snackbar/snackbar.component';
 import { HttpClient, HttpEventType } from '@angular/common/http';
 import { articleStatsToken } from 'src/app/providers/article.provider';
@@ -11,6 +11,7 @@ import { transition, useAnimation, trigger } from '@angular/animations';
 import { fadeAnimation } from '../animations/animations';
 import { CategoryModel } from 'src/app/models/category.model';
 import { AuthService } from 'src/app/services/auth.service';
+import { ImglistComponent } from 'src/app/shared/dialog/imglist/imglist.component';
 
 
 @Component({
@@ -50,7 +51,8 @@ export class AddArticleComponent implements OnInit, OnDestroy {
   constructor(private router: Router,
     private formbuilder: FormBuilder, private snackbar: MatSnackBar,
     private http: HttpClient, @Inject(articleStatsToken) public stats,
-    private api: ApiService, private authservice: AuthService) {
+    private api: ApiService, private authservice: AuthService
+    , public dialog: MatDialog) {
   }
 
   ngOnInit() {
@@ -78,8 +80,8 @@ export class AddArticleComponent implements OnInit, OnDestroy {
       ])),
       submitted: this.formbuilder.control('', Validators.required),
       isfavorite: this.formbuilder.control('', Validators.required),
-      image: this.formbuilder.control('', Validators.required),
       category_id: this.formbuilder.control('', Validators.required),
+      image: this.formbuilder.control('', Validators.required),
     });
   }
 
@@ -109,6 +111,16 @@ export class AddArticleComponent implements OnInit, OnDestroy {
       politeness: 'assertive',
       // announcementMessage: 'test msg'
     });
+  }
+
+
+  openDialog() {
+    this.dialog.open(ImglistComponent, {
+      width: '720px'
+    });
+    // this.dialog.open(UploaddialogComponent, {
+    //   width: '720px'
+    // });
   }
 
 }

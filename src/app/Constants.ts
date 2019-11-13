@@ -9,6 +9,9 @@ export class Constants {
   public static regUrl = 'http://localhost:8000/api/register';
   public static loginUrl = 'http://localhost:8000/api/login';
   public static searchArticleUrl = 'http://localhost:8000/api/searchArticle';
+  public static uploadImageUrl = 'http://localhost:8000/api/uploadImg';
+  public static uploadImageList = 'http://localhost:8000/api/uploadImagesList';
+
 
 }
 

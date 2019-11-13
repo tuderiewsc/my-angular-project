@@ -36,8 +36,10 @@
 
 
   <mat-form-field>
-    <input type="text" matInput placeholder="لینک تصویر" [(ngModel)]="image" name="image" formControlName="image">
+    <input type="text" matInput placeholder="لینک تصویر" [(ngModel)]="image" name="image" formControlName="image"
+      id="imgLink">
   </mat-form-field>
+  <a mat-flat-button color="primary" (click)="openDialog()">get link</a>
 
 
   <div class="form-group">

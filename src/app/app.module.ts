@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import {
   MatButtonModule,
-  MatDatepickerModule, MatFormFieldModule,
+  MatFormFieldModule,
   MatIconModule,
   MatInputModule,
   MatMenuModule, MatSelectModule, MatSlideToggleModule,
@@ -40,6 +40,7 @@ import { PanelComponent } from './userpanel/panel/panel.component';
 import { GuestGuard } from './shared/guest.guard';
 import { SearchPageComponent } from './pages/search-page/search-page.component';
 import { DeleteDialogComponent } from './shared/dialog/delete-dialog/delete-dialog.component';
+import { ImglistComponent } from './shared/dialog/imglist/imglist.component';
 
 
 @NgModule({
@@ -62,7 +63,8 @@ import { DeleteDialogComponent } from './shared/dialog/delete-dialog/delete-dial
     LoginComponent,
     PanelComponent,
     SearchPageComponent,
-    DeleteDialogComponent
+    DeleteDialogComponent,
+    ImglistComponent
   ],
   imports: [
     BrowserModule, BrowserAnimationsModule,
@@ -72,12 +74,12 @@ import { DeleteDialogComponent } from './shared/dialog/delete-dialog/delete-dial
     MatButtonModule, MatToolbarModule, MatMenuModule, MatIconModule,
     MatSlideToggleModule, MatInputModule, MatFormFieldModule, MatSelectModule,
     MatTableModule, MatSnackBarModule, MatDialogModule,
-    ReactiveFormsModule.withConfig({ warnOnNgModelWithFormControl: 'never' }),
+    ReactiveFormsModule.withConfig({ warnOnNgModelWithFormControl: 'never' })
   ],
   providers: [AuthGuard, ApiService, PagerService, GuestGuard,
     { provide: articleStatsToken, useValue: stats }
   ],
   bootstrap: [AppComponent],
-  entryComponents: [SnackbarComponent, DeleteDialogComponent]
+  entryComponents: [SnackbarComponent, DeleteDialogComponent, ImglistComponent]
 })
 export class AppModule { }
