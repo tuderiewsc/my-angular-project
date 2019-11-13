@@ -83,6 +83,7 @@ export class EditArticleComponent implements OnInit {
       Article.isfavorite = false;
     }
 
+    alert('Article edited');
     this.api.updateArticle(Article, id)
       .subscribe(() => this.router.navigateByUrl('articlelist'));
   }

@@ -81,7 +81,7 @@ export class AddArticleComponent implements OnInit, OnDestroy {
       submitted: this.formbuilder.control('', Validators.required),
       isfavorite: this.formbuilder.control('', Validators.required),
       category_id: this.formbuilder.control('', Validators.required),
-      image: this.formbuilder.control('', Validators.required),
+      image: this.formbuilder.control('', null),
     });
   }
 
@@ -96,11 +96,21 @@ export class AddArticleComponent implements OnInit, OnDestroy {
     Article.user_id = this.user.id;
     if (this.submitted === true) { Article.submitted = true; } else { Article.submitted = false; }
     if (this.isfavorite === true) { Article.isfavorite = true; } else { Article.isfavorite = false; }
+    if (this.image === undefined) {
+      // default image
+      Article.image = 'http://localhost:8000/upload/image/1573630832-2019-Image-not-found.jpg';
+    } else {
+      Article.image = this.image;
+    }
+
+    console.log('img: ' + this.image);
 
     this.api.addArticle(Article)
-      .subscribe(() => this.router.navigate(['/home']));
+      .subscribe(() => {
+        this.router.navigate(['/home']),
+          this.openSnackbar()
+      });
 
-    this.openSnackbar();
   }
 
   openSnackbar() {

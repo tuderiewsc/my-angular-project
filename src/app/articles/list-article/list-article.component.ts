@@ -51,6 +51,10 @@ export class ListArticleComponent implements OnInit {
         this.openSnackbar();
       }
     });
+
+    // if(confirm('مقاله پاک شود؟')){
+    //   // do action
+    // }
   }
 
 

@@ -22,10 +22,10 @@
     <ng-template #user_template>
       <span class="mx-2">خوش آمدید ادمین</span>
       <ul class="toolbar-item">
+        <li>{{ tr }}</li>
         <a [matMenuTriggerFor]="menu1" class="toolbar-item">
           <li>
             <mat-icon aria-hidden="false" aria-label="">account_circle</mat-icon>
-            <!--    <mat-icon class="mat-icon-rtl-mirror" aria-hidden="false" aria-label="">account_circle</mat-icon>-->
           </li>
         </a>
         <mat-menu #menu1="matMenu" xPosition="after">

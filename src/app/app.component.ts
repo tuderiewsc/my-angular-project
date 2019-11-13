@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AuthService } from './services/auth.service';
 import { AutoLogoutServiceService } from './services/auto-logout-service.service';
 import { MatDialog } from '@angular/material';
+import { PagerService } from './services/pager.services';
 
 @Component({
   selector: 'app-root',
@@ -14,6 +15,7 @@ export class AppComponent implements OnInit {
 
   title = 'articles_project';
   loggedIn = false;
+  tr: number;
 
 
   constructor(private router: Router, private auth: AuthService,
@@ -31,6 +33,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.tr = this.authLogout.timeRemained().df;
   }
 
   logout() {

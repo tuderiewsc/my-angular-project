@@ -27,7 +27,6 @@ export class RegisterComponent implements OnInit {
     Validators.required,
     Validators.minLength(6)
   ])]);
-  // tslint:disable-next-line: variable-name
   password_confirmation = new FormControl('', [Validators.required]);
 
   registerForm: FormGroup = this.formbuilder.group({
