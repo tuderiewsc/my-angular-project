@@ -1,63 +1,83 @@
-<div class="container">
-  <div class="row">
-    <div class="col-md-8 col-sm-12 my-3">
-      <div class="jumbotron jumbotron-fluid">
-        <div class="container">
-          <h2 class="display-3">Angular Articles</h2>
-          <hr class="my-2">
-          <p>More info</p>
-          <p class="lead">
-            <a class="btn btn-primary btn-lg" routerLink="/articles/page/1" role="button">
-              رفتن به مقالات</a>
-          </p>
+<!-- socials-Start -->
+<div class="socials">
+  <ul class="list">
+    <li class="face" data-toggle="tooltip" data-placement="right" data-html="true"
+      title="<h6>نشانی فیسبوک</h6><br><a target='_blank' href='http://www.facebook.com/share.phpv=4&src=' style='font-family: Vazir '>کلیک کنید</a>"
+      data-trigger="focus">
+      <a href="#">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+    </li>
+    <li class="twitter" data-toggle="tooltip" data-placement="right" data-html="true"
+      title="<h6>نشانی توییتر</h6><br><a target='_blank' href='http://plus.google.com/shareurl=' style='font-family: Vazir '>کلیک کنید</a>"
+      data-trigger="focus">
+      <a href="#">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+    <li class="gplus" data-toggle="tooltip" data-placement="right" data-html="true"
+      title="<h6>نشانی گوگل پلاس</h6><br><a target='_blank' href='http://www.facebook.com/share.phpv=4&src=' style='font-family: Vazir '>کلیک کنید</a>"
+      data-trigger="focus">
+      <a href="#">
+        <i class="fab fa-google-plus-g"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+<!-- socials-End -->
+
+
+<!-- content-Start -->
+<section class="main_content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-8 col-sm-12">
+        <div class="card">
+          <div class="card-body">
+            <div class="jumbotron text-center">
+              <h3 class="typewriter">اپلیکیشن انگولار</h3>
+              <a routerLink="/articles/page/1"
+                class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent my-4">مشاهده
+                مقالات
+              </a>
+            </div>
+          </div>
         </div>
+      </div>
+      <div class="col-md-4 col-sm-12">
+        <aside>
+          <div class="card">
+            <div class="card-header">
+              <h6><i class="material-icons align-middle">list</i>دسته بندی ها </h6>
+            </div>
+            <div class="card-body">
+              <ul class="category" id="accordion">
+                <p *ngFor="let category of categories ; let index=index">
+                  <span *ngIf="category.parent_id == 0">
+                    <a href="#Section{{ index }}" data-toggle="collapse" class="cat-item"><i
+                        class="material-icons align-middle">chevron_left</i>
+                      {{ category.name }}
+                    </a>
+                    <li id="Section{{ index }}" class="collapse" data-parent="#accordion">
+                      <ul>
+                        <li *ngFor="let subcat of categories">
+                          <a routerLink="/category/{{ subcat.id }}/page/1" *ngIf="subcat.parent_id==category.id"
+                            class="cat-item">{{ subcat.name }}</a>
+                        </li>
+                      </ul>
+                    </li>
+                  </span>
+                </p>
+              </ul>
+
+
+            </div>
+          </div>
+        </aside>
+
+
       </div>
     </div>
-
-    <aside class="col-md-4 col-sm-12 my-3 aside">
-      <div class="card">
-        <div class="card-header">
-          <h6>
-            <mat-icon aria-hidden="false" aria-label="">check</mat-icon>
-            جستجو
-          </h6>
-        </div>
-
-        <div class="card-body">
-          <form class="side-search form-group" method="get" role="search" (ngSubmit)="searchArticle()">
-            <div class="contain">
-              <input class="form-control" placeholder="جستجو..." id="search" type="search" [(ngModel)]="query"
-                name="query" autocomplete="on">
-              <button type="submit">
-                <mat-icon aria-hidden="false" aria-label="">search</mat-icon>
-              </button>
-            </div>
-          </form>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <h6>
-            <mat-icon aria-hidden="false" aria-label="">check</mat-icon>دسته بندی مطالب
-          </h6>
-        </div>
-        <div class="card-body">
-          <ul class="collection cats">
-            <li class="collection-item" *ngFor="let category of categories">
-              <span *ngIf="category.parent_id == 0"><i class="material-icons">chevron_left</i>
-                <a routerLink="/category/{{ category.id }}/page/1">{{ category.name }}</a>
-                <ul class="collection children">
-                  <li class="collection-item" *ngFor="let subcat of categories">
-                    <a routerLink="/category/{{ subcat.id }}/page/1"
-                      *ngIf="subcat.parent_id==category.id">{{ subcat.name }}</a>
-                  </li>
-                </ul>
-              </span>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </aside>
   </div>
-</div>
+</section>
+<!-- content-End -->

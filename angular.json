@@ -25,11 +25,13 @@
             ],
             "styles": [
               "src/styles.css",
+              "src/assets/css/material.teal-purple.min.css",
               "src/assets/css/bootstrap.min.css",
-              "src/assets/css/style.css"
+              "src/assets/css/main.css"
             ],
             "scripts": [
-              "src/assets/js/jQuery.js",
+              "src/assets/js/jquery-1.11.1.min.js",
+              "src/assets/js/material.min.js",
               "src/assets/js/popper.min.js",
               "src/assets/js/bootstrap.min.js",
               "src/assets/js/script.js"

@@ -1,72 +1,78 @@
-<!-- navbar -->
-<mat-toolbar color="primary">
-  <mat-toolbar-row>
-    <span style="flex: 1 1 auto;">
-      <ul class="toolbar-items">
-        <a routerLink="/home" class="toolbar-item" routerLinkActive="active"
-          [routerLinkActiveOptions]="{exatct : true}">
-          <li>خانه</li>
-        </a>
-        <a routerLink="/articles/page/1" class="toolbar-item" routerLinkActive="active">
-          <li>مقالات</li>
-        </a>
+  <!-- Header-Start -->
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <a class="navbar-brand mx-2">
+      <img src="assets/logo.png" alt="" width="30" height="30">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item active">
+          <a class="nav-link" routerLink="/home" routerLinkActive="active"
+            [routerLinkActiveOptions]="{exatct : true}">صفحه اصلي <span class="sr-only">(current)</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/articles/page/1" routerLinkActive="active">مقالات</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            دسته بندي مطالب
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="#">آموزش وب</a>
+            <a class="dropdown-item" href="#">آموزش موبايل</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">ساير</a>
+          </div>
+        </li>
       </ul>
-    </span>
 
-    <span class="mx-2" *ngIf="!checkLogin(); else user_template">
-      <div class="btn-group" role="group">
-        <a routerLink="/register" type="button" class="btn btn-success">ثبت نام</a>
-        <a routerLink="/login" type="button" class="btn btn-info">ورود</a>
+      <form method="GET" (ngSubmit)="searchArticle()" class="form-inline" id="main_search">
+        <input class="form-control mr-sm-2" type="search" [(ngModel)]="query" name="query" placeholder="جستجو..."
+          aria-label="Search" id="search">
+        <button class="btn my-2 my-sm-0" type="submit">
+          <i class="material-icons">search</i>
+        </button>
+      </form>
+
+      <div class="dropdown mx-3" *ngIf="!checkLogin(); else user_template">
+        <i class="material-icons dropdown-toggle" data-toggle="dropdown" id="account">vpn_key
+        </i>
+        <div class="dropdown-menu">
+          <a routerLink="/register" class="dropdown-item">ثبت نام</a>
+          <a routerLink="/login" class="dropdown-item">ورود</a>
+        </div>
       </div>
-    </span>
-    <ng-template #user_template>
-      <span class="mx-2">خوش آمدید ادمین</span>
-      <ul class="toolbar-item">
-        <li>{{ tr }}</li>
-        <a [matMenuTriggerFor]="menu1" class="toolbar-item">
-          <li>
-            <mat-icon aria-hidden="false" aria-label="">account_circle</mat-icon>
-          </li>
-        </a>
-        <mat-menu #menu1="matMenu" xPosition="after">
-          <a mat-menu-item [routerLink]="[ 'user-panel' ]">پنل کاربری</a>
-          <a mat-menu-item [routerLink]="[ 'article/add' ]">افزودن مقاله</a>
-          <a mat-menu-item [routerLink]="[ 'articlelist' ]">لیست مقالات</a>
-          <a mat-menu-item [routerLink]="[ 'article/add' ]">افزودن دسته بندي</a>
-          <a mat-menu-item [routerLink]="[ 'article/list' ]">لیست دسته بندي ها</a>
-          <a mat-menu-item (click)="logout()">خروج</a>
-        </mat-menu>
-      </ul>
-    </ng-template>
-  </mat-toolbar-row>
-</mat-toolbar>
-<!-- navbar -->
-
-
-<br>
-<br>
-<br>
-<br>
-<br>
-<router-outlet></router-outlet>
-
-<!--<app-articles></app-articles>-->
-
-
-<!-- Footer -->
-<footer id="myFooter" class=" text-white pt-4">
-  <div class="container text-center text-md-left">
-    <div class="row">
-      <div class="text-center mr-auto ml-auto">
-        <h5 class="font-weight-bold text-uppercase mb-4">درباره سايت</h5>
-        <p>آموزش برنامه نويسي و نرم افزار</p>
-      </div>
+      <ng-template #user_template>
+        <div class="dropdown mx-3">
+          <i class="material-icons dropdown-toggle" data-toggle="dropdown" id="account">account_circle
+          </i>
+          <div class="dropdown-menu">
+            <h6 class="dropdown-header">خوش آمديد ادمين</h6>
+            <a [routerLink]="[ 'user-panel' ]" class="dropdown-item">پنل مديريت</a>
+          </div>
+        </div>
+      </ng-template>
     </div>
-  </div>
-  <div class="footer-copyright text-center py-3">
-    <span>© 2018 Copyright</span>
-  </div>
+  </nav>
+  <!-- Header-End -->
+
+  <router-outlet></router-outlet>
 
 
-</footer>
-<!-- Footer -->
+
+  <!-- Footer-Start -->
+  <footer class="text-center bg-dark">
+    <div>
+      <ul>
+        <li><a href="#">Help</a></li>
+        <li><a href="#">Privacy & Terms</a></li>
+      </ul>
+    </div>
+  </footer>
+  <!-- Footer-End -->
