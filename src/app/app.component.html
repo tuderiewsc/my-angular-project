@@ -44,8 +44,8 @@
         <i class="material-icons dropdown-toggle" data-toggle="dropdown" id="account">vpn_key
         </i>
         <div class="dropdown-menu">
-          <a routerLink="/register" class="dropdown-item">ثبت نام</a>
-          <a routerLink="/login" class="dropdown-item">ورود</a>
+          <a routerLink="/register" class="dropdown-item"><i class="material-icons">person_add</i>ثبت نام</a>
+          <a routerLink="/login" class="dropdown-item"><i class="material-icons">person</i>ورود</a>
         </div>
       </div>
       <ng-template #user_template>
@@ -54,7 +54,9 @@
           </i>
           <div class="dropdown-menu">
             <h6 class="dropdown-header">خوش آمديد ادمين</h6>
-            <a [routerLink]="[ 'user-panel' ]" class="dropdown-item">پنل مديريت</a>
+            <a [routerLink]="[ 'user-panel' ]" class="dropdown-item"><i class="material-icons">person_pin</i>پنل
+              مديريت</a>
+            <a [routerLink]="[ 'user-panel' ]" class="dropdown-item"><i class="material-icons">exit_to_app</i>خروج</a>
           </div>
         </div>
       </ng-template>

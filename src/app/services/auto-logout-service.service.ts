@@ -61,7 +61,7 @@ export class AutoLogoutServiceService {
     const diff = timeleft - now;
     const isTimeout = diff < 0;
 
-    console.log('diff' + diff);
+    //console.log('diff' + diff);
 
 
 

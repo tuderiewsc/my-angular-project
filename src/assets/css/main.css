@@ -277,6 +277,11 @@ nav ul li.active {
 nav ul li.active a {
   color: #fff !important;
 }
+nav div.dropdown-menu i {
+  font-size: 1rem;
+  vertical-align: sub;
+  margin: auto 4px;
+}
 nav a.dropdown-item {
   text-align: right;
   padding: 6px;
@@ -416,29 +421,57 @@ section.main_content .card .card-body .jumbotron h3.typewriter {
 section.main_content .card .card-body a {
   font-family: "Vazir";
 }
-section.main_content aside a.cat-item {
+section.main_content aside a {
+  color: #757575;
+}
+section.main_content aside ul.category a.cat-header {
+  color: #757575;
+  width: 100%;
+  margin: 0 !important;
+  padding: 0 !important;
+  font-size: 1rem;
+}
+section.main_content aside ul.category a.cat-header::before {
+  content: "";
+  font-family: "material icons";
+  font-size: 1.5rem;
+  vertical-align: middle;
+  transition: 2s ease;
+  -webkit-transition: 2s ease;
+  -moz-transition: 2s ease;
+  -o-transition: 2s ease;
+  -ms-transition: 2s ease;
+}
+section.main_content aside ul.category a.cat-header[aria-expanded=true]::before {
+  content: "";
+  font-family: "material icons";
+  font-size: 1.5rem;
+  vertical-align: middle;
+  transition: 2s ease;
+  -webkit-transition: 2s ease;
+  -moz-transition: 2s ease;
+  -o-transition: 2s ease;
+  -ms-transition: 2s ease;
+}
+section.main_content aside ul.category li.collapse a.cat-item {
   color: #757575;
   width: 100%;
   margin: 0 !important;
   padding: 0 !important;
 }
-section.main_content aside a.cat-item li {
-  padding: 8px;
-  margin: 4px;
-}
-section.main_content aside a.cat-item li:hover {
-  color: #009688;
-}
-section.main_content aside a.cat-item li:hover span {
-  color: #009688;
-  margin-right: 8px;
-}
-section.main_content aside a.cat-item li span {
+section.main_content aside ul.category li.collapse a.cat-item span {
   transition: 0.3s ease;
   -webkit-transition: 0.3s ease;
   -moz-transition: 0.3s ease;
   -o-transition: 0.3s ease;
   -ms-transition: 0.3s ease;
+}
+section.main_content aside ul.category li.collapse a.cat-item:hover {
+  color: #009688;
+}
+section.main_content aside ul.category li.collapse a.cat-item:hover span {
+  color: #009688;
+  margin-right: 4px;
 }
 
 /* The typing effect */
@@ -560,29 +593,57 @@ section.article_content .card.article span.more {
 section.article_content .card.article span.more a {
   font-family: "Vazir";
 }
-section.article_content aside a.cat-item {
+section.article_content aside a {
+  color: #757575;
+}
+section.article_content aside ul.category a.cat-header {
+  color: #757575;
+  width: 100%;
+  margin: 0 !important;
+  padding: 0 !important;
+  font-size: 1rem;
+}
+section.article_content aside ul.category a.cat-header::before {
+  content: "";
+  font-family: "material icons";
+  font-size: 1.5rem;
+  vertical-align: middle;
+  transition: 2s ease;
+  -webkit-transition: 2s ease;
+  -moz-transition: 2s ease;
+  -o-transition: 2s ease;
+  -ms-transition: 2s ease;
+}
+section.article_content aside ul.category a.cat-header[aria-expanded=true]::before {
+  content: "";
+  font-family: "material icons";
+  font-size: 1.5rem;
+  vertical-align: middle;
+  transition: 2s ease;
+  -webkit-transition: 2s ease;
+  -moz-transition: 2s ease;
+  -o-transition: 2s ease;
+  -ms-transition: 2s ease;
+}
+section.article_content aside ul.category li.collapse a.cat-item {
   color: #757575;
   width: 100%;
   margin: 0 !important;
   padding: 0 !important;
 }
-section.article_content aside a.cat-item li {
-  padding: 8px;
-  margin: 4px;
-}
-section.article_content aside a.cat-item li:hover {
-  color: #009688;
-}
-section.article_content aside a.cat-item li:hover span {
-  color: #009688;
-  margin-right: 8px;
-}
-section.article_content aside a.cat-item li span {
+section.article_content aside ul.category li.collapse a.cat-item span {
   transition: 0.3s ease;
   -webkit-transition: 0.3s ease;
   -moz-transition: 0.3s ease;
   -o-transition: 0.3s ease;
   -ms-transition: 0.3s ease;
+}
+section.article_content aside ul.category li.collapse a.cat-item:hover {
+  color: #009688;
+}
+section.article_content aside ul.category li.collapse a.cat-item:hover span {
+  color: #009688;
+  margin-right: 4px;
 }
 
 section.article_content .card.article img#main_photo {

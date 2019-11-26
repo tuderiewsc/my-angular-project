@@ -4,22 +4,22 @@
     <li class="face" data-toggle="tooltip" data-placement="right" data-html="true"
       title="<h6>نشانی فیسبوک</h6><br><a target='_blank' href='http://www.facebook.com/share.phpv=4&src=' style='font-family: Vazir '>کلیک کنید</a>"
       data-trigger="focus">
-      <a href="#">
-        <i class="fab fa-facebook-f"></i>
+      <a href="!#">
+        <i class="fa fa-facebook"></i>
       </a>
     </li>
     <li class="twitter" data-toggle="tooltip" data-placement="right" data-html="true"
       title="<h6>نشانی توییتر</h6><br><a target='_blank' href='http://plus.google.com/shareurl=' style='font-family: Vazir '>کلیک کنید</a>"
       data-trigger="focus">
-      <a href="#">
-        <i class="fab fa-twitter"></i>
+      <a href="!#">
+        <i class="fa fa-twitter"></i>
       </a>
     </li>
     <li class="gplus" data-toggle="tooltip" data-placement="right" data-html="true"
       title="<h6>نشانی گوگل پلاس</h6><br><a target='_blank' href='http://www.facebook.com/share.phpv=4&src=' style='font-family: Vazir '>کلیک کنید</a>"
       data-trigger="focus">
       <a href="#">
-        <i class="fab fa-google-plus-g"></i>
+        <i class="fa fa-google-plus"></i>
       </a>
     </li>
   </ul>
@@ -51,18 +51,18 @@
               <h6><i class="material-icons align-middle">list</i>دسته بندی ها </h6>
             </div>
             <div class="card-body">
-              <ul class="category" id="accordion">
-                <p *ngFor="let category of categories ; let index=index">
+              <ul class="category" id="indexCats">
+                <p class="mb-3" *ngFor="let category of categories ; let index=index">
                   <span *ngIf="category.parent_id == 0">
-                    <a href="#Section{{ index }}" data-toggle="collapse" class="cat-item"><i
-                        class="material-icons align-middle">chevron_left</i>
-                      {{ category.name }}
+                    <a href="#Section{{ index }}" data-toggle="collapse" class="cat-header"
+                      aria-expanded="false">{{ category.name }}
                     </a>
-                    <li id="Section{{ index }}" class="collapse" data-parent="#accordion">
+                    <li id="Section{{ index }}" class="collapse mr-4" data-parent="#indexCats">
                       <ul>
                         <li *ngFor="let subcat of categories">
                           <a routerLink="/category/{{ subcat.id }}/page/1" *ngIf="subcat.parent_id==category.id"
-                            class="cat-item">{{ subcat.name }}</a>
+                            class="cat-item"><span>{{ subcat.name }}</span>
+                          </a>
                         </li>
                       </ul>
                     </li>
@@ -74,8 +74,6 @@
             </div>
           </div>
         </aside>
-
-
       </div>
     </div>
   </div>

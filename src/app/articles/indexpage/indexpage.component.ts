@@ -4,6 +4,8 @@ import { ApiService } from 'src/app/services/api.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { ArticleModel } from 'src/app/models/article.model';
 import { Router } from '@angular/router';
+import * as $ from 'jquery';
+
 
 @Component({
   selector: 'app-indexpage',
@@ -15,6 +17,7 @@ export class IndexpageComponent implements OnInit {
   categories: CategoryModel[];
   query: string;
   Articles: ArticleModel[];
+  expanded = false;
   // @Output() passedPhrase = new EventEmitter<string>();
 
 
@@ -23,8 +26,23 @@ export class IndexpageComponent implements OnInit {
     , private router: Router) { }
 
   ngOnInit() {
+
+    $(document).ready(function () {
+      $('a').click(function (event) {
+        event.preventDefault();
+      });
+
+    });
+
     this.api.getCategories()
       .subscribe(res => this.categories = res);
+
+
+  }
+
+  expand(status: boolean) {
+    console.log(status);
+    this.expanded = !this.expanded;
   }
 
   searchArticle() {
