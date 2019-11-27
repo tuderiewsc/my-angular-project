@@ -67,6 +67,7 @@ export class ArticlesComponent implements OnInit {
             .subscribe(id => this.api.getArticles(id)
                 .subscribe(res => {
                     this.articles = res.data;
+                    console.log('articles: ' + res.data);
                     this.pager = this.pagerservice.getPager(res.total, res.current_page, res.per_page);
                 }));
 

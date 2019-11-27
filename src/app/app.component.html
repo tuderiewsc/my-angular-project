@@ -10,25 +10,34 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ml-auto">
-        <li class="nav-item active">
-          <a class="nav-link" routerLink="/home" routerLinkActive="active"
-            [routerLinkActiveOptions]="{exatct : true}">صفحه اصلي <span class="sr-only">(current)</span>
+        <li class="nav-item active" routerLink="/home" routerLinkActive="active"
+          [routerLinkActiveOptions]="{exatct : true}">
+          <a class="nav-link">صفحه اصلی <span class="sr-only">(current)</span>
           </a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/articles/page/1" routerLinkActive="active">مقالات</a>
+        <li class="nav-item" routerLink="/articles/page/1" routerLinkActive="active">
+          <a class="nav-link">مقالات</a>
         </li>
-        <li class="nav-item dropdown">
+        <li class="nav-item dropdown" routerLinkActive="active">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
             دسته بندي مطالب
           </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">آموزش وب</a>
-            <a class="dropdown-item" href="#">آموزش موبايل</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">ساير</a>
-          </div>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <div *ngFor="let category of categories">
+              <li class="dropdown-item dropdown" *ngIf="category.parent_id == 0">
+                {{ category.name }}
+                <ul>
+                  <span *ngFor="let subcat of categories">
+                    <li *ngIf="subcat.parent_id==category.id">
+                      <a routerLink="/category/{{ subcat.id }}/page/1">{{ subcat.name }}</a>
+                    </li>
+                  </span>
+
+                </ul>
+              </li>
+            </div>
+          </ul>
         </li>
       </ul>
 
@@ -53,10 +62,10 @@
           <i class="material-icons dropdown-toggle" data-toggle="dropdown" id="account">account_circle
           </i>
           <div class="dropdown-menu">
-            <h6 class="dropdown-header">خوش آمديد ادمين</h6>
+            <h6 class="dropdown-header">خوش آمدید ادمین</h6>
             <a [routerLink]="[ 'user-panel' ]" class="dropdown-item"><i class="material-icons">person_pin</i>پنل
-              مديريت</a>
-            <a [routerLink]="[ 'user-panel' ]" class="dropdown-item"><i class="material-icons">exit_to_app</i>خروج</a>
+              مدیریت</a>
+            <a class="dropdown-item" (click)="logout()"><i class="material-icons">exit_to_app</i>خروج</a>
           </div>
         </div>
       </ng-template>

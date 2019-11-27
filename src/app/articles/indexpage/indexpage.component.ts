@@ -31,7 +31,6 @@ export class IndexpageComponent implements OnInit {
       $('a').click(function (event) {
         event.preventDefault();
       });
-
     });
 
     this.api.getCategories()
@@ -45,17 +44,6 @@ export class IndexpageComponent implements OnInit {
     this.expanded = !this.expanded;
   }
 
-  searchArticle() {
-    this.router.navigate(['search/' + this.query]);
-    // this.passedPhrase.emit(this.phrase);
 
-    // this.api.getsearchArticle(this.phrase)
-    //   .subscribe(res => {
-    //     console.log(res),
-    //       this.passedArticles.emit(res),
-    //       this.router.navigateByUrl('searchResult');
-    //   });
-
-  }
 
 }

@@ -1,7 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ArticleModel } from 'src/app/models/article.model';
 import { ApiService } from 'src/app/services/api.service';
-import { Router, ActivatedRoute } from '@angular/router';
+import {Router, ActivatedRoute, Params} from '@angular/router';
+import {map} from 'rxjs/operators';
+import {query} from '@angular/animations';
 
 @Component({
   selector: 'app-search-page',
@@ -17,24 +19,25 @@ export class SearchPageComponent implements OnInit {
   constructor(private api: ApiService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    const queryPhrase = this.route.snapshot.params.query;
-    this.query = queryPhrase;
 
-    this.api.getsearchArticle(queryPhrase)
-      .subscribe(res => this.Articles = res);
-  }
-
-  onSearch(event: string) {
-    this.api.getsearchArticle(event)
-      .subscribe(res => {
-        console.log(res),
+    this.route.params.pipe
+    (map((params: Params) => params.query))
+      .subscribe(query => this.api.getsearchArticle(query)
+        .subscribe(res => {
           this.Articles = res;
-      });
+          console.log('articles: ' + res);
+        }));
 
-    console.log('2:' + event);
+    this.route.params.pipe
+    (map((params: Params) => params.query))
+      .subscribe(query => this.query=query);
 
 
+    // this.query = this.route.snapshot.params.query;
+    // this.api.getsearchArticle(this.query)
+    //   .subscribe(res => this.Articles = res);
   }
+
 
 
 

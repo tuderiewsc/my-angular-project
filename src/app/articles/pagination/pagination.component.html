@@ -1,35 +1,40 @@
- <ul class="pagination paginatin-sm my-4" *ngIf="pager != undefined && pager.pages && pager.pages.length">
-   <li class="page-item" [ngClass]="{'disabled': pager.currentPage == 1}">
-     <a class="page-link" [routerLink]="['/articles/page/' , 1]">First</a>
-   </li>
-   <li class="page-item" [ngClass]="{'disabled': pager.currentPage == 1}">
-     <a class="page-link" [routerLink]="['/articles/page/' , pager.currentPage-1]">Previous</a>
-   </li>
+  <ul class="pagination paginatin-sm my-3" *ngIf="pager != undefined && pager.pages && pager.pages.length">
+    <li class="page-item disabled" [ngClass]="{'disabled': pager.currentPage == 1}">
+      <a class="page-link" [routerLink]="['/articles/page/' , 1]">اولین</a>
+    </li>
+    <li class="page-item disabled" [ngClass]="{'disabled': pager.currentPage == 1}">
+      <a class=" page-link" [routerLink]="['/articles/page/' , pager.currentPage-1]">&laquo;</a>
+    </li>
 
-   <li class="page-item" *ngFor="let page of pager.pages" [ngClass]="{'active': pager.currentPage == page}">
-     <a class="page-link" [routerLink]="['/articles/page/' , page]">{{ page }}</a>
-   </li>
+    <li class="page-item" *ngFor="let page of pager.pages" [ngClass]="{'active': pager.currentPage == page}">
+      <a class="page-link" [routerLink]="['/articles/page/' , page]">{{ page }}</a>
+    </li>
 
-   <li class="page-item" [ngClass]="{'disabled': pager.currentPage == pager.totalPages}"><a class="page-link"
-       [routerLink]="['/articles/page/'  , pager.currentPage+1]">Next</a></li>
-   <li class="page-item" [ngClass]="{'disabled': pager.currentPage == pager.totalPages}">
-     <a class="page-link" [routerLink]="['/articles/page/'  , pager.totalPages]">Last</a></li>
- </ul>
+    <li class="page-item" [ngClass]="{'disabled': pager.currentPage == pager.totalPages}">
+      <a class="page-link" [routerLink]="['/articles/page/'  , pager.currentPage+1]">&raquo;</a>
+    </li>
+    <li class="page-item" [ngClass]="{'disabled': pager.currentPage == pager.totalPages}">
+      <a class="page-link" [routerLink]="['/articles/page/'  , pager.totalPages]">آخرین</a>
+    </li>
+  </ul>
 
 
- <ul class="pagination paginatin-sm my-4" *ngIf="catPager != undefined && catPager.pages && catPager.pages.length">
-   <li class="page-item" [ngClass]="{'disabled': catPager.currentPage == 1}">
-     <a class="page-link" [routerLink]="['/category/'+ id +'/page/' , 1]">First</a>
-   </li>
-   <li class="page-item" [ngClass]="{'disabled': catPager.currentPage == 1}">
-     <a class="page-link" [routerLink]="['/category/'+ id +'/page/' , catPager.currentPage-1]">
-       Previous</a>
-   </li>
-   <li class="page-item" *ngFor="let page of catPager.pages" [ngClass]="{'active': catPager.currentPage == page}">
-     <a class="page-link" [routerLink]="['/category/'+ id +'/page/' , page]">{{ page }}</a>
-   </li>
-   <li class="page-item" [ngClass]="{'disabled': catPager.currentPage == catPager.totalPages}"><a class="page-link"
-       [routerLink]="['/category/'+ id +'/page/' , catPager.currentPage+1]">Next</a></li>
-   <li class="page-item" [ngClass]="{'disabled': catPager.currentPage == catPager.totalPages}">
-     <a class="page-link" [routerLink]="['/category/'+ id +'/page/'  , catPager.totalPages]">Last</a></li>
- </ul>
+  <ul class="pagination paginatin-sm my-3" *ngIf="catPager != undefined && catPager.pages && catPager.pages.length">
+    <li class="page-item disabled" [ngClass]="{'disabled': catPager.currentPage == 1}">
+      <a class="page-link" [routerLink]="['/category/'+ id +'/page/' , 1]">اولين</a>
+    </li>
+    <li class="page-item disabled" [ngClass]="{'disabled': catPager.currentPage == 1}">
+      <a class=" page-link" [routerLink]="['/category/'+ id +'/page/' , catPager.currentPage-1]">&laquo;</a>
+    </li>
+
+    <li class="page-item" *ngFor="let page of catPager.pages" [ngClass]="{'active': catPager.currentPage == page}">
+      <a class="page-link" [routerLink]="['/category/'+ id +'/page/' , page]">{{ page }}</a>
+    </li>
+
+    <li class="page-item" [ngClass]="{'disabled': catPager.currentPage == catPager.totalPages}">
+      <a class="page-link" [routerLink]="['/category/'+ id +'/page/' , catPager.currentPage+1]">&raquo;</a>
+    </li>
+    <li class="page-item" [ngClass]="{'disabled': catPager.currentPage == catPager.totalPages}">
+      <a class="page-link" [routerLink]="['/category/'+ id +'/page/'  , catPager.totalPages]">آخرين</a>
+    </li>
+  </ul>

@@ -1,106 +1,85 @@
-<!--<app-add-article (newArticle)="onNewArticle($event)"></app-add-article>-->
-
-<!-- content -->
-<div class="container">
-  <div class="row">
-    <div class="col-md-8 col-sm-12 my-3">
-      <div *ngFor="let article of articles" [@articleAnimation]="articles.length">
-        <div class="card article" *ngIf="article.submitted==true">
-          <div class="card-header grey lighten-2">
-            <h6>{{article.title | uppercase}}</h6>
-          </div>
-          <div class="card-body">
-            <img src="{{article.image}}">
-            <p class="truncate">
-              {{article.desc | slice:0:30}} ---
-            </p>
-          </div>
-          <div class="card-footer">
-            <div class="contenttags">
-              <span class="collection">
-                <li class="collection-item">
-                  <mat-icon aria-hidden="false">person</mat-icon>
-                  <span>Admin</span>
-                </li>
-              </span>
-              <span class="collection">
-                <li class="collection-item">
-                  <mat-icon aria-hidden="false">date_range</mat-icon>
-                  <span>{{article.createdat | date:'shortDate'}}</span>
-                </li>
-              </span>
-              <span class="collection">
-                <li class="collection-item">
-                  <mat-icon aria-hidden="false">visibility</mat-icon>
-                  <span>332</span>
-                </li>
-              </span>
-              <span class="collection">
-                <li class="collection-item">
-                  <mat-icon [articlefav]="article.isfavorite" aria-hidden="false">favorite_border</mat-icon>
-                </li>
-              </span>
+<!-- content-Start -->
+<section class="article_content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-8 col-sm-12">
+        <div *ngFor="let article of articles" [@articleAnimation]="articles.length">
+          <div class="card article" *ngIf="article.submitted==true">
+            <div class="card-header">
+              <h5>{{article.title | uppercase}}</h5>
             </div>
-            <div class="left-btn">
-              <button mat-flat-button color="accent" (click)="setSelected(article)"
-                routerLink="/article/{{article.id}}">ادامه مطلب</button>
+            <div class="card-body">
+              <a routerLink="/article/{{article.id}}">
+                <img class="article_mainPhoto" src="{{article.image}}">
+              </a>
+              <p class="card-text text-justify">
+                {{article.desc | slice:0:30}} ---
+              </p>
+            </div>
+            <div class="card-footer">
+              <ul class="list-inline">
+                <li class="list-inline-item">
+                  <i class="material-icons">account_box</i><span>Admin</span>
+                </li>
+                <li class="list-inline-item">
+                  <i class="material-icons">visibility</i><span>21</span>
+                </li>
+                <li class="list-inline-item">
+                  <i class="material-icons">date_range</i><span>{{article.created_at | date:'longDate'}}</span>
+                </li>
+                <li class="list-inline-item">
+                  <i class="material-icons" [articlefav]="article.isfavorite"
+                    aria-hidden="false">favorite_border</i><span>33</span>
+                </li>
+              </ul>
+              <span class="more">
+                <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--primary"
+                  routerLink="/article/{{article.id}}">ادامه
+                  مطلب
+                </a>
+              </span>
             </div>
           </div>
         </div>
+
+        <div class="d-flex justify-content-center">
+          <app-pagination [pager]="pager"></app-pagination>
+        </div>
+
+
       </div>
 
-      <div class="d-flex justify-content-center">
-        <app-pagination [pager]="pager"></app-pagination>
+      <div class="col-md-4 col-sm-12">
+        <aside>
+          <div class="card">
+            <div class="card-header">
+              <h6><i class="material-icons align-middle">list</i>دسته بندی ها </h6>
+            </div>
+            <div class="card-body">
+              <ul class="category" id="indexCats">
+                <p class="mb-3" *ngFor="let category of categories ; let index=index">
+                  <span *ngIf="category.parent_id == 0">
+                    <a href="#Section{{ index }}" data-toggle="collapse" class="cat-header"
+                      aria-expanded="false">{{ category.name }}
+                    </a>
+                    <li id="Section{{ index }}" class="collapse mr-4" data-parent="#indexCats">
+                      <ul>
+                        <li *ngFor="let subcat of categories">
+                          <a routerLink="/category/{{ subcat.id }}/page/1" *ngIf="subcat.parent_id==category.id"
+                            class="cat-item"><span>{{ subcat.name }}</span>
+                          </a>
+                        </li>
+                      </ul>
+                    </li>
+                  </span>
+                </p>
+              </ul>
+            </div>
+          </div>
+        </aside>
       </div>
     </div>
 
-    <aside class="col-md-4 col-sm-12 my-3 aside">
-      <div class="card">
-        <div class="card-header">
-          <h6>
-            <mat-icon aria-hidden="false" aria-label="">check</mat-icon>
-            جستجو
-          </h6>
-        </div>
-        <div class="card-body">
-          <form class="side-search form-group" method="get" role="search">
-            <div class="contain">
-              <input class="form-control" placeholder="جستجو..." id="search" type="search" name="s" autocomplete="on">
-              <a>
-                <mat-icon aria-hidden="false" aria-label="">search</mat-icon>
-              </a>
-            </div>
-
-          </form>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <h6>
-            <mat-icon aria-hidden="false" aria-label="">check</mat-icon>دسته بندی مطالب
-          </h6>
-        </div>
-        <div class="card-body">
-          <ul class="collection cats">
-            <li class="collection-item" *ngFor="let category of categories">
-              <span *ngIf="category.parent_id == 0"><i class="material-icons">chevron_left</i>
-                <a routerLink="/category/{{ category.id }}/page/1">{{ category.name }}</a>
-                <ul class="collection children">
-                  <li class="collection-item" *ngFor="let subcat of categories">
-                    <a routerLink="/category/{{ subcat.id }}/page/1"
-                      *ngIf="subcat.parent_id==category.id">{{ subcat.name }}</a>
-                  </li>
-                </ul>
-              </span>
-            </li>
-          </ul>
-
-        </div>
-      </div>
-    </aside>
   </div>
-</div>
-<!-- content -->
-
-<!--<app-show-article [passedArticle]="selectedArticle" *ngIf="selectedArticle!=null"></app-show-article>-->
+</section>
+<!-- content-End -->

@@ -47,6 +47,10 @@ export class ApiService {
     return this.http.get(Constants.urlCats);
   }
 
+  getSingleCategory(id: number): Observable<any> {
+    return this.http.get(Constants.urlCats + '/' + id);
+  }
+
   getCategory(id: number, pagenumber: number): Observable<any> {
     return this.http.get(Constants.urlOneCat + '/' + id + '?page=' + pagenumber)
       .pipe(

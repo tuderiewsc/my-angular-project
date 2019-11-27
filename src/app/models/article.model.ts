@@ -5,7 +5,7 @@ export class ArticleModel {
     desc: string;
     category_id: number;
     user_id: number;
-    createdat?: number;
+    created_at?: number;
     submitted: boolean;
     isfavorite: boolean;
     data: ArticleModel[];

@@ -1,0 +1,9 @@
+form {
+  height: 100%;
+  width: auto;
+}
+
+.btn-success.disabled,
+.btn-success:disabled {
+  cursor: not-allowed;
+}

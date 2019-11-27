@@ -5,6 +5,7 @@ import { ApiService } from 'src/app/services/api.service';
 import { Paginate } from 'src/app/models/paginate';
 import { PagerService } from 'src/app/services/pager.services';
 import { map } from 'rxjs/operators';
+import { CategoryModel } from 'src/app/models/category.model';
 
 @Component({
   selector: 'app-category',
@@ -15,6 +16,7 @@ export class CategoryComponent implements OnInit {
 
   articles: ArticleModel[];
   catPager: Paginate;
+  category: CategoryModel;
 
   id: number;
   pagenum: number;
@@ -31,7 +33,8 @@ export class CategoryComponent implements OnInit {
           .subscribe(result => {
             this.articles = result.data,
               this.catPager = this.pagerservice.getPager(result.total, result.current_page, result.per_page)
-          });
+          }),
+        this.api.getSingleCategory(this.id).subscribe(res => this.category = res);
     });
 
 

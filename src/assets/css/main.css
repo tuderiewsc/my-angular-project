@@ -277,26 +277,67 @@ nav ul li.active {
 nav ul li.active a {
   color: #fff !important;
 }
+nav ul.dropdown-menu li.dropdown {
+  width: 100%;
+  padding: 6px;
+}
+nav ul.dropdown-menu li.dropdown ul {
+  visibility: hidden;
+  opacity: 0;
+  transition: 0.4s ease;
+  -webkit-transition: 0.4s ease;
+  -moz-transition: 0.4s ease;
+  -o-transition: 0.4s ease;
+  -ms-transition: 0.4s ease;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  position: absolute;
+  right: 101%;
+  top: 0;
+  min-width: 100px;
+  background: white;
+}
+nav ul.dropdown-menu li.dropdown ul a {
+  padding: 6px !important;
+  color: #757575 !important;
+}
+nav ul.dropdown-menu li.dropdown ul a:hover {
+  color: #212121 !important;
+}
+nav ul.dropdown-menu li.dropdown::after {
+  content: "";
+  font-family: "material icons";
+  float: left;
+}
+nav ul.dropdown-menu li.dropdown:hover > ul {
+  visibility: visible;
+  opacity: 1;
+}
 nav div.dropdown-menu i {
   font-size: 1rem;
   vertical-align: sub;
-  margin: auto 4px;
+  margin: auto 6px;
 }
-nav a.dropdown-item {
+nav div.dropdown-menu a {
+  padding: 6px;
+  color: #757575;
+  margin: 8px auto;
+}
+nav li.dropdown-item {
+  position: relative;
   text-align: right;
   padding: 6px;
   color: #757575 !important;
 }
-nav a.dropdown-item:hover {
+nav li.dropdown-item:hover {
   color: #212121 !important;
 }
-nav .menu_bar {
+nav li.dropdown-item .menu_bar {
   width: 16px;
   height: 20px;
   z-index: 300;
   margin: auto 10px;
 }
-nav .menu_bar .menu {
+nav li.dropdown-item .menu_bar .menu {
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;
@@ -309,7 +350,7 @@ nav .menu_bar .menu {
   -o-transition: 0.3s;
   -ms-transition: 0.3s;
 }
-nav .menu_bar .menu-line {
+nav li.dropdown-item .menu_bar .menu-line {
   width: 100%;
   height: 2px;
   margin-top: 4px;
@@ -322,18 +363,18 @@ nav .menu_bar .menu-line {
   -webkit-transform-origin: right;
   transform-origin: right;
 }
-nav .checkbox:checked ~ .menu_bar .menu {
+nav li.dropdown-item .checkbox:checked ~ .menu_bar .menu {
   -webkit-transform: rotateZ(90deg);
   transform: rotateZ(90deg);
 }
-nav .checkbox:checked ~ .menu_bar .menu-line-1 {
+nav li.dropdown-item .checkbox:checked ~ .menu_bar .menu-line-1 {
   -webkit-transform: rotateZ(-45deg);
   transform: rotateZ(-45deg);
 }
-nav .checkbox:checked ~ .menu_bar .menu-line-2 {
+nav li.dropdown-item .checkbox:checked ~ .menu_bar .menu-line-2 {
   opacity: 0;
 }
-nav .checkbox:checked ~ .menu_bar .menu-line-3 {
+nav li.dropdown-item .checkbox:checked ~ .menu_bar .menu-line-3 {
   -webkit-transform: rotateZ(45deg);
   transform: rotateZ(45deg);
 }
@@ -421,6 +462,33 @@ section.main_content .card .card-body .jumbotron h3.typewriter {
 section.main_content .card .card-body a {
   font-family: "Vazir";
 }
+section.main_content .card .card-body a:hover span {
+  padding-left: 20px;
+}
+section.main_content .card .card-body a:hover span:before {
+  opacity: 1;
+  left: 20px;
+}
+section.main_content .card .card-body a span {
+  transition: 0.5s;
+  -webkit-transition: 0.5s;
+  -moz-transition: 0.5s;
+  -o-transition: 0.5s;
+  -ms-transition: 0.5s;
+}
+section.main_content .card .card-body a span::before {
+  content: "";
+  font-family: FontAwesome;
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  left: 25px;
+  transition: 0.2s;
+  -webkit-transition: 0.2s;
+  -moz-transition: 0.2s;
+  -o-transition: 0.2s;
+  -ms-transition: 0.2s;
+}
 section.main_content aside a {
   color: #757575;
 }
@@ -494,6 +562,7 @@ section.main_content aside ul.category li.collapse a.cat-item:hover span {
 }
 .socials {
   margin-top: 100px;
+  /* tooltipp container */
 }
 .socials ul {
   position: fixed;
@@ -504,10 +573,11 @@ section.main_content aside ul.category li.collapse a.cat-item:hover span {
   z-index: 100;
 }
 .socials ul li {
-  padding: 8px;
+  padding: 2px;
   border: 1px solid #444;
   width: 35px;
   height: 35px;
+  line-height: 35px;
   text-align: center;
   transition: 0.3s ease;
   -webkit-transition: 0.3s ease;
@@ -529,6 +599,45 @@ section.main_content aside ul.category li.collapse a.cat-item:hover span {
 }
 .socials ul li.gplus:hover {
   background: darkred;
+}
+.socials .tooltipp {
+  position: relative;
+  display: block;
+  border-bottom: 1px dotted black;
+}
+.socials .tooltipp .tooltipptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 2px;
+  position: absolute;
+  z-index: 1;
+  top: -16px;
+  left: 120%;
+  opacity: 0;
+  transition: 0.3s ease;
+  -webkit-transition: 0.3s ease;
+  -moz-transition: 0.3s ease;
+  -o-transition: 0.3s ease;
+  -ms-transition: 0.3s ease;
+}
+.socials .tooltipp .tooltipptext::after {
+  content: " ";
+  position: absolute;
+  top: 50%;
+  right: 100%;
+  /* To the left of the tooltip */
+  margin-top: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent black transparent transparent;
+}
+.socials .tooltipp:hover .tooltipptext {
+  visibility: visible;
+  opacity: 1;
 }
 
 footer {
@@ -644,6 +753,17 @@ section.article_content aside ul.category li.collapse a.cat-item:hover {
 section.article_content aside ul.category li.collapse a.cat-item:hover span {
   color: #009688;
   margin-right: 4px;
+}
+
+.pagination li {
+  border-radius: 0;
+}
+.pagination .page-item.active .page-link {
+  background-color: #009688;
+  border-color: #009688;
+}
+.pagination .page-link {
+  color: #009688;
 }
 
 section.article_content .card.article img#main_photo {
@@ -922,23 +1042,33 @@ section.category_content ul.breadcrumb a {
 section.category_content ul.breadcrumb a:hover {
   color: #009688;
 }
-section.category_content .card p {
+section.category_content .cat_container .card {
+  width: 100%;
+  margin: 16px auto;
+}
+section.category_content .cat_container .card h6.title {
+  text-align: center;
+  color: #212121;
+  font-size: 1.125rem;
+  margin: 8px auto;
+}
+section.category_content .cat_container .card p {
   font-size: 0.875rem;
   line-height: 2;
 }
-section.category_content .card ul.list-inline {
+section.category_content .cat_container .card ul.list-inline {
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between;
   align-content: center;
   align-items: center;
 }
-section.category_content .card ul.list-inline li {
+section.category_content .cat_container .card ul.list-inline li {
   font-size: 0.875rem;
   color: #757575;
   margin: auto 12px;
 }
-section.category_content .card ul.list-inline li i {
+section.category_content .cat_container .card ul.list-inline li i {
   font-size: 20px;
   margin-left: 4px;
   vertical-align: middle;

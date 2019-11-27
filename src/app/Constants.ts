@@ -12,7 +12,6 @@ export class Constants {
   public static uploadImageUrl = 'http://localhost:8000/api/uploadImg';
   public static uploadImageList = 'http://localhost:8000/api/uploadImagesList';
 
-
 }
 
 

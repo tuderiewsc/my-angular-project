@@ -1,28 +1,15 @@
-form#regForm {
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: center;
-  align-items: center;
-  align-content: space-between;
-  margin: 16px 10%;
-  width: 80%;
+form {
+  height: 100%;
+  width: auto;
 }
 
-form#regForm mat-form-field {
-  width: 80%;
-  margin: 16px 2%;
+form span {
+  width: 100%;
+  margin: 8px auto;
+  color: darkred;
 }
 
-form#regForm div.form-group {
-  width: 60%;
-  margin: 16px 2%;
-}
-
-div.errors span {
-  color: rgb(253, 57, 84);
-  font-size: 0.875rem;
-  margin: 10px auto;
-  background: transparent !important;
-  text-align: right;
-  /* width: 80%; */
+.btn-primary.disabled,
+.btn-primary:disabled {
+  cursor: not-allowed;
 }
