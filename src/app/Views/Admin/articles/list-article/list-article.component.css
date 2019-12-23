@@ -1,0 +1,19 @@
+form{
+  min-height: 200px;
+}
+
+.mat-select{
+  font-size: 1rem;
+  font-family: "Vazir";
+}
+
+.mat-select-panel .mat-option.mat-selected:not(.mat-option-multiple){
+  font-family: "Vazir";
+  font-size: 0.875rem;
+  color: rgb(0, 106, 93);
+  background: white;
+}
+
+.mat-select-panel{
+  width: 150%;
+}

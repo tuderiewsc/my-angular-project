@@ -1,0 +1,85 @@
+
+<!-- socials-Start -->
+<div class="socials">
+  <ul class="list">
+    <li class="face tooltipp">
+      <i class="fa fa-facebook-f"></i>
+      <span class="tooltipptext">
+        <h6>لینک فیسبوک</h6><a target='_blank' href='http://www.facebook.com/share.phpv=4&src='
+          style='font-family: Vazir '>کلیک کنید</a>
+      </span>
+    </li>
+    <li class="twitter tooltipp">
+      <i class="fa fa-twitter"></i>
+      <span class="tooltipptext">
+        <h6>لینک توییتر</h6><a target='_blank' href='http://plus.google.com/shareurl=' style='font-family: Vazir '>کلیک
+          کنید</a>
+      </span>
+    </li>
+    <li class="gplus tooltipp">
+      <i class="fa fa-google-plus"></i>
+      <span class="tooltipptext">
+        <h6>لینک گوکل پلاس</h6><a target='_blank' href='http://www.facebook.com/share.phpv=4&src='
+          style='font-family: Vazir '>کلیک کنید</a>
+      </span>
+    </li>
+  </ul>
+</div>
+<!-- socials-End -->
+
+
+<!-- content-Start -->
+<section class="main_content">
+  <div class="container-fluid">
+      <!--<p *ngIf="loading">{{loadingText}}</p>-->
+    <div class="row">
+
+      <div class="col-md-8 col-sm-12">
+        <div class="card">
+          <div class="card-body">
+            <div class="jumbotron text-center">
+              <h3 class="typewriter">اپلیکیشن انگولار</h3>
+              <a routerLink="/articles/page/1"
+                class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent my-4">
+				<span>مشاهده مقالات</span>
+               
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 col-sm-12">
+        <aside>
+          <div class="card">
+            <div class="card-header">
+              <h6><i class="material-icons align-middle">list</i>دسته بندی ها </h6>
+            </div>
+            <div class="card-body">
+              <ul class="category" id="indexCats">
+                <p class="mb-3" *ngFor="let category of categories ; let index=index">
+                  <span *ngIf="category.parent_id == 0">
+                    <a href="#Section{{ index }}" data-toggle="collapse" class="cat-header"
+                      aria-expanded="false">{{ category.name }}
+                    </a>
+                    <li id="Section{{ index }}" class="collapse mr-4" data-parent="#indexCats">
+                      <ul>
+                        <li *ngFor="let subcat of categories">
+                          <a routerLink="/category/{{ subcat.id }}/page/1" *ngIf="subcat.parent_id==category.id"
+                            class="cat-item"><span>{{ subcat.name }}</span>
+                          </a>
+                        </li>
+                      </ul>
+                    </li>
+                  </span>
+                </p>
+              </ul>
+
+
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- content-End -->

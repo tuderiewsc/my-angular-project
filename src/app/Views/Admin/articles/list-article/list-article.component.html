@@ -1,0 +1,67 @@
+<!-- content-Start -->
+<section class="panel_content">
+  <div class="container-fluid">
+    <h5 class="panelTitle">لیست مقالات</h5>
+    <hr>
+    <div class="row">
+      <div class="articleList">
+        <form ngForm class="form-control  form-inline">
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <label class="mdl-textfield__label" for="search"></label>
+            <label for="search">جستجو</label>
+            <input class="mdl-textfield__input" type="text" name="keyword" [(ngModel)]="keyword"
+                   id="search" placeholder="عنوان مقاله را وارد کنید">
+          </div>
+          <div class="form-control">
+            <mat-label>وضعيت انتشار</mat-label>
+            <mat-select name="complete" [(ngModel)]="complete">
+              <mat-option [value]="0" disabled>وضعيت انتشار ---</mat-option>
+              <mat-option [value]="1">منتشر شده</mat-option>
+              <mat-option [value]="0">منتشر نشده</mat-option>
+            </mat-select>
+          </div>
+        </form>
+        <div class="table-responsive my-4">
+          <table class="table table-hover table-sm table-light" id="tbl_articles">
+            <thead class="thead-inverse">
+            <tr>
+              <th style="width: 10%;">
+                <input type="checkbox" name="">
+              </th>
+              <th style="width: 10%">ردیف</th>
+              <th style="width: 20%">عنوان</th>
+              <th style="width: 40%">توضیحات</th>
+              <th style="width: 20%">عملیات</th>
+            </tr>
+            </thead>
+            <tbody class="bg-light">
+            <tr *ngFor="let article of articles | search:keyword | complete:complete ;let index = index">
+              <td >
+                <input type="checkbox" name="">
+              </td>
+              <td >{{ index+1 }}</td>
+              <td>{{ article.title }}</td>
+              <td class="articleDesc" *ngIf="article.desc != '' ">{{ article.desc | slice:0:50}}...</td>
+              <td class="articleDesc" *ngIf="article.desc == '' ">---</td>
+              <td >
+                <a routerLink="/article/{{ article.id }}/edit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored bg-info">ویرایش</a>
+                |
+                <a (click)="del(article.id , article.title)" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored bg-danger">حذف</a>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <div class="alert alert-warning text-center" role="alert" *ngIf="articles === null ">
+    <strong>موردی برای نمایش وجود ندارد!</strong><br><br>
+    <a [routerLink]="[ '' ]" class="alert-link">بازگشت به صفحه اصلی</a>
+  </div>
+
+</section>
+<!-- content-End -->
