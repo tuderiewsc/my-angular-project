@@ -12,10 +12,12 @@
               <form action="#" class="form-control" method="post" style="border:none;" #regForm="ngForm" id="loginForm"
                 novalidate [formGroup]="loginForm" (ngSubmit)="login(loginForm.value)">
 
-                <div class="alert alert-danger" *ngIf="errorMessage != undefined">
-                  {{ errorMessage }}
-                </div>
-                <br>
+                <div class="alert alert-danger my_alert"
+                     [ngStyle]="{'display': (errorMessage != undefined) ? 'block' : ''}"
+                     *ngIf="errorMessage != undefined">
+                  {{ 'نام کاربری یا پسورد اشتباه است' }}
+                </div><br>
+
 
                 <div class="d-flex flex-wrap justify-content-center">
                   <div class="input-group my-4 mr-sm-2 w-50">
@@ -24,15 +26,19 @@
                         <i class="material-icons">email</i>
                       </div>
                     </div>
-                    <input type="email" class="form-control" placeholder="ایمیل" formControlName="email">
-                    <div class="errors" *ngIf="loginForm.controls['email'].invalid &&
+                    <input type="email" class="form-control" id="useremail" placeholder="ایمیل" formControlName="email"
+                           [ngClass]="{'is-invalid': loginForm.controls['email'].invalid &&
+(loginForm.controls['email'].dirty || loginForm.controls['email'].touched)}">
+
+                    <div class="errors w-100 p-2"
+                         *ngIf="loginForm.controls['email'].invalid &&
 (loginForm.controls['email'].dirty || loginForm.controls['email'].touched)">
-                      <span *ngIf="loginForm.controls['email'].errors.required">
+                      <small class="float-right text-danger" *ngIf="loginForm.controls['email'].errors.required">
                         فیلد ایمیل را تکمیل کنید.
-                      </span><br>
-                      <span *ngIf="loginForm.controls['email'].errors.email">
+                      </small><br>
+                      <small class="float-right text-danger" *ngIf="loginForm.controls['email'].errors.email">
                         ایمیل معتبر نیست.
-                      </span>
+                      </small>
                     </div>
                   </div>
                 </div>
@@ -43,15 +49,18 @@
                         <i class="material-icons">vpn_key</i>
                       </div>
                     </div>
-                    <input type="password" class="form-control" placeholder="رمز عبور" formControlName="password">
-                    <div class="errors" *ngIf="loginForm.controls['password'].invalid &&
+                    <input type="password" class="form-control" placeholder="رمز عبور" formControlName="password"
+                    [ngClass]="{'is-invalid':loginForm.controls['password'].invalid &&
+(loginForm.controls['password'].dirty || loginForm.controls['password'].touched)}">
+
+                    <div class="errors w-100 p-2" *ngIf="loginForm.controls['password'].invalid &&
 (loginForm.controls['password'].dirty || loginForm.controls['password'].touched)">
-                      <span *ngIf="loginForm.controls['password'].errors.minlength">
+                      <small class="float-right text-danger" *ngIf="loginForm.controls['password'].errors.minlength">
                         طول مجاز پسورد رعایت نشده است.
-                      </span>
-                      <span *ngIf="loginForm.controls['password'].errors.required">
+                      </small>
+                      <small class="float-right text-danger" *ngIf="loginForm.controls['password'].errors.required">
                         پسورد را وارد کنید.
-                      </span>
+                      </small>
                     </div>
                   </div>
                 </div>

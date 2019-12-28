@@ -17,6 +17,10 @@ import {AppComponent} from '../app.component';
 import {DashboardComponent} from '../dashboard.component';
 import {SiteLayoutComponent} from '../Views/layouts/site-layout/site-layout.component';
 import {DashboardLayoutComponent} from '../Views/layouts/dashboard-layout/dashboard-layout.component';
+import {AddCategoryComponent} from '../Views/Admin/categories/add-category/add-category.component';
+import {ListCategoryComponent} from '../Views/Admin/categories/list-category/list-category.component';
+import {EditCategoryComponent} from '../Views/Admin/categories/edit-category/edit-category.component';
+import {EditProfileComponent} from '../Views/Admin/others/edit-profile/edit-profile.component';
 
 
 const routes: Routes = [
@@ -59,6 +63,20 @@ const routes: Routes = [
       },
       {
         path: 'dashboard/article/:id/edit', component: EditArticleComponent,
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'dashboard/category/add', component: AddCategoryComponent, canActivate: [AuthGuard]
+      },
+      {
+        path: 'dashboard/category/list', component: ListCategoryComponent, canActivate: [AuthGuard],
+      },
+      {
+        path: 'dashboard/category/:id/edit', component: EditCategoryComponent,
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'dashboard/edit-profile', component: EditProfileComponent,
         canActivate: [AuthGuard]
       },
     ]

@@ -12,6 +12,7 @@ import { fadeAnimation } from '../../../../Controllers/animations/animations';
 import { CategoryModel } from 'src/app/Models/category.model';
 import { AuthService } from 'src/app/Controllers/services/auth.service';
 import { ImglistComponent } from 'src/app/Views/dialog/imglist/imglist.component';
+import * as $ from 'jquery';
 
 
 @Component({
@@ -39,8 +40,8 @@ export class AddArticleComponent implements OnInit, OnDestroy {
   image: string;
   category_id: number;
   user_id: number;
-  submitted: boolean;
-  isfavorite: boolean;
+  submitted: string;
+  isfavorite: string;
   fileToUpload: File = null;
   lastArticleId: number;
   categories: CategoryModel[];
@@ -94,16 +95,14 @@ export class AddArticleComponent implements OnInit, OnDestroy {
     Article.desc = this.desc;
     Article.category_id = this.category_id;
     Article.user_id = this.user.id;
-    if (this.submitted === true) { Article.submitted = true; } else { Article.submitted = false; }
-    if (this.isfavorite === true) { Article.isfavorite = true; } else { Article.isfavorite = false; }
+    if (this.submitted === 'true') { Article.submitted = true; } else { Article.submitted = false; }
+    if (this.isfavorite === 'true') { Article.isfavorite = true; } else { Article.isfavorite = false; }
     if (this.image === undefined) {
       // default image
       Article.image = 'http://localhost:8000/upload/image/1573630832-2019-Image-not-found.jpg';
     } else {
       Article.image = this.image;
     }
-
-    console.log('img: ' + this.image);
 
     this.api.addArticle(Article)
       .subscribe(() => {

@@ -1,55 +1,68 @@
-<form #addArticle="ngForm" (ngSubmit)="onsubmit()" class="col-md-12 my-5" dir="rtl" id="add-article"
-  [formGroup]="addArticleForm" novalidate enctype="multipart/form-data">
-  <mat-form-field>
-    <input type="text" matInput name="title" [(ngModel)]="title" placeholder="عنوان" formControlName="title">
-  </mat-form-field>
-
-  <mat-form-field>
-    <textarea matInput formControlName="desc" [(ngModel)]="desc" name="desc" placeholder="توضيحات" maxlength="100"
-      #tarea></textarea>
-    <mat-hint>{{tarea.value?.length || 0}}/20</mat-hint>
-  </mat-form-field>
-
-  <mat-form-field>
-    <mat-label>وضعيت انتشار</mat-label>
-    <mat-select name="submitted" formControlName="submitted" [(ngModel)]="submitted">
-      <mat-option *ngFor="let stat of stats" [value]="stat.value">
-        {{stat.viewValue}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-
-  <mat-form-field>
-    <mat-label>علاقه مندی</mat-label>
-    <mat-select name="isfavorite" formControlName="isfavorite" [(ngModel)]="isfavorite">
-      <mat-option value="true">هست</mat-option>
-      <mat-option value="false">نیست</mat-option>
-    </mat-select>
-  </mat-form-field>
-
-  <mat-form-field>
-    <mat-label>دسته بندی</mat-label>
-    <mat-select name="category_id" formControlName="category_id" [(ngModel)]="category_id">
-      <mat-option *ngFor="let cat of categories" value="{{ cat.id }}">{{ cat.name }}</mat-option>
-    </mat-select>
-  </mat-form-field>
-
-
-  <mat-form-field>
-    <input type="text" matInput placeholder="لینک تصویر" [(ngModel)]="image" name="image" formControlName="image"
-      id="imgLink">
-  </mat-form-field>
-  <a mat-flat-button color="primary" (click)="openDialog()">get link</a>
-
-
-  <div class="form-group">
-    <!-- <button type="submit" (click)=" addArticle.reset()">Submit</button> -->
-    <button type="submit" class="form-control" mat-flat-button color="accent" name="arc_submit"
-      [disabled]="addArticleForm.pristine || addArticleForm.invalid">
-      ثبت <mat-icon class="mx-2">save</mat-icon>
-    </button>
-  </div>
-</form>
+<!-- content-Start -->
+<div class="container">
+  <section class="panel_content">
+    <h5 class="panelTitle">افزودن مقاله</h5>
+    <hr>
+    <div class="row">
+      <div class="formAdd">
+        <form #addArticle="ngForm" (ngSubmit)="onsubmit()" class="form-row p-3 bg-light"
+              method="post" [formGroup]="addArticleForm" novalidate enctype="multipart/form-data"
+              id="add-article">
+          <div class="form-group required col-md-6 mt-3">
+            <label class="mainLabel" for="title">عنوان</label>
+            <input class="form-control" type="text" id="title"
+                   name="title" [(ngModel)]="title" formControlName="title">
+          </div>
+          <div class="form-group col-md-6 mt-3">
+            <label class="mainLabel" for="image">لینک تصویر</label>
+            <input class="form-control" type="text" id="image"
+                   [(ngModel)]="image" name="image" formControlName="image">
+            <a mat-flat-button color="primary" (click)="openDialog()">get link</a>
+          </div>
+          <div class="form-group required col-md-12 mt-3">
+            <label class="mainLabel" for="desc">توضیحات</label>
+            <textarea class="form-control" id="desc"
+                      #tarea formControlName="desc" [(ngModel)]="desc" name="desc" maxlength="20"></textarea>
+            <span>{{ tarea.value?.length || 0 }}/20</span>
+          </div>
+          <div class="form-group required col-md-4 mt-3">
+            <label class="mainLabel" for="submitted">وضعیت انتشار</label>
+            <select class="form-control" id="submitted"
+                    name="submitted" formControlName="submitted" [(ngModel)]="submitted">
+              <option *ngFor="let stat of stats" [value]="stat.value">
+                {{stat.viewValue}}
+              </option>
+            </select>
+          </div>
+          <div class="form-group required col-md-4 mt-3">
+            <label class="mainLabel" for="isfavorite">علاقه مندی</label>
+            <select class="form-control" id="isfavorite"
+                    name="isfavorite" formControlName="isfavorite" [(ngModel)]="isfavorite">
+              <option disabled selected>---</option>
+              <option value="true">هست</option>
+              <option value="false">نيست</option>
+            </select>
+          </div>
+          <div class="form-group required col-md-4 mt-3">
+            <label class="mainLabel" for="isfavorite">دسته بندی</label>
+            <select class="form-control" id="isfavorite"
+                    name="category_id" formControlName="category_id" [(ngModel)]="category_id">
+              <option *ngFor="let cat of categories" value="{{ cat.id }}">
+                {{ cat.name }}
+              </option>
+            </select>
+          </div>
+          <div class="form-group col-12 my-3">
+            <!-- <button type="submit" (click)=" addArticle.reset()">Submit</button> -->
+            <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored bg-secondary w-25"
+                    [disabled]="addArticleForm.pristine || addArticleForm.invalid">ثبت</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+</div>
+<!-- content-End -->
 
 
 <!-- Errors -->
@@ -57,40 +70,40 @@
   <div *ngIf="addArticleForm.controls['title'].invalid &&
    (addArticleForm.controls['title'].dirty || addArticleForm.controls['title'].touched)">
     <span *ngIf="addArticleForm.controls['title'].errors.required">
-      فیلد نام را تکمیل کنید.
+      فيلد نام را تکميل کنيد.
     </span>
   </div>
   <div *ngIf="addArticleForm.controls['desc'].invalid &&
    (addArticleForm.controls['desc'].dirty || addArticleForm.controls['desc'].touched)">
     <span *ngIf="addArticleForm.controls['desc'].errors.maxlength">
-      طول مجاز رعایت نشده است.
+      طول مجاز رعايت نشده است.
     </span>
     <span *ngIf="addArticleForm.controls['desc'].errors.required">
-      فیلد توضيحات را تکمیل کنید.
+      فيلد توضيحات را تکميل کنيد.
     </span>
   </div>
   <div *ngIf="addArticleForm.controls['submitted'].invalid &&
    (addArticleForm.controls['submitted'].dirty || addArticleForm.controls['submitted'].touched)">
     <span *ngIf="addArticleForm.controls['submitted'].errors.required">
-      وضعیت را تکمیل کنید.
+      وضعيت را تکميل کنيد.
     </span>
   </div>
   <div *ngIf="addArticleForm.controls['isfavorite'].invalid &&
    (addArticleForm.controls['isfavorite'].dirty || addArticleForm.controls['isfavorite'].touched)">
     <span *ngIf="addArticleForm.controls['isfavorite'].errors.required">
-      وضعیت را تکمیل کنید.
+      وضعيت را تکميل کنيد.
     </span>
   </div>
   <div *ngIf="addArticleForm.controls['category_id'].invalid &&
    (addArticleForm.controls['category_id'].dirty || addArticleForm.controls['category_id'].touched)">
     <span *ngIf="addArticleForm.controls['category_id'].errors.required">
-      وضعیت را تکمیل کنید.
+      وضعيت را تکميل کنيد.
     </span>
   </div>
   <div *ngIf="addArticleForm.controls['image'].invalid &&
    (addArticleForm.controls['image'].dirty || addArticleForm.controls['image'].touched)">
     <span *ngIf="addArticleForm.controls['image'].errors.required">
-      وضعیت را تکمیل کنید.
+      وضعيت را تکميل کنيد.
     </span>
   </div>
 </section>

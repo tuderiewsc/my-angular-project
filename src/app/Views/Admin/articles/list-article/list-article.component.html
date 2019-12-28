@@ -1,18 +1,17 @@
 <!-- content-Start -->
-<section class="panel_content">
-  <div class="container-fluid">
+<div class="container">
+  <section class="panel_content">
     <h5 class="panelTitle">لیست مقالات</h5>
     <hr>
     <div class="row">
       <div class="articleList">
-        <form ngForm class="form-control  form-inline">
-          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <label class="mdl-textfield__label" for="search"></label>
+        <form ngForm class="form-row p-3 bg-light">
+          <div class="form-group col-md-4">
             <label for="search">جستجو</label>
-            <input class="mdl-textfield__input" type="text" name="keyword" [(ngModel)]="keyword"
-                   id="search" placeholder="عنوان مقاله را وارد کنید">
+            <input class="form-control" type="text" id="search" placeholder="عنوان مقاله را وارد کنید"
+                   name="keyword" [(ngModel)]="keyword">
           </div>
-          <div class="form-control">
+          <div class="form-group col-md-4">
             <mat-label>وضعيت انتشار</mat-label>
             <mat-select name="complete" [(ngModel)]="complete">
               <mat-option [value]="0" disabled>وضعيت انتشار ---</mat-option>
@@ -24,7 +23,7 @@
         <div class="table-responsive my-4">
           <table class="table table-hover table-sm table-light" id="tbl_articles">
             <thead class="thead-inverse">
-            <tr>
+            <tr >
               <th style="width: 10%;">
                 <input type="checkbox" name="">
               </th>
@@ -43,9 +42,8 @@
               <td>{{ article.title }}</td>
               <td class="articleDesc" *ngIf="article.desc != '' ">{{ article.desc | slice:0:50}}...</td>
               <td class="articleDesc" *ngIf="article.desc == '' ">---</td>
-              <td >
+              <td>
                 <a routerLink="/article/{{ article.id }}/edit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored bg-info">ویرایش</a>
-                |
                 <a (click)="del(article.id , article.title)" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored bg-danger">حذف</a>
               </td>
             </tr>
@@ -56,12 +54,12 @@
       </div>
 
     </div>
-  </div>
 
-  <div class="alert alert-warning text-center" role="alert" *ngIf="articles === null ">
-    <strong>موردی برای نمایش وجود ندارد!</strong><br><br>
-    <a [routerLink]="[ '' ]" class="alert-link">بازگشت به صفحه اصلی</a>
-  </div>
+    <div class="alert alert-warning text-center" role="alert" *ngIf="articles === null ">
+      <strong>موردي براي نمايش وجود ندارد!</strong><br><br>
+      <a [routerLink]="[ '' ]" class="alert-link">بازگشت به صفحه اصلي</a>
+    </div>
 
-</section>
+  </section>
+</div>
 <!-- content-End -->

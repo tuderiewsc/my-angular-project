@@ -40,12 +40,13 @@ import { GuestGuard } from './Controllers/middleware/guest.guard';
 import { SearchPageComponent } from './Views/Site/search-page/search-page.component';
 import { DeleteDialogComponent } from './Views/dialog/delete-dialog/delete-dialog.component';
 import { ImglistComponent } from './Views/dialog/imglist/imglist.component';
-import {DashboardModule} from './modules/dashboard/dashboard.module';
-import {ArticleComponent} from './Dashboard/dashboard/articles/article.component';
-import {DashboardRoutingModule} from './modules/dashboard/dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
 import { SiteLayoutComponent } from './Views/layouts/site-layout/site-layout.component';
 import { DashboardLayoutComponent } from './Views/layouts/dashboard-layout/dashboard-layout.component';
+import { AddCategoryComponent } from './Views/Admin/categories/add-category/add-category.component';
+import { ListCategoryComponent } from './Views/Admin/categories/list-category/list-category.component';
+import { EditCategoryComponent } from './Views/Admin/categories/edit-category/edit-category.component';
+import { EditProfileComponent } from './Views/Admin/others/edit-profile/edit-profile.component';
 
 
 @NgModule({
@@ -69,16 +70,19 @@ import { DashboardLayoutComponent } from './Views/layouts/dashboard-layout/dashb
     SearchPageComponent,
     DeleteDialogComponent,
     ImglistComponent,
-    ArticleComponent,
     DashboardComponent,
     SiteLayoutComponent,
-    DashboardLayoutComponent
+    DashboardLayoutComponent,
+    AddCategoryComponent,
+    ListCategoryComponent,
+    EditCategoryComponent,
+    EditProfileComponent
   ],
   imports: [
     BrowserModule, BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
-    routing, DashboardModule, DashboardRoutingModule,
+    routing,
     MatButtonModule, MatToolbarModule, MatMenuModule, MatIconModule,
     MatSlideToggleModule, MatInputModule, MatFormFieldModule, MatSelectModule,
     MatTableModule, MatSnackBarModule, MatDialogModule,

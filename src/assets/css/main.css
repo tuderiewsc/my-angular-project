@@ -808,14 +808,14 @@ section.article_content .card.article a.fav i {
 nav.navigation {
   position: fixed;
   top: 60px;
-  right: -20%;
+  right: 0;
   width: 20%;
   height: 100vh;
-  background: #fff;
+  background: #eee;
 }
 nav.navigation ul.menu {
   padding: 0;
-  width: 0;
+  width: 100%;
   transition: 0.1s;
   -webkit-transition: 0.1s;
   -moz-transition: 0.1s;
@@ -892,8 +892,8 @@ nav.navigation ul.menu li.collapse.show {
 
 section.panel_content {
   margin-top: 75px;
-  margin-right: 0;
-  width: 100%;
+  margin-right: 22%;
+  width: 76%;
   padding: 10px;
 }
 section.panel_content div.articleList {
