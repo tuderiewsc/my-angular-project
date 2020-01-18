@@ -641,12 +641,12 @@ section.main_content aside ul.category li.collapse a.cat-item:hover span {
 }
 
 footer {
-  left: 0;
+  position: relative;
   width: 100%;
-  height: 100px;
-  bottom: 0;
+  height: auto;
+  min-height: 200px;
   text-align: center !important;
-  margin-top: 100px;
+  margin-top: 150px;
 }
 footer ul {
   text-align: center;

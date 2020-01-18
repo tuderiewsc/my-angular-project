@@ -5,22 +5,44 @@
     <hr>
     <div class="row">
       <div class="formAdd">
-        <form action="#" class="form-row p-3 bg-light justify-content-center" method="post">
+        <form #addCategory="ngForm" id="addCategory" action="#" class="form-row p-3 bg-light justify-content-center" method="post"
+              novalidate [formGroup]="addCatForm" (ngSubmit)="add_category(addCatForm.value)">
+
+          <div class="alert alert-danger" *ngIf="errorMessage != undefined">
+            {{ errorMessage }}
+          </div>
+          <br>
+
           <div class="form-group required col-md-4">
             <label class="mainLabel" for="name">نام دسته</label>
-            <input class="form-control" type="text" id="name">
+            <input class="form-control" type="text" id="name" formControlName="name"
+            [ngClass]="{'is-invalid': addCatForm.controls['name'].invalid &&
+                  (addCatForm.controls['name'].dirty || addCatForm.controls['name'].touched)}">
+            <div class="errors" *ngIf="addCatForm.controls['name'].invalid &&
+                  (addCatForm.controls['name'].dirty || addCatForm.controls['name'].touched)">
+                      <span *ngIf="addCatForm.controls['name'].errors.required">
+                        فیلد نام را تکمیل کنید.
+                      </span>
+            </div>
           </div>
           <div class="form-group required col-md-4">
             <label class="mainLabel" for="submitted">مادر دسته</label>
-            <select class="form-control" id="submitted">
-              <option selected>---</option>
-              <option>خبری</option>
-              <option>آموزشی</option>
-              <option>ویدئو</option>
+            <select class="form-control" id="submitted" formControlName="parent_id"
+            [ngClass]="{'is-invalid': addCatForm.controls['parent_id'].invalid &&
+                  (addCatForm.controls['parent_id'].dirty || addCatForm.controls['parent_id'].touched)}">
+              <option selected value="0">---</option>
+              <option *ngFor="let cat of cats" value="{{ cat.id }}"> {{ cat.name }}</option>
             </select>
+            <div class="errors" *ngIf="addCatForm.controls['parent_id'].invalid &&
+                  (addCatForm.controls['parent_id'].dirty || addCatForm.controls['parent_id'].touched)">
+                      <span *ngIf="addCatForm.controls['parent_id'].errors.required">
+                        فیلد نام را تکمیل کنید.
+                      </span>
+            </div>
           </div>
           <div class="form-group my-3 col-12">
-            <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored bg-secondary w-25">ثبت</button>
+            <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored bg-secondary w-25"
+                    [disabled]="addCatForm.pristine || addCatForm.invalid">ثبت</button>
           </div>
         </form>
       </div>

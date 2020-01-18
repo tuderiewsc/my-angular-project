@@ -9,7 +9,6 @@ export class ValidateService {
 
   constructor() { }
 
-
   public matchingPasswords(passwordkey: string, confirmpasswordkey: string) {
     return (group: FormGroup): {
       [keys: string]: any

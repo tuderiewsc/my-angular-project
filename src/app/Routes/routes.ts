@@ -21,6 +21,7 @@ import {AddCategoryComponent} from '../Views/Admin/categories/add-category/add-c
 import {ListCategoryComponent} from '../Views/Admin/categories/list-category/list-category.component';
 import {EditCategoryComponent} from '../Views/Admin/categories/edit-category/edit-category.component';
 import {EditProfileComponent} from '../Views/Admin/others/edit-profile/edit-profile.component';
+import {PostdeactivateGuard} from '../Controllers/middleware/postdeactivate.guard';
 
 
 const routes: Routes = [
@@ -28,9 +29,10 @@ const routes: Routes = [
     path: '', component: SiteLayoutComponent,
     children:[
       { path: '', redirectTo: '/home', pathMatch: 'full' },
-      { path: 'home', component: IndexpageComponent},
+      { path: 'home', component: IndexpageComponent, data:{title:'صفحه اصلی'}},
       {
-        path: 'articles/page/:id', component: ArticlesComponent
+        path: 'articles/page/:id', component: ArticlesComponent ,
+        data:{title:'مقالات'}
       },
       {
         path: 'article/:id', component: ShowArticleComponent
@@ -63,7 +65,8 @@ const routes: Routes = [
       },
       {
         path: 'dashboard/article/:id/edit', component: EditArticleComponent,
-        canActivate: [AuthGuard]
+        canActivate: [AuthGuard],
+        canDeactivate: [PostdeactivateGuard]
       },
       {
         path: 'dashboard/category/add', component: AddCategoryComponent, canActivate: [AuthGuard]
@@ -87,6 +90,6 @@ const routes: Routes = [
 ];
 
 export const routing: ModuleWithProviders = RouterModule.forRoot(routes, {
-  enableTracing: true,
+  enableTracing: false,
   preloadingStrategy: PreloadAllModules
 });

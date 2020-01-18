@@ -6,6 +6,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ApiService } from 'src/app/Controllers/services/api.service';
 import { CategoryModel } from 'src/app/Models/category.model';
 import { Observable } from 'rxjs';
+import {ImglistComponent} from '../../../dialog/imglist/imglist.component';
+import {MatDialog} from '@angular/material';
 
 
 
@@ -30,7 +32,7 @@ export class EditArticleComponent implements OnInit {
 
 
   constructor(private route: ActivatedRoute, private router: Router
-    , private api: ApiService, private formbuilder: FormBuilder) { }
+    , private api: ApiService, private formbuilder: FormBuilder, public dialog: MatDialog) { }
 
   ngOnInit() {
     const id = +this.route.snapshot.params.id;
@@ -43,7 +45,13 @@ export class EditArticleComponent implements OnInit {
   }
 
   canDeactivate(): Observable<boolean> | boolean {
-    return window.confirm('are u sure?');
+    if(! this.article || this.title==this.article.title || this.desc==this.article.desc
+      || this.image==this.article.image
+    ) {
+      return true;
+    }
+
+    return window.confirm('تغییرات ذخیره نشوند?');
   }
 
   buildForm() {
@@ -83,9 +91,16 @@ export class EditArticleComponent implements OnInit {
       Article.isfavorite = false;
     }
 
-    alert('Article edited');
+    alert('مقاله ویرایش شد.');
     this.api.updateArticle(Article, id)
-      .subscribe(() => this.router.navigateByUrl('articlelist'));
+      .subscribe(() => this.router.navigate(['/dashboard/article/list'] ));
+  }
+
+  openDialog() {
+    this.dialog.open(ImglistComponent, {
+      width: '720px'
+    });
+
   }
 
 

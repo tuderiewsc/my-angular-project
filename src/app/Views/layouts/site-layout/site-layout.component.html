@@ -18,26 +18,30 @@
       <li class="nav-item" routerLink="/articles/page/1" routerLinkActive="active">
         <a class="nav-link">مقالات</a>
       </li>
-      <li class="nav-item dropdown" routerLinkActive="active">
+      <li class="nav-item dropdown" routerLinkActive="active"
+          *ngIf="categories?.length >0 && loaded">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
            aria-haspopup="true" aria-expanded="false">
           دسته بندي مطالب
         </a>
+
+
         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <div *ngFor="let category of categories">
-            <li class="dropdown-item dropdown" *ngIf="category.parent_id == 0">
-              {{ category.name }}
-              <ul>
+            <div *ngFor="let category of categories" >
+              <li class="dropdown-item dropdown" *ngIf="category.parent_id == 0">
+                {{ category.name }}
+                <ul>
                   <span *ngFor="let subcat of categories">
                     <li *ngIf="subcat.parent_id==category.id">
                       <a routerLink="/category/{{ subcat.id }}/page/1">{{ subcat.name }}</a>
                     </li>
                   </span>
-
-              </ul>
-            </li>
-          </div>
+                </ul>
+              </li>
+            </div>
         </ul>
+
+
       </li>
     </ul>
 

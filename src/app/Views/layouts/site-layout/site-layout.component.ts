@@ -20,6 +20,9 @@ export class SiteLayoutComponent implements OnInit {
   query: string;
   pageType: string;
 
+  loaded: boolean =false;
+
+
 
 
   constructor(private router: Router, private auth: AuthService,
@@ -65,25 +68,15 @@ export class SiteLayoutComponent implements OnInit {
           }
         } ,8000);
       });
-
-      // Auto hide Alerts
-      setInterval(function(){
-        var is_shown = $('.my_alert').css('display');
-        if (is_shown == 'block') {
-          $('.my_alert').fadeOut('slow');
-          // $('.my_alert').slideUp('slow');
-          // setInterval(function() {
-          // $('.my_alert').css('display', 'block');
-          // }, 1000);
-        }
-
-      } ,6000);
     });
 
     this.tr = this.authLogout.timeRemained().df;
 
     this.api.getCategories()
-      .subscribe(res => this.categories = res);
+      .subscribe(res => {
+        this.categories = res,
+          this.loaded =true
+      });
 
   }
 

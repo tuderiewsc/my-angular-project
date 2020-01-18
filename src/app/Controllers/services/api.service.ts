@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import { ArticleModel } from '../../Models/article.model';
 import { catchError, tap, delay } from 'rxjs/operators';
 import { Constants } from '../../Constants';
+import {CategoryModel} from '../../Models/category.model';
 
 
 @Injectable({
@@ -47,6 +48,10 @@ export class ApiService {
     return this.http.get(Constants.urlCats);
   }
 
+  getHeadCategories(): Observable<any> {
+    return this.http.get(Constants.urlHeadCats);
+  }
+
   getSingleCategory(id: number): Observable<any> {
     return this.http.get(Constants.urlCats + '/' + id);
   }
@@ -59,6 +64,24 @@ export class ApiService {
         delay(200)
       );
   }
+
+  addCategory(values:any): Observable<any> {
+    return this.http.post<boolean>(Constants.urlCats, values, this.httpOptions);
+  }
+
+  // updateCategory(category: CategoryModel, id:number){
+  //   return this.http.put<boolean>(Constants.urlCats+ '/' + id, category, this.httpOptions);
+  // }
+
+  updateCategory(values:any, id:number){
+    return this.http.put<boolean>(Constants.urlCats+ '/' + id, values, this.httpOptions);
+  }
+
+  deleteCategory(id: number): Observable<CategoryModel> {
+    return this.http.delete<CategoryModel>(Constants.urlCats + '/' + id);
+  }
+
+
 
   getImgList(): Observable<any> {
     return this.http.get(Constants.uploadImageList);

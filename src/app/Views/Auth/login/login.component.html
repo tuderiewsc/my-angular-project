@@ -12,12 +12,10 @@
               <form action="#" class="form-control" method="post" style="border:none;" #regForm="ngForm" id="loginForm"
                 novalidate [formGroup]="loginForm" (ngSubmit)="login(loginForm.value)">
 
-                <div class="alert alert-danger my_alert"
-                     [ngStyle]="{'display': (errorMessage != undefined) ? 'block' : ''}"
+                <div class="alert alert-danger"
                      *ngIf="errorMessage != undefined">
                   {{ 'نام کاربری یا پسورد اشتباه است' }}
                 </div><br>
-
 
                 <div class="d-flex flex-wrap justify-content-center">
                   <div class="input-group my-4 mr-sm-2 w-50">
@@ -65,8 +63,12 @@
                   </div>
                 </div>
 
-                <input type="submit" value="ورود" class="btn btn-success w-50 my-4"
-                  [disabled]="loginForm.pristine || loginForm.invalid">
+                  <button type="submit" class="btn btn-success w-50 my-4" id="login_submit"
+                          [disabled]="loginForm.pristine || loginForm.invalid">
+                    ورود
+                    <i class="fa fa-refresh fa-spin" id="login_refresh"
+                       style="vertical-align: middle; opacity: 0"></i>
+                  </button>
 
               </form>
             </div>

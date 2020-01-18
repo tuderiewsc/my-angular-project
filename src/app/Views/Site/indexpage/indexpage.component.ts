@@ -3,8 +3,9 @@ import { CategoryModel } from 'src/app/Models/category.model';
 import { ApiService } from 'src/app/Controllers/services/api.service';
 import { AuthService } from 'src/app/Controllers/services/auth.service';
 import { ArticleModel } from 'src/app/Models/article.model';
-import {Event, NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router} from '@angular/router';
+import {ActivatedRoute, Event, NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router} from '@angular/router';
 import * as $ from 'jquery';
+import {Title} from '@angular/platform-browser';
 
 
 @Component({
@@ -15,16 +16,17 @@ import * as $ from 'jquery';
 export class IndexpageComponent implements OnInit {
 
   categories: CategoryModel[];
-  query: string;
   Articles: ArticleModel[];
-  expanded = false;
   // @Output() passedPhrase = new EventEmitter<string>();
-  loading = true;
-  loadingText : string = 'Load...';
+  loaded : boolean = false;
 
 
   constructor(private api: ApiService, private auth: AuthService
-    ) {
+              ,private activeroute:ActivatedRoute, private titleService: Title
+  ) {
+
+    this.titleService.setTitle(activeroute.snapshot.data['title']);
+
     // this.router.events.subscribe((routerEvent: Event) => {
     //   this.checkRouterEvent(routerEvent);
     // })
@@ -49,16 +51,10 @@ export class IndexpageComponent implements OnInit {
       });
     });
 
-    this.api.getCategories()
-      .subscribe(res => this.categories = res);
-
-
+    this.api.getCategories().subscribe(res => this.categories = res);
   }
 
-  expand(status: boolean) {
-    console.log(status);
-    this.expanded = !this.expanded;
-  }
+
 
 
 

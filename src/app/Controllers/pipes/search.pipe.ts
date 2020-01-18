@@ -15,8 +15,6 @@ export class SearchPipe implements PipeTransform {
     const keyword = args[0];
     return articles.filter((article: ArticleModel) =>
       article.title.indexOf(keyword) !== -1);
-
-
   }
 
 }

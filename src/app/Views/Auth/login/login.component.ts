@@ -3,6 +3,7 @@ import { AuthService } from 'src/app/Controllers/services/auth.service';
 import { FormControl, Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { ValidateService } from 'src/app/Controllers/services/validate.service';
 import { Router } from '@angular/router';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-login',
@@ -13,6 +14,7 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
 
   errorMessage: string;
+
 
   constructor(private formbuilder: FormBuilder, private validateservice: ValidateService
     , private auth: AuthService, private router: Router) { }
@@ -32,25 +34,41 @@ export class LoginComponent implements OnInit {
   });
 
   login(value: any) {
+
+
     this.auth.login(value).subscribe(user => {
-      if (user) {
-        localStorage.setItem('user', JSON.stringify(user));
-        this.auth.currentUser.next(user);
-        this.router.navigateByUrl('');
+        if (user) {
+          localStorage.setItem('user', JSON.stringify(user));
+          this.auth.currentUser.next(user);
+          this.router.navigateByUrl('');
+        }
+      }, err => {
+        if (err.status === 402) {
+          const message = err.error.message;
+          this.errorMessage = message[Object.keys(message)[0]];
+        } else if (err.status === 404) {
+          this.errorMessage = err.error.message;
+        }
       }
-    }, err => {
-      if (err.status === 402) {
-        const message = err.error.message;
-        this.errorMessage = message[Object.keys(message)[0]];
-      } else if (err.status === 404) {
-        this.errorMessage = err.error.message;
-      }
-    }
     );
+
+
   }
 
 
   ngOnInit() {
+    $(document).ready(function () {
+
+      $('#login_submit').click(function() {
+        $('#login_refresh').css('opacity', '1');
+
+        setInterval(function() {
+          $('#login_refresh').css('opacity', '0');
+        }, 3000)
+
+      })
+
+    });
   }
 
 }

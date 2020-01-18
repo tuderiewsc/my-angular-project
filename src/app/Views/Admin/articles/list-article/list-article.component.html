@@ -43,7 +43,8 @@
               <td class="articleDesc" *ngIf="article.desc != '' ">{{ article.desc | slice:0:50}}...</td>
               <td class="articleDesc" *ngIf="article.desc == '' ">---</td>
               <td>
-                <a routerLink="/article/{{ article.id }}/edit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored bg-info">ویرایش</a>
+                <a routerLink="/dashboard/article/{{ article.id }}/edit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored bg-info">ویرایش</a>
+                |
                 <a (click)="del(article.id , article.title)" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored bg-danger">حذف</a>
               </td>
             </tr>

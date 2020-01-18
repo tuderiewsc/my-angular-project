@@ -7,6 +7,7 @@ import { PagerService } from '../../Controllers/services/pager.services';
 import { map } from 'rxjs/operators';
 import { CategoryModel } from '../../Models/category.model';
 import { trigger, transition, query, style, animate, stagger } from '@angular/animations';
+import {Title} from '@angular/platform-browser';
 
 
 @Component({
@@ -26,25 +27,34 @@ import { trigger, transition, query, style, animate, stagger } from '@angular/an
 })
 export class ArticlesComponent implements OnInit {
 
-
-    title: string;
-    image: string;
-    desc: string;
-    createdat: Date;
-    submitted: boolean;
-    selectedArticle: ArticleModel;
-    articles: ArticleModel[];
-    categories: CategoryModel[];
-    pager: Paginate;
+  page_title: string = 'مقالات' ;
 
 
 
 
-    constructor(private api: ApiService, private activateroute: ActivatedRoute,
-        private pagerservice: PagerService) { }
+  title: string;
+  image: string;
+  desc: string;
+  createdat: Date;
+  submitted: boolean;
+  selectedArticle: ArticleModel;
+  articles: ArticleModel[];
+  categories: CategoryModel[];
+  pager: Paginate;
+
+  loaded:boolean=false;
+
+
+  constructor(private api: ApiService, private activateroute: ActivatedRoute,
+              private pagerservice: PagerService, private titleService:Title,
+              private activeroute:ActivatedRoute) {
+
+    this.titleService.setTitle(activeroute.snapshot.data['title']);
+
+  }
 
     ngOnInit() {
-        this.getArticles();
+      this.getArticles();
         this.getCategories();
         // this.selectedArticle = null;
         // var Now = this.datePipe.transform(new Date(),"dd-MM-yyyy");
@@ -67,9 +77,11 @@ export class ArticlesComponent implements OnInit {
             .subscribe(id => this.api.getArticles(id)
                 .subscribe(res => {
                     this.articles = res.data;
-                    console.log('articles: ' + res.data);
+                    this.loaded = true;
                     this.pager = this.pagerservice.getPager(res.total, res.current_page, res.per_page);
                 }));
+
+        this.articles = [];
 
     }
 

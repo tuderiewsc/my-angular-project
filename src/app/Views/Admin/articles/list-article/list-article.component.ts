@@ -24,7 +24,6 @@ export class ListArticleComponent implements OnInit {
 
   constructor(private api: ApiService, private authservice: AuthService,
     private snackbar: MatSnackBar, public dialog: MatDialog) {
-
   }
 
   ngOnInit() {

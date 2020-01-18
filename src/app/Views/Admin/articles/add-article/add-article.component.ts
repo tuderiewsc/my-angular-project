@@ -106,7 +106,7 @@ export class AddArticleComponent implements OnInit, OnDestroy {
 
     this.api.addArticle(Article)
       .subscribe(() => {
-        this.router.navigate(['/home']),
+        this.router.navigate(['/']),
           this.openSnackbar()
       });
 
@@ -118,7 +118,7 @@ export class AddArticleComponent implements OnInit, OnDestroy {
       verticalPosition: 'bottom',
       horizontalPosition: 'left',
       politeness: 'assertive',
-      // announcementMessage: 'test msg'
+       //announcementMessage: 'test msg'
     });
   }
 

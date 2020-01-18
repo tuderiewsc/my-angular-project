@@ -2,7 +2,7 @@
 <section class="article_content">
   <div class="container-fluid">
     <div class="row">
-      <div class="col-md-8 col-sm-12">
+      <div class="col-md-8 col-sm-12" *ngIf="articles?.length > 0 && loaded">
         <div *ngFor="let article of articles" [@articleAnimation]="articles.length">
           <div class="card article" *ngIf="article.submitted==true">
             <div class="card-header">
@@ -19,7 +19,7 @@
             <div class="card-footer">
               <ul class="list-inline">
                 <li class="list-inline-item">
-                  <i class="material-icons">account_box</i><span>Admin</span>
+                  <i class="material-icons">account_box</i><span>{{ article.user['name'] }}</span>
                 </li>
                 <li class="list-inline-item">
                   <i class="material-icons">visibility</i><span>21</span>
@@ -49,6 +49,17 @@
 
       </div>
 
+      <div class="col-md-8 col-sm-12" *ngIf="articles?.length == 0 && loaded">
+        <div class="alert alert-danger">
+          <span>مطلبی برای نمایش وجود ندارد!</span>
+        </div>
+      </div>
+
+      <div class="col-md-8 col-sm-12" *ngIf="!loaded">
+       در حال دریافت اطلاعات ...
+      </div>
+
+
       <div class="col-md-4 col-sm-12">
         <aside>
           <div class="card">
@@ -56,7 +67,13 @@
               <h6><i class="material-icons align-middle">list</i>دسته بندی ها </h6>
             </div>
             <div class="card-body">
-              <ul class="category" id="indexCats">
+              <div class="text-center text-muted">
+                <span *ngIf="! loaded">
+                در حال بارگذاری<i class="fa fa-refresh fa-spin mx-1"></i>
+              </span>
+              </div>
+
+              <ul class="category" id="indexCats" *ngIf="loaded && categories?.length>0">
                 <p class="mb-3" *ngFor="let category of categories ; let index=index">
                   <span *ngIf="category.parent_id == 0">
                     <a href="#Section{{ index }}" data-toggle="collapse" class="cat-header"
@@ -65,7 +82,7 @@
                     <li id="Section{{ index }}" class="collapse mr-4" data-parent="#indexCats">
                       <ul>
                         <li *ngFor="let subcat of categories">
-                          <a routerLink="/category/{{ subcat.id }}/page/1" *ngIf="subcat.parent_id==category.id"
+                          <a routerLink="/category/{{ subcat.id }}/page/1" *ngIf="subcat.parent_id == category.id"
                             class="cat-item"><span>{{ subcat.name }}</span>
                           </a>
                         </li>

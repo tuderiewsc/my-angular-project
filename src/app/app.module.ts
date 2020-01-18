@@ -1,4 +1,4 @@
-import { BrowserModule } from '@angular/platform-browser';
+import {BrowserModule, Title} from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
@@ -25,6 +25,7 @@ import { PageNotFoundComponent } from './Views/Site/page-not-found/page-not-foun
 import { ListArticleComponent } from './Views/Admin/articles/list-article/list-article.component';
 import { SnackbarComponent } from './Views/dialog/snackbar/snackbar.component';
 import { SearchPipe } from './Controllers/pipes/search.pipe';
+ import {catSearchPipe} from './Controllers/pipes/catsearch.pipe';
 import { CompletePipe } from './Controllers/pipes/complete.pipe';
 import { routing } from './Routes/routes';
 import { FavoriteDirective } from './Controllers/Directives/favorite.directive';
@@ -47,6 +48,7 @@ import { AddCategoryComponent } from './Views/Admin/categories/add-category/add-
 import { ListCategoryComponent } from './Views/Admin/categories/list-category/list-category.component';
 import { EditCategoryComponent } from './Views/Admin/categories/edit-category/edit-category.component';
 import { EditProfileComponent } from './Views/Admin/others/edit-profile/edit-profile.component';
+import {PostdeactivateGuard} from './Controllers/middleware/postdeactivate.guard';
 
 
 @NgModule({
@@ -60,6 +62,7 @@ import { EditProfileComponent } from './Views/Admin/others/edit-profile/edit-pro
     ListArticleComponent,
     SnackbarComponent,
     SearchPipe,
+    catSearchPipe,
     CompletePipe,
     FavoriteDirective,
     PaginationComponent,
@@ -88,7 +91,7 @@ import { EditProfileComponent } from './Views/Admin/others/edit-profile/edit-pro
     MatTableModule, MatSnackBarModule, MatDialogModule,
     ReactiveFormsModule.withConfig({ warnOnNgModelWithFormControl: 'never' })
   ],
-  providers: [AuthGuard, ApiService, PagerService, GuestGuard,
+  providers: [AuthGuard, ApiService, PagerService, GuestGuard,PostdeactivateGuard,Title,
     { provide: articleStatsToken, useValue: stats }
   ],
   bootstrap: [AppComponent],

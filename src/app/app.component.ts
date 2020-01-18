@@ -7,6 +7,8 @@ import { PagerService } from './Controllers/services/pager.services';
 import { ApiService } from './Controllers/services/api.service';
 import { CategoryModel } from './Models/category.model';
 import {Event} from '@angular/router';
+import {Title} from '@angular/platform-browser';
+import {filter, map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -16,13 +18,13 @@ import {Event} from '@angular/router';
 export class AppComponent implements OnInit {
 
 
-  constructor(private router:Router) {
+  constructor(private router:Router) {}
 
-  }
 
 
 
   ngOnInit(): void {
+
   }
 
 
