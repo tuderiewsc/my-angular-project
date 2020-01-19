@@ -1,11 +1,13 @@
 jQuery(document).ready(function($) {
-
-
-
-	//$('table#tbl_categories').simpleCheckboxTable();
-	//$('table#tbl_articles').simpleCheckboxTable();
-	// AdminPanel //
-
-
 });
+
+function get_src(id) {
+  var imageName = id;
+  $('input#image').val('http://localhost:8000/upload/image/'+imageName);
+  $('#closedialog').click();
+}
+
+function remove_src() {
+  $('input#image').val('');
+}
 

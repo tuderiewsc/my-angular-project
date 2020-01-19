@@ -12,18 +12,20 @@
             <label class="mainLabel" for="title">عنوان</label>
             <input class="form-control" type="text" id="title"
                    name="title" [(ngModel)]="title" formControlName="title">
+            <div *ngIf="addArticleForm.controls['title'].invalid &&
+             (addArticleForm.controls['title'].dirty || addArticleForm.controls['title'].touched)">
+              <small class="text-danger pull-right p-1" *ngIf="addArticleForm.controls['title'].errors.required">
+                فيلد نام را تکميل کنيد.
+              </small>
+            </div>
           </div>
           <div class="form-group col-md-6 mt-3">
             <label class="mainLabel" for="image">لینک تصویر</label>
-            <input class="form-control" type="text" id="image"
+            <input class="form-control ng-dirty" type="text" id="image" disabled
                    [(ngModel)]="image" name="image" formControlName="image">
-            <a mat-flat-button color="primary" (click)="openDialog()">get link</a>
-          </div>
-          <div class="form-group required col-md-12 mt-3">
-            <label class="mainLabel" for="desc">توضیحات</label>
-            <textarea class="form-control" id="desc"
-                      #tarea formControlName="desc" [(ngModel)]="desc" name="desc" maxlength="20"></textarea>
-            <span>{{ tarea.value?.length || 0 }}/20</span>
+            <a mat-flat-button color="primary" id="get_image_src" (click)="openDialog()">دریافت لینک</a>
+            <a mat-flat-button color="warn" id="remove_image_src"
+               onclick="remove_src()" (click)="removeImageSrc()">حذف لینک</a>
           </div>
           <div class="form-group required col-md-4 mt-3">
             <label class="mainLabel" for="submitted">وضعیت انتشار</label>
@@ -33,6 +35,12 @@
                 {{stat.viewValue}}
               </option>
             </select>
+            <div *ngIf="addArticleForm.controls['submitted'].invalid &&
+             (addArticleForm.controls['submitted'].dirty || addArticleForm.controls['submitted'].touched)">
+              <small class="text-danger pull-right p-1" *ngIf="addArticleForm.controls['submitted'].errors.required">
+                یک مورد انتخاب کنید.
+              </small>
+            </div>
           </div>
           <div class="form-group required col-md-4 mt-3">
             <label class="mainLabel" for="isfavorite">علاقه مندی</label>
@@ -42,16 +50,44 @@
               <option value="true">هست</option>
               <option value="false">نيست</option>
             </select>
+            <div *ngIf="addArticleForm.controls['isfavorite'].invalid &&
+             (addArticleForm.controls['isfavorite'].dirty || addArticleForm.controls['isfavorite'].touched)">
+              <small class="text-danger pull-right p-1" *ngIf="addArticleForm.controls['isfavorite'].errors.required">
+                یک مورد انتخاب کنید.
+              </small>
+            </div>
           </div>
           <div class="form-group required col-md-4 mt-3">
-            <label class="mainLabel" for="isfavorite">دسته بندی</label>
-            <select class="form-control" id="isfavorite"
+            <label class="mainLabel" for="category_id">دسته بندی</label>
+            <select class="form-control" id="category_id"
                     name="category_id" formControlName="category_id" [(ngModel)]="category_id">
               <option *ngFor="let cat of categories" value="{{ cat.id }}">
                 {{ cat.name }}
               </option>
             </select>
+            <div *ngIf="addArticleForm.controls['category_id'].invalid &&
+             (addArticleForm.controls['category_id'].dirty || addArticleForm.controls['category_id'].touched)">
+              <small class="text-danger pull-right p-1" *ngIf="addArticleForm.controls['category_id'].errors.required">
+                یک مورد انتخاب کنید.
+              </small>
+            </div>
           </div>
+          <div class="form-group required col-md-12 mt-3">
+            <label class="mainLabel" for="desc">توضیحات</label>
+            <textarea class="form-control" id="desc" rows="5"
+                      #tarea formControlName="desc" [(ngModel)]="desc" name="desc" maxlength="20"></textarea>
+            <span>{{ tarea.value?.length || 0 }}/20</span>
+            <div *ngIf="addArticleForm.controls['desc'].invalid &&
+             (addArticleForm.controls['desc'].dirty || addArticleForm.controls['desc'].touched)">
+              <small class="text-danger pull-right p-1" *ngIf="addArticleForm.controls['desc'].errors.maxlength">
+                طول مجاز رعايت نشده است.
+              </small>
+              <small class="text-danger pull-right p-1" *ngIf="addArticleForm.controls['desc'].errors.required">
+                فيلد توضيحات را تکميل کنيد.
+              </small>
+            </div>
+          </div>
+
           <div class="form-group col-12 my-3">
             <!-- <button type="submit" (click)=" addArticle.reset()">Submit</button> -->
             <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored bg-secondary w-25"
@@ -65,46 +101,3 @@
 <!-- content-End -->
 
 
-<!-- Errors -->
-<section class="errors">
-  <div *ngIf="addArticleForm.controls['title'].invalid &&
-   (addArticleForm.controls['title'].dirty || addArticleForm.controls['title'].touched)">
-    <span *ngIf="addArticleForm.controls['title'].errors.required">
-      فيلد نام را تکميل کنيد.
-    </span>
-  </div>
-  <div *ngIf="addArticleForm.controls['desc'].invalid &&
-   (addArticleForm.controls['desc'].dirty || addArticleForm.controls['desc'].touched)">
-    <span *ngIf="addArticleForm.controls['desc'].errors.maxlength">
-      طول مجاز رعايت نشده است.
-    </span>
-    <span *ngIf="addArticleForm.controls['desc'].errors.required">
-      فيلد توضيحات را تکميل کنيد.
-    </span>
-  </div>
-  <div *ngIf="addArticleForm.controls['submitted'].invalid &&
-   (addArticleForm.controls['submitted'].dirty || addArticleForm.controls['submitted'].touched)">
-    <span *ngIf="addArticleForm.controls['submitted'].errors.required">
-      وضعيت را تکميل کنيد.
-    </span>
-  </div>
-  <div *ngIf="addArticleForm.controls['isfavorite'].invalid &&
-   (addArticleForm.controls['isfavorite'].dirty || addArticleForm.controls['isfavorite'].touched)">
-    <span *ngIf="addArticleForm.controls['isfavorite'].errors.required">
-      وضعيت را تکميل کنيد.
-    </span>
-  </div>
-  <div *ngIf="addArticleForm.controls['category_id'].invalid &&
-   (addArticleForm.controls['category_id'].dirty || addArticleForm.controls['category_id'].touched)">
-    <span *ngIf="addArticleForm.controls['category_id'].errors.required">
-      وضعيت را تکميل کنيد.
-    </span>
-  </div>
-  <div *ngIf="addArticleForm.controls['image'].invalid &&
-   (addArticleForm.controls['image'].dirty || addArticleForm.controls['image'].touched)">
-    <span *ngIf="addArticleForm.controls['image'].errors.required">
-      وضعيت را تکميل کنيد.
-    </span>
-  </div>
-</section>
-<!-- Errors -->

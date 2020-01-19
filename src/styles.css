@@ -1,3 +1,37 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
 
+input.ng-invalid.ng-touched {
+  border-color: orangered;
+}
+textarea.ng-invalid.ng-touched {
+  border-color: orangered;
+}
+select.ng-invalid.ng-touched {
+  border-color: orangered;
+}
+
+input#image {
+  position: relative;
+}
+
+a#get_image_src {
+  position: absolute;
+  border-radius: 0;
+  left: 6px;
+  font-family: "Vazir" ;
+  margin: 4px;
+}
+
+a#remove_image_src {
+  position: absolute;
+  left: 110px;
+  width: auto;
+  margin: 4px;
+  border-radius: 0;
+  font-family: "Vazir" ;
+}
+
+.formAdd .form-group {
+  margin: 40px auto;
+}

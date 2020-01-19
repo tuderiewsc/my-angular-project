@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output, Inject, OnDestroy } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output, Inject, OnDestroy, Input} from '@angular/core';
 import { ArticleModel } from '../../../../Models/article.model';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, FormControl, Validators, MaxLengthValidator } from '@angular/forms';
@@ -97,19 +97,29 @@ export class AddArticleComponent implements OnInit, OnDestroy {
     Article.user_id = this.user.id;
     if (this.submitted === 'true') { Article.submitted = true; } else { Article.submitted = false; }
     if (this.isfavorite === 'true') { Article.isfavorite = true; } else { Article.isfavorite = false; }
-    if (this.image === undefined) {
-      // default image
-      Article.image = 'http://localhost:8000/upload/image/1573630832-2019-Image-not-found.jpg';
-    } else {
-      Article.image = this.image;
+    // if (this.image === undefined) {
+    //   // default image
+    //   Article.image = 'http://localhost:8000/upload/image/1573630832-2019-Image-not-found.jpg';
+    // } else {
+    //   Article.image = this.image;
+    // }
+    if(localStorage.getItem('imageSrc') !== null){
+      Article.image= 'http://localhost:8000/upload/image/'
+        +localStorage.getItem('imageSrc');
+    }else {
+        Article.image = 'http://localhost:8000/upload/image/1573630832-2019-Image-not-found.jpg';
     }
+
 
     this.api.addArticle(Article)
       .subscribe(() => {
         this.router.navigate(['/']),
           this.openSnackbar()
       });
+  }
 
+  removeImageSrc(){
+    localStorage.removeItem('imageSrc');
   }
 
   openSnackbar() {

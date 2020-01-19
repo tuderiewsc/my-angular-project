@@ -3,7 +3,8 @@
 <div class="container">
   <div class="row">
     <ul class="imgs">
-      <li class="imgLink" *ngFor="let image of images" id="{{ image.id }}" onclick="getsrc(id)">
+      <li class="imgLink" *ngFor="let image of images" id="{{ image.image }}"
+          onclick="get_src(id)" (click)="getImageSrc(image.image)">
         <img src="http://localhost:8000/upload/image/{{ image.image }}" alt="" width="80">
       </li>
     </ul>
