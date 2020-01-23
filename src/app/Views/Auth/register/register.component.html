@@ -24,12 +24,16 @@
                         <i class="material-icons">person</i>
                       </div>
                     </div>
-                    <input type="text" class="form-control" placeholder="نام*" formControlName="name"><br>
-                    <div class="errors" *ngIf="registerForm.controls['name'].invalid &&
-                  (registerForm.controls['name'].dirty || registerForm.controls['name'].touched)">
-                      <span *ngIf="registerForm.controls['name'].errors.required">
+                    <input type="text" class="form-control" placeholder="نام*" formControlName="name"
+                           [ngClass]="{'is-invalid': registerForm.controls['name'].invalid &&
+(registerForm.controls['name'].dirty || registerForm.controls['name'].touched)}">
+
+                    <div class="errors w-100 p-2"
+                         *ngIf="registerForm.controls['name'].invalid &&
+(registerForm.controls['name'].dirty || registerForm.controls['name'].touched)">
+                      <small class="float-right text-danger" *ngIf="registerForm.controls['name'].errors.required">
                         فیلد نام را تکمیل کنید.
-                      </span>
+                      </small>
                     </div>
                   </div>
                 </div>
@@ -40,15 +44,18 @@
                         <i class="material-icons">email</i>
                       </div>
                     </div>
-                    <input type="email" class="form-control" placeholder="ایمیل*" formControlName="email"><br>
-                    <div class="errors" *ngIf="registerForm.controls['email'].invalid &&
+                    <input type="email" class="form-control" placeholder="ایمیل*" formControlName="email"
+                           [ngClass]="{'is-invalid': registerForm.controls['email'].invalid &&
+(registerForm.controls['email'].dirty || registerForm.controls['email'].touched)}">
+
+                    <div class="errors w-100 p-2" *ngIf="registerForm.controls['email'].invalid &&
                 (registerForm.controls['email'].dirty || registerForm.controls['email'].touched)">
-                      <span *ngIf="registerForm.controls['email'].errors.required">
+                      <small class="float-right text-danger" *ngIf="registerForm.controls['email'].errors.required">
                         فیلد ایمیل را تکمیل کنید.
-                      </span><br>
-                      <span *ngIf="registerForm.controls['email'].errors.email">
+                      </small><br>
+                      <small class="float-right text-danger" *ngIf="registerForm.controls['email'].errors.email">
                         ایمیل معتبر نیست.
-                      </span>
+                      </small>
                     </div>
                   </div>
                 </div>
@@ -59,15 +66,18 @@
                         <i class="material-icons">vpn_key</i>
                       </div>
                     </div>
-                    <input type="password" class="form-control" placeholder="رمز عبور*" formControlName="password"><br>
-                    <div class="errors" *ngIf="registerForm.controls['password'].invalid &&
+                    <input type="password" class="form-control" placeholder="رمز عبور*" formControlName="password"
+                           [ngClass]="{'is-invalid': registerForm.controls['password'].invalid &&
+(registerForm.controls['password'].dirty || registerForm.controls['password'].touched)}">
+
+                    <div class="errors w-100 p-2" *ngIf="registerForm.controls['password'].invalid &&
               (registerForm.controls['password'].dirty || registerForm.controls['password'].touched)">
-                      <span *ngIf="registerForm.controls['password'].errors.minlength">
+                      <small class="float-right text-danger" *ngIf="registerForm.controls['password'].errors.minlength">
                         طول مجاز پسورد رعایت نشده است.
-                      </span>
-                      <span *ngIf="registerForm.controls['password'].errors.required">
+                      </small>
+                      <small class="float-right text-danger" *ngIf="registerForm.controls['password'].errors.required">
                         پسورد را وارد کنید.
-                      </span>
+                      </small>
                     </div>
                   </div>
                 </div>
@@ -79,18 +89,19 @@
                       </div>
                     </div>
                     <input type="password" class="form-control" placeholder="تکرار رمز عبور*"
-                      formControlName="password_confirmation"><br>
-                    <div class="errors"
+                      formControlName="password_confirmation" [ngClass]="{'is-invalid': registerForm.controls['password_confirmation'].invalid &&
+(registerForm.controls['password_confirmation'].dirty || registerForm.controls['password_confirmation'].touched)}">
+                    <div class="errors w-100 p-2"
                       *ngIf="registerForm.controls['password_confirmation'].invalid &&
             (registerForm.controls['password_confirmation'].dirty || registerForm.controls['password_confirmation'].touched)">
-                      <span *ngIf="registerForm.controls['password_confirmation'].errors.required">
+                      <small class="float-right text-danger" *ngIf="registerForm.controls['password_confirmation'].errors.required">
                         پسورد را مجددا وارد کنید.
-                      </span>
-
+                      </small>
                     </div>
-                    <span [hidden]="!registerForm.hasError('mismatchpassword')">
+                    <small class="w-100 p-2 text-right text-danger" [hidden]="!registerForm.hasError('mismatchpassword')">
                       پسوردها مطابقت ندارند!
-                    </span>
+                    </small>
+
                   </div>
                 </div>
                 <input type="submit" value="ثبت نام" class="btn btn-primary w-50 my-4"

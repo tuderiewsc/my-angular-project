@@ -14,7 +14,10 @@ export class ShowArticleComponent implements OnInit {
 
   // @Input() passedArticle: ArticleModel;
   passedArticle: ArticleModel;
+  //updateArticle: ArticleModel;
   errorMessage: string;
+  views: number;
+  loaded: boolean = false;
 
 
   constructor(private route: ActivatedRoute,
@@ -70,16 +73,45 @@ export class ShowArticleComponent implements OnInit {
       });
     });
 
-    this.getArticle();
+
+    //const Article = new ArticleModel();
+
+      this.getArticle();
+
   }
 
   getArticle() {
     const id = +this.route.snapshot.params.id;
+    const Article = new ArticleModel();
+
     this.api.getArticle(id).
-      subscribe(article => {
-        this.passedArticle = article,
-          console.log('desc: ' + article.desc)
-      });
+    subscribe(article => {
+      this.passedArticle = article,
+      this.views = article.views + 1,
+        Article.views = this.views,
+      this.api.updateArticle(Article,id).subscribe(res => console.log(res)),
+        this.loaded = true
+    });
+
+
+
+    //this.updateArticle = this.passedArticle;
+    //var views = this.passedArticle.views;
+   // this.views = this.views+1;
+
+
+    //Article.views = this.views;
+    // Article.title = this.passedArticle.title;
+    // Article.image = this.passedArticle.image;
+    // Article.desc = this.passedArticle.desc;
+    // Article.category_id = this.passedArticle.category_id;
+    // Article.user_id = this.passedArticle.user_id;
+    // Article.submitted = this.passedArticle.submitted;
+    // Article.isfavorite = this.passedArticle.isfavorite;
+
+
+
+
   }
 
 

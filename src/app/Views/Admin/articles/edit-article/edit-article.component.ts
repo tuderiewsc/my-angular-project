@@ -29,6 +29,7 @@ export class EditArticleComponent implements OnInit {
   isfavorite: string;
   article: ArticleModel;
   categories: CategoryModel;
+  editPressed: boolean = false;
 
 
   constructor(private route: ActivatedRoute, private router: Router
@@ -44,14 +45,30 @@ export class EditArticleComponent implements OnInit {
     this.buildForm();
   }
 
+  Editpressed(){
+    this.editPressed = true;
+  }
+
   canDeactivate(): Observable<boolean> | boolean {
-    if(! this.article || this.title==this.article.title || this.desc==this.article.desc
-      || this.image==this.article.image
-    ) {
+
+    if (this.title == undefined && this.desc == undefined &&
+      this.image == undefined && this.category_id == undefined){
       return true;
+    } else{
+      if( this.title !==this.article.title || this.desc !==this.article.desc
+        || this.image !==this.article.image || this.category_id !== this.article.category_id
+      ) {
+
+        if(this.editPressed == false){
+          return window.confirm('تغییرات ذخیره نشوند?');
+        }else {
+          return true;
+        }
+
+      }
     }
 
-    return window.confirm('تغییرات ذخیره نشوند?');
+
   }
 
   buildForm() {

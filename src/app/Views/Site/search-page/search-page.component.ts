@@ -15,6 +15,7 @@ export class SearchPageComponent implements OnInit {
   // @Input() passedPhrase: string;
   Articles: ArticleModel[];
   query: string;
+  noResult:boolean = false;
 
   constructor(private api: ApiService, private router: Router, private route: ActivatedRoute) { }
 
@@ -24,8 +25,12 @@ export class SearchPageComponent implements OnInit {
     (map((params: Params) => params.query))
       .subscribe(query => this.api.getsearchArticle(query)
         .subscribe(res => {
+          if(res == 0){
+            this.Articles = null;
+          }else {
           this.Articles = res;
-          console.log('articles: ' + res);
+          }
+          console.log('articles: ' + this.Articles)
         }));
 
     this.route.params.pipe

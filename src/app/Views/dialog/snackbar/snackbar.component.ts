@@ -10,10 +10,17 @@ export class SnackbarComponent implements OnInit {
     throw new Error('Method not implemented.');
   }
 
+  snackType: string;
+
 
   constructor() { }
 
   ngOnInit() {
+    if (localStorage.getItem('snack') == 'add_article'){
+      this.snackType = 'add_article';
+    } else if(localStorage.getItem('snack') == 'login_success'){
+      this.snackType = 'login_success';
+    }
   }
 
 }

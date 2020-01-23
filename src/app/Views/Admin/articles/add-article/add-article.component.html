@@ -93,6 +93,11 @@
             <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored bg-secondary w-25"
                     [disabled]="addArticleForm.pristine || addArticleForm.invalid">ثبت</button>
           </div>
+
+          <div class="alert alert-danger w-100" *ngIf="errorMessage != undefined">
+            {{ errorMessage }}
+          </div>
+
         </form>
       </div>
     </div>

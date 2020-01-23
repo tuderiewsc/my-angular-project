@@ -2,3 +2,12 @@ div.container {
   display: flex;
   justify-content: center;
 }
+
+snack-bar-container.LoginSuccess{
+  background: #00b8d4 !important;
+}
+snack-bar-container.AddArticle{
+  background: forestgreen !important;
+}
+
+

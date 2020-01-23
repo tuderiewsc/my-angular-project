@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, throwError } from 'rxjs';
+import { Observable, throwError, of } from 'rxjs';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { ArticleModel } from '../../Models/article.model';
 import { catchError, tap, delay } from 'rxjs/operators';
@@ -69,10 +69,6 @@ export class ApiService {
     return this.http.post<boolean>(Constants.urlCats, values, this.httpOptions);
   }
 
-  // updateCategory(category: CategoryModel, id:number){
-  //   return this.http.put<boolean>(Constants.urlCats+ '/' + id, category, this.httpOptions);
-  // }
-
   updateCategory(values:any, id:number){
     return this.http.put<boolean>(Constants.urlCats+ '/' + id, values, this.httpOptions);
   }
@@ -82,24 +78,23 @@ export class ApiService {
   }
 
 
-
   getImgList(): Observable<any> {
     return this.http.get(Constants.uploadImageList);
   }
 
-  private handleError(error: HttpErrorResponse) {
-    return throwError(error.message);
-  }
-
-
-  // private handleError<T>(operation = 'operation', result?: T) {
-  //   return (error: any): Observable<T> => {
-  //     console.error(error); // log to console instea
-  //     console.log(`${operation} failed: ${error.message}`);
-  //     // Let the app keep running by returning an empty result.
-  //     return of(result as T);
-  //   };
+  // private handleError(error: HttpErrorResponse) {
+  //   return throwError(error.message);
   // }
+
+
+  private handleError<T>(operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+      console.error(error); // log to console instea
+      console.log(`${operation} failed: ${error.message}`);
+      // Let the app keep running by returning an empty result.
+      return of(result as T);
+    };
+  }
 
   addArticle(article: ArticleModel): Observable<any> {
     return this.http.post<ArticleModel>(Constants.urlOne, article, this.httpOptions);

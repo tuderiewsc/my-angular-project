@@ -2,7 +2,8 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-12">
-        <div class="card article w-75" style="margin: 0 auto;">
+        <div *ngIf="!loaded">در حال بارگزاری...</div>
+        <div class="card article w-75" style="margin: 0 auto;" *ngIf="loaded">
           <div class="card-header">
             <h5>{{passedArticle.title}}</h5>
           </div>
@@ -18,16 +19,16 @@
                 <i class="material-icons">account_box</i><span>Admin</span>
               </li>
               <li class="list-inline-item">
-                <i class="material-icons">visibility</i><span>21</span>
+                <i class="material-icons">visibility</i><span>{{passedArticle.views +1}}</span>
               </li>
               <li class="list-inline-item">
                 <i class="material-icons">date_range</i><span>{{passedArticle.created_at | date}}</span>
               </li>
-              <li class="list-inline-item">
-                <a href="#" class="fav">
-                  <i class="material-icons" data-wow-duration="2s">favorite_border</i>
-                </a>
-              </li>
+              <!--<li class="list-inline-item">-->
+                <!--<a href="#" class="fav">-->
+                  <!--<i class="material-icons" data-wow-duration="2s">favorite_border</i>-->
+                <!--</a>-->
+              <!--</li>-->
             </ul>
           </div>
         </div>

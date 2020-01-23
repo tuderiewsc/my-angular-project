@@ -30,8 +30,6 @@ export class ArticlesComponent implements OnInit {
   page_title: string = 'مقالات' ;
 
 
-
-
   title: string;
   image: string;
   desc: string;
@@ -41,7 +39,6 @@ export class ArticlesComponent implements OnInit {
   articles: ArticleModel[];
   categories: CategoryModel[];
   pager: Paginate;
-
   loaded:boolean=false;
 
 
@@ -55,7 +52,7 @@ export class ArticlesComponent implements OnInit {
 
     ngOnInit() {
       this.getArticles();
-        this.getCategories();
+      this.getCategories();
         // this.selectedArticle = null;
         // var Now = this.datePipe.transform(new Date(),"dd-MM-yyyy");
     }

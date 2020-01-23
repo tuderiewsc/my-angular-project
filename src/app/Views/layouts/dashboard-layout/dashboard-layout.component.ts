@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import {AuthService} from '../../../Controllers/services/auth.service';
 import * as $ from 'jquery';
+import {AutoLogoutServiceService} from '../../../Controllers/services/auto-logout-service.service';
 
 @Component({
   selector: 'app-dashboard-layout',
@@ -10,10 +11,17 @@ import * as $ from 'jquery';
 })
 export class DashboardLayoutComponent implements OnInit {
 
+  timeLeft: number;
+  timeLeft_minute: number;
+  timeLeft_seconds: number;
+  math = Math;
 
-  constructor(private router: Router, private auth: AuthService) { }
+
+  constructor(private router: Router, private auth: AuthService,
+              private logoutService : AutoLogoutServiceService) { }
 
   ngOnInit() {
+
     $(document).ready(function () {
       $('input#check').change(function(event) {
         var state = $(this).prop('checked');
@@ -34,6 +42,15 @@ export class DashboardLayoutComponent implements OnInit {
         }
       });
     });
+
+
+    setInterval(() => {
+      this.timeLeft = this.logoutService.timeRemained().df;
+      this.timeLeft_minute = this.math.floor(this.timeLeft/60000);
+      var floats = this.timeLeft/60000
+      var decimals = floats - this.timeLeft_minute;
+      this.timeLeft_seconds = this.math.floor(decimals*60);
+    }, 1000);
 
   }
 

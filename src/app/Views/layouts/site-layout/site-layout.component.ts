@@ -15,14 +15,10 @@ export class SiteLayoutComponent implements OnInit {
 
   title = 'articles_project';
   loggedIn = false;
-  tr: number;
   categories: CategoryModel[];
   query: string;
   pageType: string;
-
   loaded: boolean =false;
-
-
 
 
   constructor(private router: Router, private auth: AuthService,
@@ -69,8 +65,6 @@ export class SiteLayoutComponent implements OnInit {
         } ,8000);
       });
     });
-
-    this.tr = this.authLogout.timeRemained().df;
 
     this.api.getCategories()
       .subscribe(res => {

@@ -12,10 +12,11 @@
               <form action="#" class="form-control" method="post" style="border:none;" #regForm="ngForm" id="loginForm"
                 novalidate [formGroup]="loginForm" (ngSubmit)="login(loginForm.value)">
 
-                <div class="alert alert-danger"
+                <div class="alert alert-danger fade show"
                      *ngIf="errorMessage != undefined">
                   {{ 'نام کاربری یا پسورد اشتباه است' }}
-                </div><br>
+                </div>
+                <br />
 
                 <div class="d-flex flex-wrap justify-content-center">
                   <div class="input-group my-4 mr-sm-2 w-50">

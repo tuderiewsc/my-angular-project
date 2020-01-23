@@ -9,6 +9,7 @@ export class ArticleModel {
     created_at?: number;
     submitted: boolean;
     isfavorite: boolean;
+    views: number;
     data: ArticleModel[];
 }
 

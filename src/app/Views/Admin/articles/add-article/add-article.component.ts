@@ -46,13 +46,14 @@ export class AddArticleComponent implements OnInit, OnDestroy {
   lastArticleId: number;
   categories: CategoryModel[];
   user: any;
+  errorMessage: string;
   // @Output() newArticle = new EventEmitter<ArticleModel>();
 
 
   constructor(private router: Router,
-    private formbuilder: FormBuilder, private snackbar: MatSnackBar,
-    private http: HttpClient, @Inject(articleStatsToken) public stats,
-    private api: ApiService, private authservice: AuthService
+              private formbuilder: FormBuilder, private snackbar: MatSnackBar,
+              private http: HttpClient, @Inject(articleStatsToken) public stats,
+              private api: ApiService, private authservice: AuthService
     , public dialog: MatDialog) {
   }
 
@@ -107,14 +108,23 @@ export class AddArticleComponent implements OnInit, OnDestroy {
       Article.image= 'http://localhost:8000/upload/image/'
         +localStorage.getItem('imageSrc');
     }else {
-        Article.image = 'http://localhost:8000/upload/image/1573630832-2019-Image-not-found.jpg';
+      Article.image = 'http://localhost:8000/upload/image/1573630832-2019-Image-not-found.jpg';
     }
 
 
     this.api.addArticle(Article)
-      .subscribe(() => {
-        this.router.navigate(['/']),
-          this.openSnackbar()
+      .subscribe(res => {
+        if (res){
+          this.router.navigate(['/']),
+            this.openSnackbar()
+        }
+      }, err =>{
+        const message = err.error.message;
+        this.errorMessage = message[Object.keys(message)[0]];
+
+        setTimeout(() =>{
+          this.errorMessage = undefined;
+        },15000)
       });
   }
 
@@ -123,12 +133,16 @@ export class AddArticleComponent implements OnInit, OnDestroy {
   }
 
   openSnackbar() {
+    localStorage.removeItem('snack');
+    localStorage.setItem('snack', 'add_article');
     this.snackbar.openFromComponent(SnackbarComponent, {
       duration: 4000,
       verticalPosition: 'bottom',
       horizontalPosition: 'left',
       politeness: 'assertive',
-       //announcementMessage: 'test msg'
+      direction: 'rtl',
+      panelClass: 'AddArticle'
+      //announcementMessage: 'test msg'
     });
   }
 
@@ -137,9 +151,9 @@ export class AddArticleComponent implements OnInit, OnDestroy {
     this.dialog.open(ImglistComponent, {
       width: '720px'
     });
-    // this.dialog.open(UploaddialogComponent, {
-    //   width: '720px'
-    // });
   }
+
+
+
 
 }
