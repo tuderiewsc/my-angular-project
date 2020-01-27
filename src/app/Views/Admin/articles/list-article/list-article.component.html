@@ -14,34 +14,76 @@
           <div class="form-group col-md-4">
             <mat-label>وضعيت انتشار</mat-label>
             <mat-select name="complete" [(ngModel)]="complete">
-              <mat-option [value]="0" disabled>وضعيت انتشار ---</mat-option>
-              <mat-option [value]="1">منتشر شده</mat-option>
-              <mat-option [value]="0">منتشر نشده</mat-option>
+              <mat-option [value]="3" disabled>وضعيت انتشار ---</mat-option>
+              <mat-option [value]="1" (click)="showResults(1)">منتشر شده</mat-option>
+              <mat-option [value]="0" (click)="showResults(0)">منتشر نشده</mat-option>
+              <mat-option [value]="2" (click)="showResults(2)">منتشر شده/منتشر نشده</mat-option>
             </mat-select>
           </div>
         </form>
+
+        <form class="form-inline mt-2" method="post" id="frm_ops">
+          <div class="form-group">
+            <select class="form-control" id="ops_select" (change)="opsChanged()"
+                    [(ngModel)]="ops_select" name="ops_select">
+              <option selected value="0">انتخاب عملیات</option>
+              <option value="1">پاک کردن</option>
+              <option value="2">منتشر شده</option>
+              <option value="3">منتشر نشده</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <button type="button" class="btn btn-info btn-sm" id="ops_submit"
+                   [disabled]="! opsSelected" (click)="ops_frmSubmit()">
+              انجام<i class="fa fa-refresh fa-spin mx-2" *ngIf="is_operating"></i>
+            </button>
+          </div>
+        </form>
+
         <div class="table-responsive my-4">
           <table class="table table-hover table-sm table-light" id="tbl_articles">
             <thead class="thead-inverse">
             <tr >
-              <th style="width: 10%;">
+              <th style="width: 5%;">
                 <input type="checkbox" name="">
               </th>
-              <th style="width: 10%">ردیف</th>
+              <th style="width: 5%">ردیف</th>
               <th style="width: 20%">عنوان</th>
-              <th style="width: 40%">توضیحات</th>
-              <th style="width: 20%">عملیات</th>
+              <th style="width: 30%">توضیحات</th>
+              <th style="width: 10%">وضعیت</th>
+              <th style="width: 30%">عملیات</th>
             </tr>
             </thead>
-            <tbody class="bg-light">
+            <tbody class="bg-light" *ngIf="! no_complete_filter">
             <tr *ngFor="let article of articles | search:keyword | complete:complete ;let index = index">
               <td >
-                <input type="checkbox" name="">
+                <input type="checkbox" (change)="checkValue(article.id)">
               </td>
               <td >{{ index+1 }}</td>
               <td>{{ article.title }}</td>
               <td class="articleDesc" *ngIf="article.desc != '' ">{{ article.desc | slice:0:50}}...</td>
               <td class="articleDesc" *ngIf="article.desc == '' ">---</td>
+              <td class="text-success" *ngIf="article.submitted == 1">منتشر شده</td>
+              <td class="text-danger" *ngIf="article.submitted == 0">منتشر نشده</td>
+              <td>
+                <a routerLink="/dashboard/article/{{ article.id }}/edit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored bg-info">ویرایش</a>
+                |
+                <a (click)="del(article.id , article.title)" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored bg-danger">حذف</a>
+              </td>
+            </tr>
+            </tbody>
+
+            <tbody class="bg-light" *ngIf="no_complete_filter">
+            <tr *ngFor="let article of articles | search:keyword  ;let index = index">
+              <td >
+                <input type="checkbox" (change)="checkValue(article.id)">
+              </td>
+              <td >{{ index+1 }}</td>
+              <td>{{ article.title }}</td>
+              <td class="articleDesc" *ngIf="article.desc != '' ">{{ article.desc | slice:0:50}}...</td>
+              <td class="articleDesc" *ngIf="article.desc == '' ">---</td>
+              <td class="text-success" *ngIf="article.submitted == 1">منتشر شده</td>
+              <td class="text-danger" *ngIf="article.submitted == 0">منتشر نشده</td>
               <td>
                 <a routerLink="/dashboard/article/{{ article.id }}/edit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored bg-info">ویرایش</a>
                 |

@@ -1,5 +1,5 @@
 form{
-  min-height: 200px;
+  /*min-height: 200px;*/
 }
 
 .mat-select{
@@ -16,4 +16,10 @@ form{
 
 .mat-select-panel{
   width: 150%;
+}
+
+form#frm_ops{
+  float: right;
+  width: 100%;
+  padding: 8px;
 }

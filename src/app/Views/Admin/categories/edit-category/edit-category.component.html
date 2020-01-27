@@ -33,10 +33,9 @@
                   (updateCatForm.controls['parent_id'].dirty || updateCatForm.controls['parent_id'].touched)}">
               <option value="0" selected="selected">---</option>
               <option *ngFor="let cat of cats" value="{{ cat.id }}"
-              [selected]="category.parent_id == cat.id"> {{ cat.name }}
+                     [selected]="category.parent_id == cat.id" > {{ cat.name }}
               </option>
             </select>
-
             <div class="errors" *ngIf="updateCatForm.controls['parent_id'].invalid &&
                   (updateCatForm.controls['parent_id'].dirty || updateCatForm.controls['parent_id'].touched)">
                       <span *ngIf="updateCatForm.controls['parent_id'].errors.required">

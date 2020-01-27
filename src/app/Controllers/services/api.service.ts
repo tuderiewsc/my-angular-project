@@ -104,6 +104,10 @@ export class ApiService {
     return this.http.put<any>(Constants.urlArticlesUpdate + id, article, this.httpOptions);
   }
 
+  updateArticleStatus(article: ArticleModel, id: number): Observable<any> {
+    return this.http.put<any>(Constants.urlUpdateStatus + id, article, this.httpOptions);
+  }
+
   deleteArticle(id: number): Observable<ArticleModel> {
     return this.http.delete<ArticleModel>(Constants.urlOne + '/' + id);
   }
