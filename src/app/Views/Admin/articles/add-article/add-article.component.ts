@@ -148,6 +148,7 @@ export class AddArticleComponent implements OnInit, OnDestroy {
 
 
   openDialog() {
+    localStorage.setItem('imgSection', 'article');
     this.dialog.open(ImglistComponent, {
       width: '720px'
     });

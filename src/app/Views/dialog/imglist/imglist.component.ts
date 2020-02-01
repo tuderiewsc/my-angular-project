@@ -13,7 +13,11 @@ export class ImglistComponent implements OnInit {
   constructor(private api: ApiService) { }
 
   ngOnInit() {
-    this.api.getImgList().subscribe(res => this.images = res);
+    if (localStorage.getItem('imgSection') == 'article'){
+      this.api.getImgList('article').subscribe(res => this.images = res);
+    }else if (localStorage.getItem('imgSection') == 'profile'){
+      this.api.getImgList('profile').subscribe(res => this.images = res);
+    }
   }
 
   getImageSrc(src:string){

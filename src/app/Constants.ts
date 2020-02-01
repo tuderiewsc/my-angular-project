@@ -11,8 +11,10 @@ export class Constants {
   public static loginUrl = 'http://localhost:8000/api/login';
   public static searchArticleUrl = 'http://localhost:8000/api/searchArticle';
   public static uploadImageUrl = 'http://localhost:8000/api/uploadImg';
-  public static uploadImageList = 'http://localhost:8000/api/uploadImagesList';
+  public static uploadImageList = 'http://localhost:8000/api/uploadImagesList/';
   public static urlUpdateStatus = 'http://localhost:8000/api/update_status/';
+  public static urlUpdateUser = 'http://localhost:8000/api/update_user/';
+  public static urlgetUser = 'http://localhost:8000/api/get_user/';
 
 }
 

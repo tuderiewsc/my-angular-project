@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 import {AuthService} from '../../../Controllers/services/auth.service';
 import * as $ from 'jquery';
 import {AutoLogoutServiceService} from '../../../Controllers/services/auto-logout-service.service';
+import {ApiService} from '../../../Controllers/services/api.service';
 
 @Component({
   selector: 'app-dashboard-layout',
@@ -16,9 +17,19 @@ export class DashboardLayoutComponent implements OnInit {
   timeLeft_seconds: number;
   math = Math;
 
+  userId:number;
+  userName: string;
+  userEmail: string;
+  avatar:string;
+  avatarSrc:string;
+  //gender:string;
 
-  constructor(private router: Router, private auth: AuthService,
-              private logoutService : AutoLogoutServiceService) { }
+
+  constructor(private router: Router, private auth: AuthService, private api:ApiService,
+              private logoutService : AutoLogoutServiceService) {
+
+
+  }
 
   ngOnInit() {
 
@@ -42,6 +53,30 @@ export class DashboardLayoutComponent implements OnInit {
         }
       });
     });
+
+    this.userId = JSON.parse(localStorage.getItem("user")).id;
+
+    this.api.getUser(this.userId).subscribe(user => {
+      this.avatar = user['profilepic'];
+      //this.avatar = user['profilepic'];
+      console.log('avatar: ' + this.avatar);
+
+      if (this.avatar != null){
+        this.avatarSrc = this.avatar;
+      } else {
+        if(user['gender'] == 'male'){
+          this.avatarSrc = 'assets/Avatar/male-avatar.png';
+        }else{
+          this.avatarSrc = 'assets/Avatar/female-avatar.png';
+        }
+      }
+      this.userName = user['name'];
+      this.userEmail = user['email'];
+
+    } );
+
+
+
 
 
     setInterval(() => {

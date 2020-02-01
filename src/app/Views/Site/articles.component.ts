@@ -51,6 +51,7 @@ export class ArticlesComponent implements OnInit {
   }
 
     ngOnInit() {
+
       this.getArticles();
       this.getCategories();
         // this.selectedArticle = null;

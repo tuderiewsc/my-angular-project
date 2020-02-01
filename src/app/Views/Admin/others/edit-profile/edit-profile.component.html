@@ -4,22 +4,68 @@
    <h5 class="panelTitle">ویرایش پروفایل</h5>
     <hr>
     <div class="row">
-      <div class="formAdd">
-        <form action="#" class="form-row p-3 bg-light" method="post">
+      <div class="formAdd" *ngIf="loaded">
+        <form #editProfileFrm id="editProfileFrm" action="#" class="form-row p-3 bg-light" method="post"
+        novalidate [formGroup]="edit_profile_form" (ngSubmit)="ep(edit_profile_form.value, userId)">
+
+          <div class="alert alert-danger" *ngIf="errorMessage != undefined">
+            {{ errorMessage }}
+          </div>
+          <br>
+
           <div class="form-group col-md-6 mt-3">
             <label class="mainLabel" for="name">نام</label>
-            <input class="form-control" type="text" id="name">
+            <input class="form-control" type="text" id="name" formControlName="name" [value]="userName"
+                   [ngClass]="{'is-invalid': edit_profile_form.controls['name'].invalid &&
+              (edit_profile_form.controls['name'].dirty || edit_profile_form.controls['name'].touched)}">
+            <div class="errors w-100 p-2"
+                 *ngIf="edit_profile_form.controls['name'].invalid &&
+                  (edit_profile_form.controls['name'].dirty || edit_profile_form.controls['name'].touched)">
+              <small class="float-right text-danger" *ngIf="edit_profile_form.controls['name'].errors.required">
+                فیلد نام را تکمیل کنید.
+              </small>
+            </div>
           </div>
 
           <div class="form-group col-md-6 mt-3">
-            <label class="mainLabel" for="imageProfile">لینک تصویر پروفایل</label>
-            <input class="form-control" type="text" id="imageProfile">
+            <label class="mainLabel" for="image">لینک تصویر پروفایل</label>
+            <input class="form-control ng-dirty ng-touched" type="text" id="image" name="profilepic" [value]="userProfilePic"
+                   formControlName="profilepic" disabled >
+            <a mat-flat-button color="primary" id="get_image_src" (click)="openDialog()">دریافت لینک</a>
+            <a mat-flat-button color="warn" id="remove_image_src"
+               onclick="remove_src()" (click)="removeImageSrc()">حذف لینک</a>
+          </div>
+
+          <div class="form-group col-12 mt-3 text-right">
+            <label>جنسیت:</label><br>
+            <label class = "mdl-radio mdl-js-radio mx-2" for = "male">
+              <input type = "radio" id = "male" value="male" [checked]="(userGender == 'male')"
+                     class = "mdl-radio__button" formControlName="gender">
+              <span class = "mdl-radio__label">مرد</span>
+            </label>
+            <label class = "mdl-radio mdl-js-radio mx-2" for = "female">
+              <input type = "radio" id = "female" value="female" [checked]="(userGender == 'female')"
+                     class = "mdl-radio__button" formControlName="gender">
+              <span class = "mdl-radio__label">زن</span>
+            </label>
+            <div class="errors w-100 p-2"
+                 *ngIf="edit_profile_form.controls['gender'].invalid &&
+                  (edit_profile_form.controls['gender'].dirty || edit_profile_form.controls['gender'].touched)">
+              <small class="float-right text-danger" *ngIf="edit_profile_form.controls['gender'].errors.required">
+                جنسیت را انتخاب کنید.
+              </small>
+            </div>
           </div>
 
           <div class="form-group col-12 my-3">
-            <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored bg-secondary">ثبت</button>
+            <button type="submit" [disabled]="edit_profile_form.pristine || edit_profile_form.invalid"
+                    class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored bg-secondary">ثبت</button>
           </div>
         </form>
+      </div>
+
+      <div *ngIf="! loaded">
+        <span>در حال بارگزاری ...</span>
       </div>
     </div>
   </div>

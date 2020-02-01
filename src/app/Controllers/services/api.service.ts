@@ -78,8 +78,8 @@ export class ApiService {
   }
 
 
-  getImgList(): Observable<any> {
-    return this.http.get(Constants.uploadImageList);
+  getImgList(section:string): Observable<any> {
+    return this.http.get(Constants.uploadImageList + section);
   }
 
   // private handleError(error: HttpErrorResponse) {
@@ -110,6 +110,14 @@ export class ApiService {
 
   deleteArticle(id: number): Observable<ArticleModel> {
     return this.http.delete<ArticleModel>(Constants.urlOne + '/' + id);
+  }
+
+  updateUser(values: any, id:number): Observable<boolean>{
+    return this.http.put<boolean>(Constants.urlUpdateUser+ id, values , this.httpOptions);
+  }
+
+  getUser(id:number): Observable<any>{
+    return this.http.get(Constants.urlgetUser+ id , this.httpOptions);
   }
 
 }

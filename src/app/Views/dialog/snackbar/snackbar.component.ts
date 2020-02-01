@@ -20,6 +20,8 @@ export class SnackbarComponent implements OnInit {
       this.snackType = 'add_article';
     } else if(localStorage.getItem('snack') == 'login_success'){
       this.snackType = 'login_success';
+    }else if(localStorage.getItem('snack') == 'ep_success'){
+      this.snackType = 'ep_success';
     }
   }
 
