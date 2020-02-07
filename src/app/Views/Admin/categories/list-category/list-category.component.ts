@@ -12,6 +12,7 @@ export class ListCategoryComponent implements OnInit {
 
   categories: CategoryModel[];
   keyword: string;
+  loaded: boolean =false;
 
 
   constructor(private api:ApiService, private router:Router) { }
@@ -23,14 +24,17 @@ export class ListCategoryComponent implements OnInit {
   }
 
   getCategories(){
-    this.api.getCategories().subscribe(cats=> this.categories=cats);
+    this.api.getCategories().subscribe(cats=> {
+      this.categories=cats,
+        this.loaded = true
+    });
 
   }
 
   delCat(id:number){
-    if (confirm("Are u Sure?")){
+    if (confirm("از حذف آیتم انتخابی مطمئن هستید؟")){
       this.api.deleteCategory(id).subscribe(()=> {
-        alert("deleted"),
+        alert("آیتم موردنظر حذف شد."),
           this.getCategories()
           //this.router.navigate()
       });

@@ -32,8 +32,6 @@ export class AddCategoryComponent implements OnInit {
   });
 
 
-
-
   add_category(value: any) {
     this.api.addCategory(value).subscribe(()=>{
       this.router.navigate(["dashboard/category/list"]),
@@ -43,6 +41,8 @@ export class AddCategoryComponent implements OnInit {
   }
 
   openSnackbar(){
+    localStorage.removeItem('snack');
+    localStorage.setItem('snack', 'add_category');
     this.snackbar.openFromComponent(SnackbarComponent,{
       duration: 4000,
       verticalPosition: 'bottom',

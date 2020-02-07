@@ -17,6 +17,8 @@ export class CategoryComponent implements OnInit {
   articles: ArticleModel[];
   catPager: Paginate;
   category: CategoryModel;
+  loaded: boolean = false;
+  cat_loaded: boolean = false;
 
   id: number;
   pagenum: number;
@@ -32,9 +34,13 @@ export class CategoryComponent implements OnInit {
         this.api.getCategory(this.id, this.pagenum)
           .subscribe(result => {
             this.articles = result.data,
-              this.catPager = this.pagerservice.getPager(result.total, result.current_page, result.per_page)
+              this.catPager = this.pagerservice.getPager(result.total, result.current_page, result.per_page),
+              this.loaded = true
           }),
-        this.api.getSingleCategory(this.id).subscribe(res => this.category = res);
+        this.api.getSingleCategory(this.id).subscribe(res => {
+          this.category = res,
+            this.cat_loaded = true
+        });
     });
 
 

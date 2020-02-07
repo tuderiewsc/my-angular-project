@@ -438,11 +438,15 @@ section.main_content {
   margin-top: 100px;
   min-height: 400px;
 }
+section.main_content .card {
+  background-color: transparent !important;
+  border: none !important;
+}
 section.main_content .card .card-body {
   padding: 6px;
 }
 section.main_content .card .card-body .jumbotron {
-  background-color: #fff;
+  background-color: transparent !important;
   max-height: 100px;
   padding: 16px;
 }
@@ -647,6 +651,7 @@ footer {
   min-height: 200px;
   text-align: center !important;
   margin-top: 150px;
+  background-image: url("../images/bc.svg");
 }
 footer ul {
   text-align: center;
@@ -656,6 +661,32 @@ footer ul a {
   padding: 10px;
   margin-top: 10px;
   color: #757575;
+}
+
+.block {
+  width: 80%;
+  margin: 0 10%;
+  position: relative;
+  background: linear-gradient(to right, #E0E0E0 0%, #bdbdbd 100%);
+}
+.block::before, .block::after {
+  content: "";
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background: inherit;
+  z-index: -1;
+  transition: ease all 0.5s;
+}
+.block::before {
+  top: 0;
+  transform-origin: left top;
+  transform: skewY(0deg);
+}
+.block::after {
+  bottom: 0;
+  transform-origin: right bottom;
+  transform: skewY(-3deg);
 }
 
 section.article_content {
@@ -826,7 +857,7 @@ nav.navigation ul.menu li.menu-header {
   text-align: center;
   height: 100px;
   width: 100%;
-  margin-bottom: 5rem;
+  margin-bottom: 7rem;
   padding: 10px;
 }
 nav.navigation ul.menu li.menu-header h5 {
@@ -907,10 +938,10 @@ section.panel_content div.articleList form {
 section.panel_content div.articleList form div {
   margin: auto 16px;
   border: none;
-  width: 40%;
+  width: 100%;
 }
 section.panel_content div.articleList form select {
-  width: 100%;
+  width: 40%;
 }
 section.panel_content div.articleList form label {
   font-size: 0.875rem;
@@ -996,7 +1027,7 @@ section.search_content .card article a img {
 .errorPage .row {
   width: 100%;
   height: 100vh;
-  background: linear-gradient(rgba(38, 50, 56, 0.6), rgba(38, 50, 56, 0.9)), url("../images/bg1.jpg");
+  background: linear-gradient(rgba(38, 50, 56, 0.6), rgba(38, 50, 56, 0.9));
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: center;

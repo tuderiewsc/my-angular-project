@@ -2,7 +2,8 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-12">
-        <div *ngIf="!loaded">در حال بارگزاری...</div>
+        <div *ngIf="!loaded"><p>در حال دریافت اطلاعات...</p></div>
+
         <div class="card article w-75" style="margin: 0 auto;" *ngIf="loaded">
           <div class="card-header">
             <h5>{{passedArticle.title}}</h5>

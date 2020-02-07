@@ -35,7 +35,8 @@
 <nav class="navigation bg-light" style="z-index: 10 !important">
   <ul class="menu" id="side_menu">
     <li class="menu-header">
-      <img src="{{ avatarSrc }}" width="100" height="100">
+      <img src="{{ avatarSrc }}" width="100" height="100" *ngIf="avatarSrc != undefined">
+      <img src="/assets/images/Noise.gif" width="100" height="100" *ngIf="avatarSrc == undefined">
       <h5>کاربر: {{ userName }}</h5>
       <h5>ایمیل: {{ userEmail }}</h5>
     </li>

@@ -22,16 +22,14 @@ export class DashboardLayoutComponent implements OnInit {
   userEmail: string;
   avatar:string;
   avatarSrc:string;
-  //gender:string;
 
 
   constructor(private router: Router, private auth: AuthService, private api:ApiService,
-              private logoutService : AutoLogoutServiceService) {
+              private logoutService : AutoLogoutServiceService) {}
 
-
-  }
 
   ngOnInit() {
+    console.log('avatarSrc: '+ this.avatarSrc);
 
     $(document).ready(function () {
       $('input#check').change(function(event) {

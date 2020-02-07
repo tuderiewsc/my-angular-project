@@ -36,4 +36,35 @@ a#remove_image_src {
   margin: 40px auto;
 }
 
+mat-select{
+  border: 1px solid #ced4da;
+  padding: 5px;
+  margin-top: 16px;
+}
+
+span.mat-select-value-text {
+  font-family: 'Vazir';
+  font-size: 14px;
+}
+
+span.mat-option-text {
+  font-family: vazir;
+  font-size: 14px;
+}
+
+
+a.mdl-button{
+  color: #eee !important;
+}
+button:disabled,
+button[disabled] {
+  cursor: not-allowed !important;
+}
+
+.errors {
+  float: right;
+  color: red;
+  padding: 4px;
+}
+
 

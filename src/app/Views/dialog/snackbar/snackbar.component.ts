@@ -22,6 +22,8 @@ export class SnackbarComponent implements OnInit {
       this.snackType = 'login_success';
     }else if(localStorage.getItem('snack') == 'ep_success'){
       this.snackType = 'ep_success';
+    }else if(localStorage.getItem('snack') == 'add_category'){
+      this.snackType = 'add_category';
     }
   }
 

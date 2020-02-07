@@ -25,6 +25,7 @@ export class ListArticleComponent implements OnInit {
   ids = new Array();
   opsSelected:boolean = false;
   is_operating:boolean = false;
+  loaded: boolean = false;
   no_complete_filter:boolean = true;
   ops_select:number = 0;
 
@@ -53,7 +54,8 @@ export class ListArticleComponent implements OnInit {
     const userId = this.user.id;
 
     this.api.getArticlesList(userId).subscribe(articles => {
-      this.articles = articles
+      this.articles = articles,
+        this.loaded =true;
     });
   }
 

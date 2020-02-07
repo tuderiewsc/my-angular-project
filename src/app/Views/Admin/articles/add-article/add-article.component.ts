@@ -77,7 +77,7 @@ export class AddArticleComponent implements OnInit, OnDestroy {
     this.addArticleForm = this.formbuilder.group({
       title: this.formbuilder.control('', Validators.required),
       desc: this.formbuilder.control('', Validators.compose([
-        Validators.maxLength(20),
+        Validators.maxLength(1000),
         Validators.required
       ])),
       submitted: this.formbuilder.control('', Validators.required),
@@ -92,18 +92,11 @@ export class AddArticleComponent implements OnInit, OnDestroy {
     const Article = new ArticleModel();
 
     Article.title = this.title;
-    Article.image = this.image;
     Article.desc = this.desc;
     Article.category_id = this.category_id;
     Article.user_id = this.user.id;
     if (this.submitted === 'true') { Article.submitted = true; } else { Article.submitted = false; }
     if (this.isfavorite === 'true') { Article.isfavorite = true; } else { Article.isfavorite = false; }
-    // if (this.image === undefined) {
-    //   // default image
-    //   Article.image = 'http://localhost:8000/upload/image/1573630832-2019-Image-not-found.jpg';
-    // } else {
-    //   Article.image = this.image;
-    // }
     if(localStorage.getItem('imageSrc') !== null){
       Article.image= 'http://localhost:8000/upload/image/'
         +localStorage.getItem('imageSrc');
@@ -115,7 +108,7 @@ export class AddArticleComponent implements OnInit, OnDestroy {
     this.api.addArticle(Article)
       .subscribe(res => {
         if (res){
-          this.router.navigate(['/']),
+          this.router.navigate(['/dashboard/article/list']),
             this.openSnackbar()
         }
       }, err =>{

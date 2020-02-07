@@ -20,9 +20,9 @@
                   (addCatForm.controls['name'].dirty || addCatForm.controls['name'].touched)}">
             <div class="errors" *ngIf="addCatForm.controls['name'].invalid &&
                   (addCatForm.controls['name'].dirty || addCatForm.controls['name'].touched)">
-                      <span *ngIf="addCatForm.controls['name'].errors.required">
-                        فیلد نام را تکمیل کنید.
-                      </span>
+              <small *ngIf="addCatForm.controls['name'].errors.required">
+                فیلد نام را تکمیل کنید.
+              </small>
             </div>
           </div>
           <div class="form-group required col-md-4">
@@ -35,9 +35,9 @@
             </select>
             <div class="errors" *ngIf="addCatForm.controls['parent_id'].invalid &&
                   (addCatForm.controls['parent_id'].dirty || addCatForm.controls['parent_id'].touched)">
-                      <span *ngIf="addCatForm.controls['parent_id'].errors.required">
-                        فیلد نام را تکمیل کنید.
-                      </span>
+              <small *ngIf="addCatForm.controls['parent_id'].errors.required">
+                یک مورد را انتخاب کنید.
+              </small>
             </div>
           </div>
           <div class="form-group my-3 col-12">

@@ -13,7 +13,7 @@
                 <img class="article_mainPhoto" src="{{article.image}}">
               </a>
               <p class="card-text text-justify">
-                {{article.desc | slice:0:30}} ---
+                {{article.desc | slice:0:400}} ---
               </p>
             </div>
             <div class="card-footer">
@@ -69,8 +69,11 @@
             <div class="card-body">
               <div class="text-center text-muted">
                 <span *ngIf="! loaded">
-                در حال بارگذاری<i class="fa fa-refresh fa-spin mx-1"></i>
+                <i class="fa fa-spinner fa-spin"></i>
               </span>
+                <div *ngIf="loaded && categories?.length == 0">
+                  <h5 class="alert alert-danger">موردي براي نمايش وجود ندارد!</h5>
+                </div>
               </div>
 
               <ul class="category" id="indexCats" *ngIf="loaded && categories?.length>0">

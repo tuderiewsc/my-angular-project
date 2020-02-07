@@ -1,5 +1,6 @@
-jQuery(document).ready(function($) {
+$(document).ready(function() {
 });
+
 
 function get_src(id) {
   var imageName = id;
@@ -10,4 +11,5 @@ function get_src(id) {
 function remove_src() {
   $('input#image').val('');
 }
+
 

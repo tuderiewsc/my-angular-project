@@ -30,6 +30,8 @@ export class EditArticleComponent implements OnInit {
   article: ArticleModel;
   categories: CategoryModel;
   editPressed: boolean = false;
+  loaded: boolean = false;
+
 
 
   constructor(private route: ActivatedRoute, private router: Router
@@ -64,7 +66,6 @@ export class EditArticleComponent implements OnInit {
         }else {
           return true;
         }
-
       }
     }
 
@@ -75,7 +76,7 @@ export class EditArticleComponent implements OnInit {
     this.editArticleForm = this.formbuilder.group({
       title: this.formbuilder.control('', Validators.required),
       desc: this.formbuilder.control('', Validators.compose([
-        Validators.maxLength(20),
+        Validators.maxLength(1000),
         Validators.required
       ])),
       submitted: this.formbuilder.control('', Validators.required),
@@ -87,25 +88,37 @@ export class EditArticleComponent implements OnInit {
 
   getArticle(id) {
     this.api.getArticle(id)
-      .subscribe(res => this.article = res);
+      .subscribe(res => {
+        this.article = res,
+          this.loaded=true
+      });
   }
 
   onEditArticle(id: number) {
+
     const Article = new ArticleModel();
 
     Article.title = this.title;
-    Article.image = this.image;
     Article.desc = this.desc;
     Article.category_id = this.category_id;
-    if (this.submitted === '1') {
-      Article.submitted = true;
+
+    if (this.submitted == undefined){
+      Article.submitted = this.article.submitted;
     } else {
-      Article.submitted = false;
+      if (this.submitted === '1') {Article.submitted = true;} else {Article.submitted = false;}
     }
-    if (this.isfavorite === '1') {
-      Article.isfavorite = true;
-    } else {
-      Article.isfavorite = false;
+
+    if (this.isfavorite == undefined){
+      Article.isfavorite = this.article.isfavorite;
+    }else{
+      if (this.isfavorite === '1') {Article.isfavorite = true;} else {Article.isfavorite = false;}
+    }
+
+    if(localStorage.getItem('imageSrc') !== null){
+      Article.image= 'http://localhost:8000/upload/image/'
+        +localStorage.getItem('imageSrc');
+    }else {
+      Article.image = 'http://localhost:8000/upload/image/1573630832-2019-Image-not-found.jpg';
     }
 
     alert('مقاله ویرایش شد.');
@@ -113,11 +126,16 @@ export class EditArticleComponent implements OnInit {
       .subscribe(() => this.router.navigate(['/dashboard/article/list'] ));
   }
 
+
   openDialog() {
+    localStorage.setItem('imgSection', 'article');
     this.dialog.open(ImglistComponent, {
       width: '720px'
     });
+  }
 
+  removeImageSrc(){
+    localStorage.removeItem('imageSrc');
   }
 
 
