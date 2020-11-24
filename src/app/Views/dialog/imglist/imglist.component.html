@@ -5,7 +5,7 @@
     <ul class="imgs">
       <li class="imgLink" *ngFor="let image of images" id="{{ image.image }}"
           onclick="get_src(id)" (click)="getImageSrc(image.image)">
-        <img src="http://localhost:8000/upload/image/{{ image.image }}" alt="" width="80">
+        <img src="http://demoapps.ir/demo/api_articles/article/public/upload/image/{{ image.image }}" alt="" width="80">
       </li>
     </ul>
   </div>

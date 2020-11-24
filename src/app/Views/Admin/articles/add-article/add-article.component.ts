@@ -98,10 +98,10 @@ export class AddArticleComponent implements OnInit, OnDestroy {
     if (this.submitted === 'true') { Article.submitted = true; } else { Article.submitted = false; }
     if (this.isfavorite === 'true') { Article.isfavorite = true; } else { Article.isfavorite = false; }
     if(localStorage.getItem('imageSrc') !== null){
-      Article.image= 'http://localhost:8000/upload/image/'
+      Article.image= 'http://demoapps.ir/demo/api_articles/article/public/upload/image/'
         +localStorage.getItem('imageSrc');
     }else {
-      Article.image = 'http://localhost:8000/upload/image/1573630832-2019-Image-not-found.jpg';
+      Article.image = 'http://demoapps.ir/demo/api_articles/article/public/upload/image/1573630832-2019-Image-not-found.jpg';
     }
 
 

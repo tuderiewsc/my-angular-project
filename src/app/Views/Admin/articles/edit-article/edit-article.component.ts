@@ -45,6 +45,7 @@ export class EditArticleComponent implements OnInit {
       .subscribe(res => this.categories = res);
 
     this.buildForm();
+    localStorage.removeItem('imageSrc');
   }
 
   Editpressed(){
@@ -96,6 +97,9 @@ export class EditArticleComponent implements OnInit {
 
   onEditArticle(id: number) {
 
+    console.log('storage: ' + localStorage.getItem('imageSrc'));
+    console.log('image: ' + this.image);
+
     const Article = new ArticleModel();
 
     Article.title = this.title;
@@ -111,14 +115,16 @@ export class EditArticleComponent implements OnInit {
     if (this.isfavorite == undefined){
       Article.isfavorite = this.article.isfavorite;
     }else{
-      if (this.isfavorite === '1') {Article.isfavorite = true;} else {Article.isfavorite = false;}
+        if (this.isfavorite === '1') {Article.isfavorite = true;} else {Article.isfavorite = false;}
     }
 
     if(localStorage.getItem('imageSrc') !== null){
-      Article.image= 'http://localhost:8000/upload/image/'
+      Article.image= 'http://demoapps.ir/demo/api_articles/article/public/upload/image/'
         +localStorage.getItem('imageSrc');
     }else {
-      Article.image = 'http://localhost:8000/upload/image/1573630832-2019-Image-not-found.jpg';
+      if(this.image == undefined){
+        Article.image = '/assets/images/imagenotfound.jpg';
+      }
     }
 
     alert('مقاله ویرایش شد.');

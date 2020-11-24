@@ -60,7 +60,7 @@ export class EditProfileComponent implements OnInit {
   ep(value: any, id:number){
     console.log(value['profilepic']);
     if (localStorage.getItem('imageSrc') !== null){
-      value['profilepic'] = 'http://localhost:8000/upload/image/'+localStorage.getItem('imageSrc');
+      value['profilepic'] = 'http://demoapps.ir/demo/api_articles/article/public/upload/image/'+localStorage.getItem('imageSrc');
     }
     this.api.updateUser(value, id).subscribe(res => {
       if(res['result'] == "update success"){

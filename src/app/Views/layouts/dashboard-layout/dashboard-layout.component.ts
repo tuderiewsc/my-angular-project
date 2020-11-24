@@ -71,9 +71,7 @@ export class DashboardLayoutComponent implements OnInit {
       this.userName = user['name'];
       this.userEmail = user['email'];
 
-    } );
-
-
+    });
 
 
 

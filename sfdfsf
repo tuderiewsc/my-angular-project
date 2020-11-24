@@ -1,0 +1,35 @@
+[33m36387d2[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m fixed final bugs
+[33m7d0eb54[m Added edit profile
+[33m8d38db6[m Added multiselect ops
+[33m8ec3126[m fixed some bugs & snackbar
+[33mec651fb[m fixed get image src
+[33maf9aa0f[m Added deactivate,...
+[33mdf95b8b[m change App theme
+[33m8c781a3[m change App structure
+[33m7c2c25f[m Finished site pages of new theme
+[33m82d53ba[m finished home page on new theme
+[33mfa4ebdf[m Started theme change
+[33m2ac6d00[m Added image uploader
+[33mf24d392[m Added upload image in Api
+[33m3892523[m Added auto logout
+[33m82c3467[m Added delete dialog
+[33m87d5b86[m Added  search page
+[33m0ab1b9f[m fixed some bugs
+[33m9b77d56[m add userid to articles
+[33mbaf762c[m Added update articles in panel
+[33m07a4453[m Fixed articleList in Panel
+[33m10927dc[m Added category articles pager
+[33m4be8e99[m Added Authentication
+[33mbb03f3e[m Added register
+[33m161e0aa[m removed routeAnim form Project
+[33mdc4dc11[m added opacity anim to articles
+[33m54b7711[m Added Categories
+[33mb999700[m added router anim
+[33md5a81d0[m Added fadeAnimation
+[33m314beb4[m finished pagination
+[33mff14b20[m add provider
+[33m4b75993[m start connect lara-api  using http
+[33m7ab1da5[m before rooket Tut
+[33m8c85f0c[m some unsuccessful tries to fix upload images
+[33m51e0c78[m complete first comment
+[33mbb613f0[m first commit
