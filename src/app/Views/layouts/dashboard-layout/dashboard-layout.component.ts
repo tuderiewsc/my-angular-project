@@ -4,6 +4,8 @@ import {AuthService} from '../../../Controllers/services/auth.service';
 import * as $ from 'jquery';
 import {AutoLogoutServiceService} from '../../../Controllers/services/auto-logout-service.service';
 import {ApiService} from '../../../Controllers/services/api.service';
+import {CookieService} from 'ngx-cookie-service';
+import {Constants} from '../../../Constants';
 
 @Component({
   selector: 'app-dashboard-layout',
@@ -25,7 +27,7 @@ export class DashboardLayoutComponent implements OnInit {
 
 
   constructor(private router: Router, private auth: AuthService, private api:ApiService,
-              private logoutService : AutoLogoutServiceService) {}
+              private logoutService : AutoLogoutServiceService , private cookieservice:CookieService) {}
 
 
   ngOnInit() {
@@ -52,11 +54,12 @@ export class DashboardLayoutComponent implements OnInit {
       });
     });
 
-    this.userId = JSON.parse(localStorage.getItem("user")).id;
+    //this.userId = JSON.parse(localStorage.getItem("user")).id;
+    this.userId = parseInt(Constants.UserID);
+
 
     this.api.getUser(this.userId).subscribe(user => {
       this.avatar = user['profilepic'];
-      //this.avatar = user['profilepic'];
       console.log('avatar: ' + this.avatar);
 
       if (this.avatar != null){

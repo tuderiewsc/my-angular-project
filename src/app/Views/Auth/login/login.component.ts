@@ -4,8 +4,13 @@ import { FormControl, Validators, FormGroup, FormBuilder } from '@angular/forms'
 import { ValidateService } from 'src/app/Controllers/services/validate.service';
 import { Router } from '@angular/router';
 import * as $ from 'jquery';
+import * as cryptojS from 'crypto-js';
 import {SnackbarComponent} from '../../dialog/snackbar/snackbar.component';
 import {MatSnackBar} from '@angular/material';
+import {CookieService} from 'ngx-cookie-service';
+import {userError} from '@angular/compiler-cli/src/transformers/util';
+import {Constants} from '../../../Constants';
+import {ApiService} from '../../../Controllers/services/api.service';
 
 @Component({
   selector: 'app-login',
@@ -16,10 +21,13 @@ import {MatSnackBar} from '@angular/material';
 export class LoginComponent implements OnInit {
 
   errorMessage: string;
+  userID: string;
+
 
 
   constructor(private formbuilder: FormBuilder, private validateservice: ValidateService
-    , private auth: AuthService, private router: Router, private snackbar: MatSnackBar) { }
+    , private auth: AuthService, private router: Router, private snackbar: MatSnackBar
+    ,private cookieservice:CookieService , private api:ApiService) { }
 
   email = new FormControl('', [Validators.compose([
     Validators.required,
@@ -35,13 +43,29 @@ export class LoginComponent implements OnInit {
     password: this.password,
   });
 
+  ngOnInit() {
+    $(document).ready(function () {
+
+      $('#login_submit').click(function() {
+        $('#login_refresh').css('opacity', '1');
+
+        setInterval(function() {
+          $('#login_refresh').css('opacity', '0');
+        }, 3000)
+
+      })
+
+    });
+
+  }
 
   login(value: any) {
 
-    this.auth.login(value).subscribe(user => {
-        if (user) {
-          localStorage.setItem('user', JSON.stringify(user));
-          this.auth.currentUser.next(user);
+    this.auth.login(value).subscribe(token => {
+        if (token){
+          this.cookieservice.set(Constants.AuthCookie , token.ciphertext);
+          Constants.UserID = this.CryptoJSAesDecrypt('your passphrase', token);
+          this.auth.currentUser.next(token);
           this.openSnackbar();
           this.router.navigateByUrl('');
         }
@@ -59,6 +83,19 @@ export class LoginComponent implements OnInit {
     );
   }
 
+
+  CryptoJSAesDecrypt(passphrase,encrypted_json_string){
+    //var obj_json = JSON.parse(encrypted_json_string);
+    var obj_json = encrypted_json_string;
+    var encrypted = obj_json.ciphertext;
+    var salt = cryptojS.enc.Hex.parse(obj_json.salt);
+    var iv = cryptojS.enc.Hex.parse(obj_json.iv);
+    var key = cryptojS.PBKDF2(passphrase, salt, { hasher: cryptojS.algo.SHA512, keySize: 64/8, iterations: 999});
+    var decrypted = cryptojS.AES.decrypt(encrypted, key, { iv: iv});
+
+    return decrypted.toString(cryptojS.enc.Utf8);
+  }
+
   openSnackbar() {
     localStorage.removeItem('snack');
     localStorage.setItem('snack', 'login_success');
@@ -72,19 +109,5 @@ export class LoginComponent implements OnInit {
   }
 
 
-  ngOnInit() {
-    $(document).ready(function () {
-
-      $('#login_submit').click(function() {
-        $('#login_refresh').css('opacity', '1');
-
-        setInterval(function() {
-          $('#login_refresh').css('opacity', '0');
-        }, 3000)
-
-      })
-
-    });
-  }
 
 }

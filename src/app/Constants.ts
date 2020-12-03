@@ -16,6 +16,9 @@ export class Constants {
   public static urlUpdateUser = 'http://127.0.0.1:8000/api/update_user/';
   public static urlgetUser = 'http://127.0.0.1:8000/api/get_user/';
 
+  public static AuthCookie = 'userLogin';
+  public static UserID = '';
+
 }
 
 

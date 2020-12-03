@@ -22,18 +22,19 @@ export class SiteLayoutComponent implements OnInit {
 
 
   constructor(private router: Router, private auth: AuthService,
-              private authLogout: AutoLogoutServiceService, private api: ApiService
+    private authLogout: AutoLogoutServiceService, private api: ApiService
     ,private activatedroute: ActivatedRoute) {
   }
 
 
 
   checkLogin(): boolean {
-    if (this.auth.getUser()) {
-      return true;
-    } else {
-      return false;
-    }
+    // if (this.auth.getUser()) {
+    //   return true;
+    // } else {
+    //   return false;
+    // }
+    return this.auth.getUser() ? true : false;
   }
 
   ngOnInit(): void {
@@ -59,7 +60,7 @@ export class SiteLayoutComponent implements OnInit {
           var inputWidth = $('form#main_search').find('input').width();
           if (inputWidth != 0 && !hasFocus) {
             $('form#main_search').find('input').animate({width:'0'}, 300)
-              .css('background', 'transparent').val('');
+            .css('background', 'transparent').val('');
             $('form#main_search').find('button').css('background', 'transparent');
           }
         } ,8000);
@@ -67,10 +68,10 @@ export class SiteLayoutComponent implements OnInit {
     });
 
     this.api.getCategories()
-      .subscribe(res => {
-        this.categories = res,
-          this.loaded =true
-      });
+    .subscribe(res => {
+      this.categories = res,
+      this.loaded =true
+    });
 
   }
 

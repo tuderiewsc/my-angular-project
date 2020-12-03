@@ -49,6 +49,7 @@ import { ListCategoryComponent } from './Views/Admin/categories/list-category/li
 import { EditCategoryComponent } from './Views/Admin/categories/edit-category/edit-category.component';
 import { EditProfileComponent } from './Views/Admin/others/edit-profile/edit-profile.component';
 import {PostdeactivateGuard} from './Controllers/middleware/postdeactivate.guard';
+import {CookieService} from 'ngx-cookie-service';
 
 
 @NgModule({
@@ -91,8 +92,15 @@ import {PostdeactivateGuard} from './Controllers/middleware/postdeactivate.guard
     MatTableModule, MatSnackBarModule, MatDialogModule,
     ReactiveFormsModule.withConfig({ warnOnNgModelWithFormControl: 'never' })
   ],
-  providers: [AuthGuard, ApiService, PagerService, GuestGuard,PostdeactivateGuard,Title,
-    { provide: articleStatsToken, useValue: stats }
+  providers: [
+    AuthGuard,
+    ApiService,
+    PagerService,
+    GuestGuard,
+    PostdeactivateGuard,
+    Title,
+    CookieService,
+    { provide: articleStatsToken, useValue: stats  }
   ],
   bootstrap: [AppComponent],
   entryComponents: [SnackbarComponent, DeleteDialogComponent, ImglistComponent]

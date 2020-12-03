@@ -9,6 +9,8 @@ import {MatDialog, MatSnackBar} from '@angular/material';
 import {ImglistComponent} from '../../../dialog/imglist/imglist.component';
 import * as $ from 'jquery';
 import {timeout} from 'rxjs/operators';
+import {CookieService} from 'ngx-cookie-service';
+import {Constants} from '../../../../Constants';
 
 @Component({
   selector: 'app-edit-profile',
@@ -28,9 +30,12 @@ export class EditProfileComponent implements OnInit {
 
   constructor(private formbuilder: FormBuilder, private validateservice: ValidateService
     , private auth: AuthService, private router: Router, private api:ApiService,
-              private snackbar:MatSnackBar, public dialog:MatDialog) {
+              private snackbar:MatSnackBar, public dialog:MatDialog
+  ,private cookieservice:CookieService) {
 
-    this.userId = JSON.parse(localStorage.getItem("user")).id;
+//    this.userId = JSON.parse(localStorage.getItem("user")).id;
+    this.userId = parseInt(Constants.UserID);
+
     this.api.getUser(this.userId).subscribe(user=>{
       this.userName = user.name,
       this.userGender = user.gender,
