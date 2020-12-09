@@ -1,4 +1,4 @@
-import {BrowserModule, Title} from '@angular/platform-browser';
+import {BrowserModule, Title , Meta} from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
@@ -100,6 +100,7 @@ import {CookieService} from 'ngx-cookie-service';
     PostdeactivateGuard,
     Title,
     CookieService,
+    Meta,
     { provide: articleStatsToken, useValue: stats  }
   ],
   bootstrap: [AppComponent],

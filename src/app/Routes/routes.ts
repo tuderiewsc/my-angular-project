@@ -29,7 +29,13 @@ const routes: Routes = [
     path: '', component: SiteLayoutComponent,
     children:[
       { path: '', redirectTo: '/home', pathMatch: 'full' },
-      { path: 'home', component: IndexpageComponent, data:{title:'صفحه اصلی'}},
+      { path: 'home', component: IndexpageComponent,
+        data:{
+          title:'صفحه اصلی',
+          descrption: 'Description of Home Component',
+          ogTitle: 'Description of Home Component for social media'
+        }
+      },
       {
         path: 'articles/page/:id', component: ArticlesComponent ,
         data:{title:'مقالات'}
@@ -45,6 +51,11 @@ const routes: Routes = [
       },
       {
         path: 'register', component: RegisterComponent,
+        data:{
+          title:'Register',
+          descrption: 'Description of Register Component',
+          ogTitle: 'Description of Register Component for social media'
+        },
         canActivate: [GuestGuard]
       },
       {

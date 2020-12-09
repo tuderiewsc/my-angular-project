@@ -61,6 +61,7 @@ export class AuthService {
 
   logOut() {
     this.cookieservice.delete(Constants.AuthCookie);
+    Constants.UserID = '';
     this.currentUser.next(false);
   }
 

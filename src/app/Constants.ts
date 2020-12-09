@@ -1,24 +1,24 @@
 export class Constants {
+  public static baseUrl = 'http://127.0.0.1:8000/api';
 
-  public static urlArticles = 'http://127.0.0.1:8000/api/articles?page=';
-  public static urlOne = 'http://127.0.0.1:8000/api/articles';
-  public static urlCats = 'http://127.0.0.1:8000/api/categories';
-  public static urlHeadCats = 'http://127.0.0.1:8000/api/headCats';
-  public static urlOneCat = 'http://127.0.0.1:8000/api/articles/categories';
-  public static urlArticlesList = 'http://127.0.0.1:8000/api/articlesList';
-  public static urlArticlesUpdate = 'http://127.0.0.1:8000/api/articles/';
-  public static regUrl = 'http://127.0.0.1:8000/api/register';
-  public static loginUrl = 'http://127.0.0.1:8000/api/login';
-  public static searchArticleUrl = 'http://127.0.0.1:8000/api/searchArticle';
-  public static uploadImageUrl = 'http://127.0.0.1:8000/api/uploadImg';
-  public static uploadImageList = 'http://127.0.0.1:8000/api/uploadImagesList/';
-  public static urlUpdateStatus = 'http://127.0.0.1:8000/api/update_status/';
-  public static urlUpdateUser = 'http://127.0.0.1:8000/api/update_user/';
-  public static urlgetUser = 'http://127.0.0.1:8000/api/get_user/';
+  public static urlArticles = Constants.baseUrl+'/articles?page=';
+  public static urlOne = Constants.baseUrl+'/articles';
+  public static urlCats = Constants.baseUrl+'/categories';
+  public static urlHeadCats = Constants.baseUrl+'/headCats';
+  public static urlOneCat = Constants.baseUrl+'/articles/categories';
+  public static urlArticlesList = Constants.baseUrl+'/articlesList';
+  public static urlArticlesUpdate = Constants.baseUrl+'/articles/';
+  public static regUrl = Constants.baseUrl+'/register';
+  public static loginUrl = Constants.baseUrl+'/login';
+  public static searchArticleUrl = Constants.baseUrl+'/searchArticle';
+  public static uploadImageUrl = Constants.baseUrl+'/uploadImg';
+  public static uploadImageList = Constants.baseUrl+'/uploadImagesList/';
+  public static urlUpdateStatus = Constants.baseUrl+'/update_status/';
+  public static urlUpdateUser = Constants.baseUrl+'/update_user/';
+  public static urlgetUser = Constants.baseUrl+'/get_user/';
 
   public static AuthCookie = 'userLogin';
   public static UserID = '';
-
 }
 
 
